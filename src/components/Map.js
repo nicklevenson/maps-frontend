@@ -34,6 +34,8 @@ class Map extends React.Component {
       new mapboxgl.Marker(el)
       .setLngLat(monument)
       .addTo(map);
+      //trigger a form, disable click
+      //create instance of a new point in state
     })
 
   }
