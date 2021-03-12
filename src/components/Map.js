@@ -1,12 +1,11 @@
 import React from 'react';
 import mapboxgl from 'mapbox-gl'
-
-import {connect} from 'react-redux'
-import {addMarker} from '../actions/addMarker.js'
+import MarkerForm from './MarkerForm.js'
 
 class Map extends React.Component {
   state = {
-    map: ""
+    map: "",
+    newMarkerInfo: null
   }
 
   componentDidMount() {
@@ -22,7 +21,9 @@ class Map extends React.Component {
       <div>
         <div id="map" style={{width:"90vw", height:"70vh"}}></div>
         <div id="newMarker" className="marker">New Marker</div>
+        {this.state.newMarkerInfo ? <MarkerForm newMarkerInfo={this.state.newMarkerInfo}/> : null}
       </div>
+ 
     )
   }
 
@@ -36,22 +37,24 @@ class Map extends React.Component {
       zoom: 2 // starting zoom
     });
     this.setState({map: map})
-
     const newMarkerButton = document.getElementById("newMarker")
-    const addMarker = this.props.addMarker
     newMarkerButton.addEventListener('click', (e) => {
-      map.on('click', function mapEvent(e){
-       
+    const triggerState = (newMarkerInfo) => this.setState({newMarkerInfo: newMarkerInfo})
+
+    const renderTempMarker = (marker) => this.renderTempMarker(marker)
+       map.on('click', function mapEvent(e){
           const coords = [e.lngLat.lng, e.lngLat.lat]
           const marker = {
-            title: "I made it!",
+            title: "New Marker",
             coordinates: {
               lat: coords[1],
               lng: coords[0]
             },
-            info: "Woo!"
+            info: "Be sure to submit me"
           }
-          addMarker(marker)
+          // addMarker(marker)
+          triggerState(marker)
+          renderTempMarker(marker)
           map.off('click', mapEvent)
           //trigger a form, disable click
           //create instance of a new point in state
@@ -81,21 +84,26 @@ class Map extends React.Component {
             console.log(handleMarkerSelect(marker))
           })
         }
-        markerEvent(marker, this.props.handleMarkerSelect)
-        
-       
+        markerEvent(marker, this.props.handleMarkerSelect) 
     })
   }  
 
-
-}
-
-
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    addMarker: (marker) => dispatch(addMarker(marker))
+  renderTempMarker(marker) {
+    var coords = [marker.coordinates.lng,marker.coordinates.lat];
+    var popup = new mapboxgl.Popup({ offset: 25 }).setHTML(
+      `<h2>${marker.title}</h2>
+      <p>${marker.info}</p>`
+    )
+    var el = document.createElement('div');
+    el.className = 'marker';
+    new mapboxgl.Marker(el)
+    .setLngLat(coords)
+    .setPopup(popup) // sets a popup on this marker
+    .addTo(this.state.map);
   }
+
 }
 
-export default connect(null, mapDispatchToProps)(Map)
+
+
+export default Map

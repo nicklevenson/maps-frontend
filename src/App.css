@@ -49,3 +49,7 @@
   border-radius: 100%;
   z-index: 10;
 }
+
+canvas:focus {
+  outline: none !important;
+}

@@ -15,7 +15,7 @@ class PublicMapContainer extends React.Component{
   render(){
     return(
       <div className="my-map">
-        <h1>My Map</h1>
+        <h1>Public Map</h1>
         <Map markers={this.props.markers} handleMarkerSelect={this.handleMarkerSelect}/>
         <MarkerInfo marker={this.state.selectedMarker}/>
       </div>
