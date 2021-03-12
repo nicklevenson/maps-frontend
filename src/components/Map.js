@@ -63,10 +63,19 @@ class Map extends React.Component {
         .setLngLat(coords)
         .setPopup(popup) // sets a popup on this marker
         .addTo(this.state.map);
+
+        let markerEvent = (marker, handleMarkerSelect) => {
+          el.addEventListener("click", function renderInfo() {
+            console.log(handleMarkerSelect(marker))
+          })
+        }
+        markerEvent(marker, this.props.handleMarkerSelect)
+        
+       
     })
   }  
 
-  
+
 }
 
 
