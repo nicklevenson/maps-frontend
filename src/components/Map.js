@@ -68,23 +68,24 @@ class Map extends React.Component {
 }
 
   renderMarkers(){
+    console.log(this.state.map)
     this.props.markers.forEach(marker => {
       var coords = [marker.coordinates.lng,marker.coordinates.lat];
-      var popup = new mapboxgl.Popup({ offset: 25 }).setHTML(
-        `<h2>${marker.title}</h2>
-        <p>${marker.info}</p>`
-      )
+      // var popup = new mapboxgl.Popup({ offset: 25 }).setHTML(
+      //   `<h2>${marker.title}</h2>
+      //   <p>${marker.info}</p>`
+      // )
     // create DOM element for the marker
         var el = document.createElement('div');
         el.className = 'marker';
         new mapboxgl.Marker(el)
         .setLngLat(coords)
-        .setPopup(popup) // sets a popup on this marker
+        // .setPopup(popup) // sets a popup on this marker
         .addTo(this.state.map);
 
         let markerEvent = (marker, handleMarkerSelect) => {
           el.addEventListener("click", function renderInfo() {
-            console.log(handleMarkerSelect(marker))
+            handleMarkerSelect(marker)
           })
         }
         markerEvent(marker, this.props.handleMarkerSelect) 
@@ -93,15 +94,15 @@ class Map extends React.Component {
 
   renderTempMarker(marker) {
     var coords = [marker.coordinates.lng,marker.coordinates.lat];
-    var popup = new mapboxgl.Popup({ offset: 25 }).setHTML(
-      `<h2>${marker.title}</h2>
-      <p>${marker.info}</p>`
-    )
+    // var popup = new mapboxgl.Popup({ offset: 25 }).setHTML(
+    //   `<h2>${marker.title}</h2>
+    //   <p>${marker.info}</p>`
+    // )
     var el = document.createElement('div');
     el.className = 'marker';
     new mapboxgl.Marker(el)
     .setLngLat(coords)
-    .setPopup(popup) // sets a popup on this marker
+    // .setPopup(popup) // sets a popup on this marker
     .addTo(this.state.map);
   }
 
