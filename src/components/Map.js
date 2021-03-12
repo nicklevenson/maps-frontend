@@ -19,7 +19,10 @@ class Map extends React.Component {
   
   render(){
     return(
-      <div id="map" style={{width:"90vw", height:"70vh"}}></div>
+      <div>
+        <div id="map" style={{width:"90vw", height:"70vh"}}></div>
+        <div id="newMarker" className="marker">New Marker</div>
+      </div>
     )
   }
 
@@ -33,20 +36,29 @@ class Map extends React.Component {
       zoom: 2 // starting zoom
     });
     this.setState({map: map})
-    map.on('click', (e) => {
-      const coords = [e.lngLat.lng, e.lngLat.lat]
-      const marker = {
-        title: "I made it!",
-        coordinates: {
-          lat: coords[1],
-          lng: coords[0]
-        },
-        info: "Woo!"
-      }
-      this.props.addMarker(marker)
-      //trigger a form, disable click
-      //create instance of a new point in state
-    })
+
+    const newMarkerButton = document.getElementById("newMarker")
+    const addMarker = this.props.addMarker
+    newMarkerButton.addEventListener('click', (e) => {
+      map.on('click', function mapEvent(e){
+       
+          const coords = [e.lngLat.lng, e.lngLat.lat]
+          const marker = {
+            title: "I made it!",
+            coordinates: {
+              lat: coords[1],
+              lng: coords[0]
+            },
+            info: "Woo!"
+          }
+          addMarker(marker)
+          map.off('click', mapEvent)
+          //trigger a form, disable click
+          //create instance of a new point in state
+        
+      })
+    }
+   )
 }
 
   renderMarkers(){
@@ -58,7 +70,7 @@ class Map extends React.Component {
       )
     // create DOM element for the marker
         var el = document.createElement('div');
-        el.id = 'marker';
+        el.className = 'marker';
         new mapboxgl.Marker(el)
         .setLngLat(coords)
         .setPopup(popup) // sets a popup on this marker

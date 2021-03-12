@@ -42,7 +42,7 @@
         el.style.borderRadius = "100%"
         el.style.zIndex="10" */
 
-#marker {
+.marker {
   width: 25px;
   height: 25px;
   background-color: #61dafb;
