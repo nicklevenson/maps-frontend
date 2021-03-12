@@ -17,7 +17,7 @@ class PersonalMapContainer extends React.Component{
       <div className="my-map">
         <h1>My Map</h1>
         <Map markers={this.props.markers} handleMarkerSelect={this.handleMarkerSelect}/>
-        <MarkerInfo marker={this.state.selectedMarker}/>
+        <MarkerInfo marker={this.state.selectedMarker} handleMarkerSelect={this.handleMarkerSelect}/>
       </div>
     )
   }
