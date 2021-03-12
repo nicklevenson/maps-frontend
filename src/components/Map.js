@@ -5,6 +5,10 @@ import {connect} from 'react-redux'
 import {addMarker} from '../actions/addMarker.js'
 
 class Map extends React.Component {
+  state = {
+    map: ""
+  }
+  
   componentDidMount() {
     mapboxgl.accessToken = process.env.REACT_APP_API_KEY;
     const map = new mapboxgl.Map({
@@ -42,7 +46,26 @@ class Map extends React.Component {
       //trigger a form, disable click
       //create instance of a new point in state
     })
+    this.setState({map: map})
+  }
 
+  componentDidUpdate() {
+    this.props.markers.forEach(marker => {
+      var coords = [marker.coordinates.lng,marker.coordinates.lat];
+      var popup = new mapboxgl.Popup({ offset: 25 }).setHTML(
+        `<h2>${marker.title}</h2>
+        <p>${marker.info}</p>`
+      )
+         
+        // create DOM element for the marker
+        var el = document.createElement('div');
+        el.id = 'marker';
+        new mapboxgl.Marker(el)
+        .setLngLat(coords)
+        .setPopup(popup) // sets a popup on this marker
+        .addTo(this.state.map);
+    })
+   
   }
   
   render(){

@@ -10,7 +10,7 @@ class MapContainer extends React.Component{
       <Map markers={this.props.markers}/>
     )
   }
-  
+
 }
 
 const mapStateToProps = (state) => {
