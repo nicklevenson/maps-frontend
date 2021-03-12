@@ -10,13 +10,15 @@ class Map extends React.Component {
     container: 'map', // container ID
     style: 'mapbox://styles/mapbox/light-v10', // style URL
     center: [-74.5, 40], // starting position [lng, lat]
-    zoom: 9 // starting zoom
+    zoom: 2 // starting zoom
     });
-    map.on('load', function () {
+  
+    map.on('load', () => {
       // Add an image to use as a custom marker
+      
       map.loadImage(
           'https://docs.mapbox.com/mapbox-gl-js/assets/custom_marker.png',
-          function (error, image) {
+          (error, image) => {
               if (error) throw error;
               map.addImage('custom-marker', image);
               // Add a GeoJSON source with 2 points
@@ -24,33 +26,25 @@ class Map extends React.Component {
                   'type': 'geojson',
                   'data': {
                       'type': 'FeatureCollection',
-                      'features': [
+                      'features': this.props.points.map(point => 
+                        (
                           {
-                              // feature for Mapbox DC
-                              'type': 'Feature',
-                              'geometry': {
-                                  'type': 'Point',
-                                  'coordinates': [
-                                      -77.03238901390978,
-                                      38.913188059745586
-                                  ]
-                              },
-                              'properties': {
-                                  'title': 'Mapbox DC'
-                              }
-                          },
-                          {
-                              // feature for Mapbox SF
-                              'type': 'Feature',
-                              'geometry': {
-                                  'type': 'Point',
-                                  'coordinates': [-122.414, 37.776]
-                              },
-                              'properties': {
-                                  'title': 'Mapbox SF'
-                              }
-                          }
-                      ]
+                            'type': 'Feature',
+                            'geometry': {
+                                'type': 'Point',
+                                'coordinates': [
+                                    point.coordinates.lat,
+                                    point.coordinates.long
+                                ]
+                            },
+                            'properties': {
+                                'title': point.title
+                            }
+                        }
+                        )
+                        )
+                         
+                      
                   }
               });
 
@@ -78,7 +72,7 @@ class Map extends React.Component {
   
   render(){
     return(
-      <div id="map" style={{width:"50vw", height:"50vh"}}></div>
+      <div id="map" style={{width:"90vw", height:"70vh"}}></div>
     )
   }
 }
