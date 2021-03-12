@@ -3,6 +3,7 @@ import Map from '../components/Map.js';
 import {connect} from 'react-redux'
 // import {addMarker} from './actions/addMarker.js'
 class MapContainer extends React.Component{
+  
  
   render(){
     return(
@@ -11,7 +12,6 @@ class MapContainer extends React.Component{
   }
   
 }
-
 
 const mapStateToProps = (state) => {
   return {

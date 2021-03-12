@@ -1,7 +1,8 @@
 import React from 'react';
 import mapboxgl from 'mapbox-gl'
 
-
+import {connect} from 'react-redux'
+import {addMarker} from '../actions/addMarker.js'
 
 class Map extends React.Component {
   componentDidMount() {
@@ -28,12 +29,16 @@ class Map extends React.Component {
         .addTo(map);
     })
     map.on('click', (e) => {
-      var coords = [e.lngLat.lng, e.lngLat.lat]
-      var el = document.createElement('div');
-      el.id = 'marker';
-      new mapboxgl.Marker(el)
-      .setLngLat(coords)
-      .addTo(map);
+      const coords = [e.lngLat.lng, e.lngLat.lat]
+      const marker = {
+        title: "I made it!",
+        coordinates: {
+          lat: coords[1],
+          lng: coords[0]
+        },
+        info: "Woo!"
+      }
+      this.props.addMarker(marker)
       //trigger a form, disable click
       //create instance of a new point in state
     })
@@ -47,4 +52,12 @@ class Map extends React.Component {
   }
 }
 
-export default Map
+
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addMarker: (marker) => dispatch(addMarker(marker))
+  }
+}
+
+export default connect(null, mapDispatchToProps)(Map)

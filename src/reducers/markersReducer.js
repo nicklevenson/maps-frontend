@@ -1,17 +1,10 @@
 function markersReducer(state={
-  markers: [
-    {
-      title: "Test",
-      coordinates: {
-      lat: 45.512230,
-      lng: -122.658722
-      },
-      info: "I like this place"
-    }
-  ]
+  markers: []
 }, action) {
   switch(action.type){
     case "ADD_MARKER":
+      console.log(action)
+      return {...state, markers: state.markers.concat(action.payload)}
     default:
       return state
   }
