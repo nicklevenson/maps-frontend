@@ -2,7 +2,7 @@ import React from 'react'
 import Map from '../components/Map.js';
 import {connect} from 'react-redux'
 // import {addMarker} from './actions/addMarker.js'
-class MapContainer extends React.Component{
+class PersonalMapContainer extends React.Component{
   
  
   render(){
@@ -19,4 +19,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps)(MapContainer)
+export default connect(mapStateToProps)(PersonalMapContainer)
