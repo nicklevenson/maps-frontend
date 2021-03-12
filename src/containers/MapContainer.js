@@ -1,24 +1,22 @@
 import React from 'react'
 import Map from '../components/Map.js';
-
+import {connect} from 'react-redux'
+// import {addMarker} from './actions/addMarker.js'
 class MapContainer extends React.Component{
-  state = {
-    points: [
-      {
-        title: "Test",
-        coordinates: {
-        lat: 45.512230,
-        lng: -122.658722
-        },
-        info: "I like this place"
-      }
-    ]
-  }
+ 
   render(){
     return(
-      <Map points={this.state.points}/>
+      <Map markers={this.props.markers}/>
     )
+  }
+  
+}
+
+
+const mapStateToProps = (state) => {
+  return {
+      markers: state.markers.markers
   }
 }
 
-export default MapContainer
+export default connect(mapStateToProps)(MapContainer)
