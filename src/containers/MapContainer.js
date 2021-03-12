@@ -7,9 +7,10 @@ class MapContainer extends React.Component{
       {
         title: "Test",
         coordinates: {
-        lat: -77.03238901390978,
-        lng: 38.913188059745586
-        }
+        lat: 45.512230,
+        lng: -122.658722
+        },
+        info: "I like this place"
       }
     ]
   }

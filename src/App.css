@@ -36,3 +36,16 @@
     transform: rotate(360deg);
   }
 }
+/*  el.style.width = "25px"
+        el.style.height = "25px"
+        el.style.backgroundColor = "lightblue"
+        el.style.borderRadius = "100%"
+        el.style.zIndex="10" */
+
+#marker {
+  width: 25px;
+  height: 25px;
+  background-color: #61dafb;
+  border-radius: 100%;
+  z-index: 10;
+}

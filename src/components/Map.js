@@ -12,23 +12,29 @@ class Map extends React.Component {
     center: [-77.0353, 38.8895], // starting position [lng, lat]
     zoom: 2 // starting zoom
     });
-    var monument = [-77.0353, 38.8895];
-    var popup = new mapboxgl.Popup({ offset: 25 }).setText(
-      'Construction on the Washington Monument began in 1848.'
-      );
-       
-      // create DOM element for the marker
+    this.props.points.forEach(point => {
+      var monument = [point.coordinates.lng,point.coordinates.lat];
+      var popup = new mapboxgl.Popup({ offset: 25 }).setHTML(
+        `<h2>${point.title}</h2>
+        <p>${point.info}</p>`
+      )
+         
+        // create DOM element for the marker
+        var el = document.createElement('div');
+        el.id = 'marker';
+        new mapboxgl.Marker(el)
+        .setLngLat(monument)
+        .setPopup(popup) // sets a popup on this marker
+        .addTo(map);
+    })
+    map.on('click', (e) => {
+      var monument = [e.lngLat.lng, e.lngLat.lat]
       var el = document.createElement('div');
       el.id = 'marker';
-      el.style.width = "50px"
-      el.style.height = "50px"
-      el.style.backgroundColor = "blue"
-       
-      // create the marker
       new mapboxgl.Marker(el)
       .setLngLat(monument)
-      .setPopup(popup) // sets a popup on this marker
       .addTo(map);
+    })
 
   }
   
