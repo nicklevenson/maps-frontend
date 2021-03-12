@@ -21,12 +21,15 @@ class Map extends React.Component {
       <div>
         <div id="map" style={{width:"90vw", height:"70vh"}}></div>
         <div id="newMarker" className="marker">New Marker</div>
-        {this.state.newMarkerInfo ? <MarkerForm newMarkerInfo={this.state.newMarkerInfo}/> : null}
+        {this.state.newMarkerInfo ? <MarkerForm removeForm={this.removeForm} newMarkerInfo={this.state.newMarkerInfo}/> : null}
       </div>
  
     )
   }
 
+  removeForm = () => {
+    this.setState({newMarkerInfo: null})
+  }
 
   renderMap() {
     mapboxgl.accessToken = process.env.REACT_APP_API_KEY;

@@ -6,8 +6,11 @@ class MarkerForm extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault()
-    console.log(this.props.newMarkerInfo)
-    console.log(e.target.title.value)
+    let marker = this.props.newMarkerInfo
+    marker.title = e.target.title.value
+    marker.info = e.target.info.value
+    this.props.addMarker(marker)
+    this.props.removeForm()
   }
    render() {
     return (
