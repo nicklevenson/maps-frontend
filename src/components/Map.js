@@ -23,9 +23,10 @@ class Map extends React.Component {
           <div id="map"></div>
         </div>
         <div className="side-bar">
-          <div class="newMarkerContainer">
-            {this.state.newMarkerInfo ? <div onClick={this.removeForm}>X</div> : null}
-            <h5>New Marker</h5>
+        {this.state.newMarkerInfo ? <div onClick={this.removeForm}>X</div> : null}
+          <div id="newMarkerContainer">
+            
+            <h5 style={{margin:"0"}}>New Marker</h5>
             <div id="newMarker" className="marker"></div>
           </div>
           {this.state.newMarkerInfo ? <MarkerForm removeForm={this.removeForm} newMarkerInfo={this.state.newMarkerInfo}/> : null}
@@ -35,8 +36,9 @@ class Map extends React.Component {
   }
 
   removeForm = () => {
-    document.getElementById("temp-marker").remove()
     this.setState({newMarkerInfo: null})
+    document.getElementById("newMarkerContainer").style.display = "inline-block"
+    document.getElementById("temp-marker").remove()
   }
 
   renderMap() {
@@ -48,29 +50,28 @@ class Map extends React.Component {
       zoom: 2 // starting zoom
     });
     this.setState({map: map})
-    const newMarkerButton = document.getElementById("newMarker")
+    const newMarkerButton = document.getElementById("newMarkerContainer")
     newMarkerButton.addEventListener('click', (e) => {
-    const triggerState = (newMarkerInfo) => this.setState({newMarkerInfo: newMarkerInfo})
-
-    const renderTempMarker = (marker) => this.renderTempMarker(marker)
-       map.on('click', function mapEvent(e){
-          const coords = [e.lngLat.lng, e.lngLat.lat]
-          const marker = {
-            title: "New Marker",
-            coordinates: {
-              lat: coords[1],
-              lng: coords[0]
-            },
-            info: "Be sure to submit me"
-          }
-          // addMarker(marker)
-          triggerState(marker)
-          renderTempMarker(marker)
-          map.off('click', mapEvent)
-          //trigger a form, disable click
-          //create instance of a new point in state
-        
-      })
+      const triggerState = (newMarkerInfo) => this.setState({newMarkerInfo: newMarkerInfo})
+      const renderTempMarker = (marker) => this.renderTempMarker(marker)
+        map.on('click', function mapEvent(e){
+            const coords = [e.lngLat.lng, e.lngLat.lat]
+            const marker = {
+              title: "New Marker",
+              coordinates: {
+                lat: coords[1],
+                lng: coords[0]
+              },
+              info: "Be sure to submit me"
+            }
+            // addMarker(marker)
+            triggerState(marker)
+            renderTempMarker(marker)
+            map.off('click', mapEvent)
+            //trigger a form, disable click
+            //create instance of a new point in state
+          
+        })
     }
    )
 }

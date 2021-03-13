@@ -11,8 +11,11 @@ class MarkerForm extends React.Component {
     marker.info = e.target.info.value
     this.props.addMarker(marker)
     this.props.removeForm()
+    document.getElementById("newMarkerContainer").style.display = "inline-block"
   }
    render() {
+    document.getElementById("newMarkerContainer").style.display = "none"
+    
     return (
       <div id="newMarkerForm">
         <h3>New Marker</h3>
