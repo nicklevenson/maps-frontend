@@ -2,6 +2,9 @@ import React from 'react';
 import mapboxgl from 'mapbox-gl'
 import MarkerForm from './MarkerForm.js'
 import RenderMarker from './RenderMarker.js'
+import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
+import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
+
 class Map extends React.Component {
   state = {
     map: "",
@@ -49,6 +52,12 @@ class Map extends React.Component {
       center: [-77.0353, 38.8895], // starting position [lng, lat]
       zoom: 2 // starting zoom
     });
+    map.addControl(
+      new MapboxGeocoder({
+      accessToken: process.env.REACT_APP_API_KEY,
+      mapboxgl: mapboxgl
+      })
+    );
     this.setState({map: map})
     const newMarkerButton = document.getElementById("newMarkerContainer")
     newMarkerButton.addEventListener('click', (e) => {
