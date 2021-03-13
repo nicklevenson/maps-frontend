@@ -1,7 +1,7 @@
 import React from 'react';
 import mapboxgl from 'mapbox-gl'
 import MarkerForm from './MarkerForm.js'
-
+import Marker from './Marker.js'
 class Map extends React.Component {
   state = {
     map: "",
@@ -77,36 +77,37 @@ class Map extends React.Component {
 }
 
   renderMarkers(){
-    console.log(this.state.map)
-    this.props.markers.forEach(marker => {
-      var coords = [marker.coordinates.lng,marker.coordinates.lat];
-      // var popup = new mapboxgl.Popup({ offset: 25 }).setHTML(
-      //   `<h2>${marker.title}</h2>
-      //   <p>${marker.info}</p>`
-      // )
-    // create DOM element for the marker
-        var el = document.createElement('div');
-        el.className = 'marker';
-        new mapboxgl.Marker(el)
-        .setLngLat(coords)
-        // .setPopup(popup) // sets a popup on this marker
-        .addTo(this.state.map);
+    // this.props.markers.forEach(marker => {
+    //   var coords = [marker.coordinates.lng,marker.coordinates.lat];
+    //   // var popup = new mapboxgl.Popup({ offset: 25 }).setHTML(
+    //   //   `<h2>${marker.title}</h2>
+    //   //   <p>${marker.info}</p>`
+    //   // )
+    // // create DOM element for the marker
+    //     var el = document.createElement('div');
+    //     el.className = 'marker';
+    //     new mapboxgl.Marker(el)
+    //     .setLngLat(coords)
+    //     // .setPopup(popup) // sets a popup on this marker
+    //     .addTo(this.state.map);
 
-        let markerEvent = (marker, handleMarkerSelect) => {
-          el.addEventListener("click", function renderInfo(event) {
-            handleMarkerSelect(marker)
-            const container = document.getElementById("marker-info-container")
-            var x = event.clientX;
-            var y = event.clientY;
-            container.style.position = 'absolute';
-            container.style.left = x + 'px';
-            container.style.top = y + 'px';
-            container.style.width = "30vw";
+    //     let markerEvent = (marker, handleMarkerSelect) => {
+    //       el.addEventListener("click", function renderInfo(event) {
+    //         handleMarkerSelect(marker)
+    //         const container = document.getElementById("marker-info-container")
+    //         var x = event.clientX;
+    //         var y = event.clientY;
+    //         container.style.position = 'absolute';
+    //         container.style.left = x + 'px';
+    //         container.style.top = y + 'px';
+    //         container.style.width = "30vw";
        
-          })
-        }
-        markerEvent(marker, this.props.handleMarkerSelect) 
-    })
+    //       })
+    //     }
+    //     markerEvent(marker, this.props.handleMarkerSelect) 
+    // })
+
+    this.props.markers.forEach(marker => Marker({marker: marker, map: this.state.map, handleMarkerSelect: this.props.handleMarkerSelect}))
   }  
 
   renderTempMarker(marker) {
