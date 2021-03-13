@@ -18,12 +18,18 @@ class Map extends React.Component {
   
   render(){
     return(
-      <div>
-        <div id="map" style={{width:"90vw", height:"70vh"}}></div>
-        <div id="newMarker" className="marker">New Marker</div>
-        {this.state.newMarkerInfo ? <MarkerForm removeForm={this.removeForm} newMarkerInfo={this.state.newMarkerInfo}/> : null}
-      </div>
- 
+      <>
+        <div className="map-container">
+          <div id="map"></div>
+        </div>
+        <div className="side-bar">
+          <div class="newMarkerContainer">
+            <h5>New Marker</h5>
+            <div id="newMarker" className="marker"></div>
+          </div>
+          {this.state.newMarkerInfo ? <MarkerForm removeForm={this.removeForm} newMarkerInfo={this.state.newMarkerInfo}/> : null}
+        </div>
+      </>
     )
   }
 

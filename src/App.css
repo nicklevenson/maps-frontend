@@ -2,45 +2,58 @@
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+
+.outer-map-container {
+  margin: auto;
+  display: grid;
+  grid-template-columns: 2fr max-content;
+  grid-template-rows: .5fr 2fr 1fr;
+  height: 90vh;
+  width: 90vw;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.map-container {
+  grid-row: 2;
+  grid-column-start: 1;
+  grid-column-end: 3;
 }
+#map {
+  width: 100%;
+  height: 100%;
+}
+.side-bar {
+  background-color: rgba(187, 183, 207, 0.884);
+  grid-row: 2;
+  grid-column: 2;
+  z-index: 10;
+  height: min-content;
+  margin: 5%;
+  border-radius: 5px;
+}
+.marker-info-container {
+  
+  grid-row: 3;
+  grid-column-start: 1;
+  grid-column-end: 3;
+}
+.marker-info{
+  
+  background-color: lightgray;
+}
+.newMarkerContainer {
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
+  
+  width: 100%;
+  text-align: center;
 
-.App-link {
-  color: #61dafb;
 }
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+#newMarker {
+  display: inline-block;
 }
-/*  el.style.width = "25px"
-        el.style.height = "25px"
-        el.style.backgroundColor = "lightblue"
-        el.style.borderRadius = "100%"
-        el.style.zIndex="10" */
+#newMarkerForm form {
+  width: 25vw;
+  height: 25vh;
+}
 
 .marker {
   width: 25px;
@@ -49,6 +62,7 @@
   border-radius: 100%;
   z-index: 10;
 }
+
 
 canvas:focus {
   outline: none !important;

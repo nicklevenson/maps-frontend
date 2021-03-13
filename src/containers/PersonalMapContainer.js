@@ -14,10 +14,13 @@ class PersonalMapContainer extends React.Component{
  
   render(){
     return(
-      <div className="my-map">
+      <div className="outer-map-container">
         <h1>My Map</h1>
         <Map markers={this.props.markers} handleMarkerSelect={this.handleMarkerSelect}/>
-        <MarkerInfo marker={this.state.selectedMarker} handleMarkerSelect={this.handleMarkerSelect}/>
+        <br/>
+        <div className="marker-info-container">
+          <MarkerInfo marker={this.state.selectedMarker} handleMarkerSelect={this.handleMarkerSelect}/>
+        </div>
       </div>
     )
   }
