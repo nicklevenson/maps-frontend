@@ -1,9 +1,9 @@
 import React from 'react'
 import Map from '../components/Map.js';
-import {connect} from 'react-redux'
+
 import MarkerInfo from '../components/MarkerInfo.js'
 // import {addMarker} from './actions/addMarker.js'
-class PublicMapContainer extends React.Component{
+class MapContainer extends React.Component{
   state = {
     selectedMarker: {}
   }
@@ -26,10 +26,5 @@ class PublicMapContainer extends React.Component{
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-      markers: state.markers.markers
-  }
-}
 
-export default connect(mapStateToProps)(PublicMapContainer)
+export default MapContainer

@@ -1,8 +1,8 @@
 import './App.css';
 import React from 'react'
 import {Switch, Route} from "react-router-dom";
-import PublicMapContainer from './containers/PublicMapContainer.js';
-import PersonalMapContainer from './containers/PersonalMapContainer.js';
+import MapContainer from './containers/MapContainer.js';
+import {connect} from 'react-redux'
 import Nav from './components/Nav.js'
 
 
@@ -12,8 +12,8 @@ class App extends React.Component {
       <div className="App">
         <Nav/>
         <Switch>
-          <Route exact path="/public-map" component={PublicMapContainer}></Route>
-          <Route exact path="/my-map" component={PersonalMapContainer}></Route>
+          <Route exact path="/public-map" render={() => <MapContainer markers={this.props.markers}/> }></Route>
+          <Route exact path="/my-map" render={() => <MapContainer markers={this.props.markers}/> }></Route>
         </Switch>
       </div>
     );
@@ -21,4 +21,11 @@ class App extends React.Component {
  
 }
 
-export default App;
+const mapStateToProps = (state) => {
+  return {
+      markers: state.markers.markers
+  }
+}
+
+export default connect(mapStateToProps)(App)
+
