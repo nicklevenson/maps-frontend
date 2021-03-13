@@ -101,7 +101,8 @@ class Map extends React.Component {
             container.style.position = 'absolute';
             container.style.left = x + 'px';
             container.style.top = y + 'px';
-            container.style.width = "30vw"
+            container.style.width = "30vw";
+       
           })
         }
         markerEvent(marker, this.props.handleMarkerSelect) 

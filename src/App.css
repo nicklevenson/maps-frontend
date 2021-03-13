@@ -39,7 +39,12 @@
 }
 
 .marker-info{
-  background-color: lightgray;
+  padding: 5%;
+  background-color: rgba(211, 211, 211, 0.959);
+  border-radius: 5px;
+  box-shadow: 0px 1px 5px rgb(94, 93, 93);
+  height: 25vh;
+  overflow-y: scroll;
 }
 #newMarkerContainer {
   display: inline-block;
