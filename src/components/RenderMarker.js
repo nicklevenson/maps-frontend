@@ -1,6 +1,6 @@
 import mapboxgl from 'mapbox-gl'
 
-const Marker = (props) => {
+const RenderMarker = (props) => {
   var coords = [props.marker.coordinates.lng, props.marker.coordinates.lat];
   // var popup = new mapboxgl.Popup({ offset: 25 }).setHTML(
   //   `<h2>${marker.title}</h2>
@@ -31,4 +31,4 @@ const Marker = (props) => {
 }
 
 
-export default Marker
+export default RenderMarker

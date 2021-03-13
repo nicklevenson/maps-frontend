@@ -12,8 +12,8 @@ class App extends React.Component {
       <div className="App">
         <Nav/>
         <Switch>
-          <Route exact path="/public-map" render={() => <MapContainer markers={this.props.markers}/> }></Route>
-          <Route exact path="/my-map" render={() => <MapContainer markers={this.props.markers}/> }></Route>
+          <Route exact path="/public-map" render={() => <MapContainer markers={this.props.markers} heading={"Public Map"}/> }></Route>
+          <Route exact path="/my-map" render={() => <MapContainer markers={this.props.markers} heading={"My Map"}/>}></Route>
         </Switch>
       </div>
     );
