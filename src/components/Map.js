@@ -24,6 +24,7 @@ class Map extends React.Component {
         </div>
         <div className="side-bar">
           <div class="newMarkerContainer">
+            {this.state.newMarkerInfo ? <div onClick={this.removeForm}>X</div> : null}
             <h5>New Marker</h5>
             <div id="newMarker" className="marker"></div>
           </div>
@@ -34,6 +35,7 @@ class Map extends React.Component {
   }
 
   removeForm = () => {
+    document.getElementById("temp-marker").remove()
     this.setState({newMarkerInfo: null})
   }
 
@@ -100,15 +102,11 @@ class Map extends React.Component {
 
   renderTempMarker(marker) {
     var coords = [marker.coordinates.lng,marker.coordinates.lat];
-    // var popup = new mapboxgl.Popup({ offset: 25 }).setHTML(
-    //   `<h2>${marker.title}</h2>
-    //   <p>${marker.info}</p>`
-    // )
-    var el = document.createElement('div');
-    el.className = 'marker';
-    new mapboxgl.Marker(el)
+    var temp = document.createElement('div');
+    temp.className = 'marker';
+    temp.id = 'temp-marker'
+    new mapboxgl.Marker(temp)
     .setLngLat(coords)
-    // .setPopup(popup) // sets a popup on this marker
     .addTo(this.state.map);
   }
 

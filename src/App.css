@@ -54,6 +54,10 @@
   width: 25vw;
   height: 25vh;
 }
+#newMarkerForm textarea{
+  width: 80%;
+  height: 20%;
+}
 
 .marker {
   width: 25px;

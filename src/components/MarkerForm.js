@@ -20,7 +20,7 @@ class MarkerForm extends React.Component {
           <label>Marker Title</label><br/>
           <input type="text" name="title"></input><br/>
           <label>Marker Info</label><br/>
-          <input type="textarea" name="info"></input><br/>
+          <textarea name="info"></textarea><br/>
           <input type="submit"></input>
         </form>
       </div>
