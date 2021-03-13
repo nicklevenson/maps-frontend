@@ -39,14 +39,16 @@
   border-radius: 5px;
 }
 
-.marker-info{
+/* .marker-info{
   padding: 5%;
   background-color: rgba(211, 211, 211, 0.959);
   border-radius: 5px;
   box-shadow: 0px 1px 5px rgb(94, 93, 93);
   height: 25vh;
   overflow-y: scroll;
-}
+} */
+
+
 #newMarkerContainer {
   display: inline-block;
   cursor: pointer;
@@ -68,10 +70,13 @@
   border-radius: 100%;
   z-index: 10;
 }
+.mapboxgl-popup {
+  max-width: 25vw !important;
+}
 
 textarea {
   background-color: transparent;
-  height: 50% !important;
+  height: 10vh !important;
   width: 20vw !important;
   
 }
