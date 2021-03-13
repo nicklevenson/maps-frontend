@@ -73,6 +73,11 @@
   z-index: 10;
 }
 
+textarea {
+  background-color: transparent;
+  height: 50%;
+  width: 100%;
+}
 
 canvas:focus {
   outline: none !important;
