@@ -45,7 +45,7 @@ class Map extends React.Component {
     mapboxgl.accessToken = process.env.REACT_APP_API_KEY;
     const map = new mapboxgl.Map({
       container: 'map', // container ID
-      style: 'mapbox://styles/mapbox/light-v10', // style URL
+      style: 'mapbox://styles/nicklevenson/ckm82ay4haed317r1gmlt32as', // style URL
       center: [-77.0353, 38.8895], // starting position [lng, lat]
       zoom: 2 // starting zoom
     });
