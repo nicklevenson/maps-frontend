@@ -1,6 +1,7 @@
 import React from 'react'
 
 export default class MarkerInfo extends React.Component {
+  
   render() {
     return(
       <div className="marker-info">

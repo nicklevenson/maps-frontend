@@ -21,9 +21,9 @@ class MarkerForm extends React.Component {
         <h3>New Marker</h3>
         <form onSubmit={e=>this.handleSubmit(e)}>
           <label>Marker Title</label><br/>
-          <input type="text" name="title"></input><br/>
+          <input type="text" name="title" required="true"></input><br/>
           <label>Marker Info</label><br/>
-          <textarea name="info"></textarea><br/>
+          <textarea name="info" required="true"></textarea><br/>
           <input type="submit"></input>
         </form>
       </div>

@@ -93,8 +93,15 @@ class Map extends React.Component {
         .addTo(this.state.map);
 
         let markerEvent = (marker, handleMarkerSelect) => {
-          el.addEventListener("click", function renderInfo() {
+          el.addEventListener("click", function renderInfo(event) {
             handleMarkerSelect(marker)
+            const container = document.getElementById("marker-info-container")
+            var x = event.clientX;
+            var y = event.clientY;
+            container.style.position = 'absolute';
+            container.style.left = x + 'px';
+            container.style.top = y + 'px';
+            container.style.width = "30vw"
           })
         }
         markerEvent(marker, this.props.handleMarkerSelect) 

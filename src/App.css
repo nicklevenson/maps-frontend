@@ -3,13 +3,18 @@
 }
 
 
+
 .outer-map-container {
   margin: auto;
   display: grid;
   grid-template-columns: 2fr max-content;
-  grid-template-rows: .5fr 2fr 1fr;
+  grid-template-rows: 10% 2fr;
   height: 90vh;
   width: 80vw;
+}
+.map-header {
+  grid-column-start: 1;
+  grid-column-end: 3;
 }
 
 .map-container {
@@ -27,24 +32,20 @@
   grid-column: 2;
   z-index: 10;
   height: min-content;
+  width: max-content;
   margin: 5%;
+  padding: 5%;
   border-radius: 5px;
 }
-.marker-info-container {
-  
-  grid-row: 3;
-  grid-column-start: 1;
-  grid-column-end: 3;
-}
+
 .marker-info{
-  
   background-color: lightgray;
 }
 #newMarkerContainer {
+  display: inline-block;
   cursor: pointer;
   width: 100%;
   text-align: center;
-
 }
 #newMarker {
   display: inline-block;
@@ -59,6 +60,7 @@
 }
 
 .marker {
+  cursor: pointer;
   width: 25px;
   height: 25px;
   background-color: #61dafb;
