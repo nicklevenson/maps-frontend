@@ -5,7 +5,6 @@ export const fetchMarkers = () => {
     fetch('http://localhost:3000/markers')
     .then(res => res.json())
     .then(markers => {
-        console.log(markers)
         markers.forEach(marker => dispatch(addMarker(marker)))
     })
   }
@@ -23,8 +22,16 @@ export const createMarker = (marker) => {
   }
     fetch('http://localhost:3000/markers', configObj)
     .then(res => res.json())
-    .then(marker => {
-        dispatch(addMarker(marker))
+    .then(json => {
+      console.log(json)
+      if (json.message) {
+        dispatch(addMarker(json.marker))
+      }else{
+        alert("Errors saving marker.")
+      }
+    })
+    .catch(function(error) {
+      alert("Errors saving marker.")
     })
   }
 }
