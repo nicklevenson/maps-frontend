@@ -68,10 +68,8 @@ class Map extends React.Component {
             const coords = [e.lngLat.lng, e.lngLat.lat]
             const marker = {
               title: "New Marker",
-              coordinates: {
-                lat: coords[1],
-                lng: coords[0]
-              },
+              lat: coords[1],
+              lng: coords[0],
               info: "Be sure to submit me"
             }
             // addMarker(marker)
@@ -91,7 +89,7 @@ class Map extends React.Component {
   }  
 
   renderTempMarker(marker) {
-    var coords = [marker.coordinates.lng,marker.coordinates.lat];
+    var coords = [marker.lng, marker.lat];
     var temp = document.createElement('div');
     temp.className = 'marker';
     temp.id = 'temp-marker'

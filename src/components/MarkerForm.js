@@ -1,5 +1,5 @@
 import React from 'react'
-import {addMarker} from '../actions/addMarker.js'
+import {createMarker} from '../actions/MarkerActions.js'
 import {connect} from 'react-redux'
 
 class MarkerForm extends React.Component {
@@ -9,7 +9,7 @@ class MarkerForm extends React.Component {
     let marker = this.props.newMarkerInfo
     marker.title = e.target.title.value
     marker.info = e.target.info.value
-    this.props.addMarker(marker)
+    this.props.createMarker(marker)
     this.props.removeForm()
     document.getElementById("newMarkerContainer").style.display = "inline-block"
   }
@@ -21,9 +21,9 @@ class MarkerForm extends React.Component {
         <h3>New Marker</h3>
         <form onSubmit={e=>this.handleSubmit(e)}>
           <label>Marker Title</label><br/>
-          <input type="text" name="title" required="true"></input><br/>
+          <input type="text" name="title" required={true}></input><br/>
           <label>Marker Info</label><br/>
-          <textarea name="info" required="true"></textarea><br/>
+          <textarea name="info" required={true}></textarea><br/>
           <input type="submit"></input>
         </form>
       </div>
@@ -32,7 +32,7 @@ class MarkerForm extends React.Component {
 }
 const mapDispatchToProps = (dispatch) => {
   return {
-    addMarker: (marker) => dispatch(addMarker(marker))
+    createMarker: (marker) => dispatch(createMarker(marker))
   }
 }
 
