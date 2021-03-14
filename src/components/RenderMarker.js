@@ -1,7 +1,7 @@
 import mapboxgl from 'mapbox-gl'
 
 const RenderMarker = (props) => {
-  var coords = [props.marker.coordinates.lng, props.marker.coordinates.lat];
+  var coords = [props.marker.lng, props.marker.lat];
 // create DOM element for the marker
     var el = document.createElement('div');
     el.className = 'marker';

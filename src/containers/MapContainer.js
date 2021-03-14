@@ -1,11 +1,16 @@
 import React from 'react'
 import Map from '../components/Map.js';
-
+import {connect} from 'react-redux'  
 import MarkerInfo from '../components/MarkerInfo.js'
-// import {addMarker} from './actions/addMarker.js'
+import { fetchMarkers } from '../actions/addMarker.js';
+
 class MapContainer extends React.Component{
   state = {
     selectedMarker: {}
+  }
+  
+  componentDidMount() {
+    this.props.fetchMarkers()
   }
 
   handleMarkerSelect = (marker) => {
@@ -26,5 +31,17 @@ class MapContainer extends React.Component{
   }
 }
 
+const mapDispatchToProps = (dispatch) => {
+  return {
+    fetchMarkers: () => dispatch(fetchMarkers())
+  }
+}
 
-export default MapContainer
+
+const mapStateToProps = (state) => {
+  return {
+      markers: state.markers.markers
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(MapContainer)

@@ -2,11 +2,12 @@ import './App.css';
 import React from 'react'
 import {Switch, Route} from "react-router-dom";
 import MapContainer from './containers/MapContainer.js';
-import {connect} from 'react-redux'
+
 import Nav from './components/Nav.js'
 
 
 class App extends React.Component {
+
   render(){
     return (
       <div className="App">
@@ -21,11 +22,6 @@ class App extends React.Component {
  
 }
 
-const mapStateToProps = (state) => {
-  return {
-      markers: state.markers.markers
-  }
-}
 
-export default connect(mapStateToProps)(App)
+export default App
 
