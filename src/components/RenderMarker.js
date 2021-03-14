@@ -4,7 +4,7 @@ const RenderMarker = (props) => {
   var coords = [props.marker.coordinates.lng, props.marker.coordinates.lat];
 // create DOM element for the marker
     var el = document.createElement('div');
-    el.className = 'marker';
+    el.className = 'mapboxgl-marker mapboxgl-marker-anchor-center';
     new mapboxgl.Marker(el)
     .setLngLat(coords)
       .setPopup(new mapboxgl.Popup({ offset: 25 }) // add popups
