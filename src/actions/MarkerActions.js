@@ -7,6 +7,9 @@ export const fetchMarkers = () => {
     .then(markers => {
         markers.forEach(marker => dispatch(addMarker(marker)))
     })
+    .catch(function(error) {
+      alert("Errors getting markers.")
+    })
   }
 }
 
