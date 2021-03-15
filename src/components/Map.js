@@ -1,6 +1,6 @@
 import React from 'react';
 import mapboxgl from 'mapbox-gl'
-
+import {connect} from 'react-redux'
 import MarkerForm from './MarkerForm.js'
 import RenderMarker from './RenderMarker.js'
 import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
@@ -31,7 +31,8 @@ class Map extends React.Component {
           <div id="newMarkerContainer">
             
             <h5 style={{margin:"0"}}>New Marker</h5>
-            <div id="newMarker" className="marker"></div>
+            {this.props.currentUser ? <div id="newMarker" className="marker" style={{backgroundImage:`url(${this.props.currentUser.image})`}}></div> : null}
+            
           </div>
           {this.state.newMarkerInfo ? <MarkerForm removeForm={this.removeForm} newMarkerInfo={this.state.newMarkerInfo}/> : null}
         </div>
@@ -94,6 +95,7 @@ class Map extends React.Component {
     var temp = document.createElement('div');
     temp.className = 'marker';
     temp.id = 'temp-marker'
+    temp.style.backgroundImage = `url(${this.props.currentUser.image})`
     new mapboxgl.Marker(temp)
     .setLngLat(coords)
     .addTo(this.state.map);
@@ -101,6 +103,14 @@ class Map extends React.Component {
 
 }
 
+const mapStateToProps = (state) => {
+  return {
+      currentUser: state.currentUser.currentUser
+  }
+}
 
 
-export default Map
+
+
+
+export default connect(mapStateToProps)(Map)

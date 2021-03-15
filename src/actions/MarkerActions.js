@@ -1,4 +1,4 @@
-import {fetchUser} from './UserActions'
+
 
 export const addMarker = (marker) => ({type: "ADD_MARKER", payload: marker})
 
@@ -30,7 +30,7 @@ export const createMarker = (marker) => {
     .then(json => {
       if (json.message) {
         dispatch(addMarker(json.marker))
-        dispatch(fetchUser())
+        dispatch(fetchMarkers())
       }else{
         alert("Errors saving marker.")
       }
