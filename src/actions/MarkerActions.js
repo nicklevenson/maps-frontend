@@ -1,3 +1,5 @@
+import {fetchUser} from './UserActions'
+
 export const addMarker = (marker) => ({type: "ADD_MARKER", payload: marker})
 
 export const fetchMarkers = () => {
@@ -26,13 +28,14 @@ export const createMarker = (marker) => {
     fetch(`${process.env.REACT_APP_BACKEND_URL}/markers`, configObj)
     .then(res => res.json())
     .then(json => {
-      console.log(json)
       if (json.message) {
         dispatch(addMarker(json.marker))
+        dispatch(fetchUser())
       }else{
         alert("Errors saving marker.")
       }
     })
+    
     .catch(function(error) {
       alert("Errors saving marker.")
     })

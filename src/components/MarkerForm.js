@@ -1,23 +1,35 @@
 import React from 'react'
 import {createMarker} from '../actions/MarkerActions.js'
+
 import {connect} from 'react-redux'
-
+import { Redirect } from 'react-router-dom'
 class MarkerForm extends React.Component {
-
+  state = {
+    redirect: false
+  }
   handleSubmit = (e) => {
     e.preventDefault()
-    let marker = this.props.newMarkerInfo
-    marker.title = e.target.title.value
-    marker.info = e.target.info.value
-    this.props.createMarker(marker)
-    this.props.removeForm()
-    document.getElementById("newMarkerContainer").style.display = "inline-block"
+
+    if (this.props.currentUser.username) {
+      let marker = this.props.newMarkerInfo
+      marker.title = e.target.title.value
+      marker.info = e.target.info.value
+      marker.user_id = this.props.currentUser.id
+      this.props.createMarker(marker)
+      this.props.removeForm()
+      document.getElementById("newMarkerContainer").style.display = "inline-block"
+   
+    }else{
+      this.setState({redirect: true})
+    }
+
   }
    render() {
     document.getElementById("newMarkerContainer").style.display = "none"
     
     return (
       <div id="newMarkerForm">
+        {this.state.redirect ? <Redirect to="login" /> : null}
         <h3>New Marker</h3>
         <form onSubmit={e=>this.handleSubmit(e)}>
           <label>Marker Title</label><br/>
@@ -36,4 +48,12 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default connect(null, mapDispatchToProps)(MarkerForm)
+
+const mapStateToProps = (state) => {
+  return {
+      currentUser: state.currentUser.currentUser
+  }
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(MarkerForm)
