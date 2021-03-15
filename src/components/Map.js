@@ -79,7 +79,6 @@ class Map extends React.Component {
   renderNewMarkerForm = (map) => {
     
     const newMarkerButton = document.getElementById("newMarkerContainer")
-    const currentUserImage = this.props.currentUser.image
     
     newMarkerButton.addEventListener('mousedown', (e) => {
       
@@ -112,7 +111,8 @@ class Map extends React.Component {
               }
               triggerState(marker)
               renderTempMarker(marker)
-              map.off('click',  mapEvent)   
+              map.off('mouseup',  mapEvent)
+                 
         })
       }else{
         this.setState({redirect: true})
