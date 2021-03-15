@@ -8,22 +8,34 @@ const RenderMarker = (props) => {
     var el = document.createElement('div');
     el.className = 'marker';
     el.style.backgroundImage = `url(${props.marker.user.image})`
+    if (props.currentUser.id === props.marker.user.id) {
+      const marker = new mapboxgl.Marker(el)
+      .setLngLat(coords)
+        .setPopup(new mapboxgl.Popup({ offset: 25 }) // add popups
+        .setHTML(
+          `<h3>${props.marker.title}</h3>
+          <textarea>${props.marker.info}</textarea>
+          <div>Delete</div>`
+        ))
+        .addTo(props.map);
   
+        marker._popup._content.children[2].addEventListener('click', function removeMarker() {
+          props.destroyMarker(props.marker)
+          marker._popup._content.children[2].removeEventListener('click', removeMarker)
+        })
+    }else{
+      new mapboxgl.Marker(el)
+      .setLngLat(coords)
+        .setPopup(new mapboxgl.Popup({ offset: 25 }) // add popups
+        .setHTML(
+          `<h3>${props.marker.title}</h3>
+          <textarea>${props.marker.info}</textarea>
+          `
+        ))
+        .addTo(props.map);
+    }
     // console.log(props.marker.user)
-    const marker = new mapboxgl.Marker(el)
-    .setLngLat(coords)
-      .setPopup(new mapboxgl.Popup({ offset: 25 }) // add popups
-      .setHTML(
-        `<h3>${props.marker.title}</h3>
-        <textarea>${props.marker.info}</textarea>
-        <div>Delete</div>`
-      ))
-      .addTo(props.map);
-
-      marker._popup._content.children[2].addEventListener('click', function removeMarker() {
-        props.destroyMarker(props.marker)
-        marker._popup._content.children[2].removeEventListener('click', removeMarker)
-      })
+   
     
   }
   
