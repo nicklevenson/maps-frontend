@@ -1,6 +1,6 @@
 import './App.css';
 import React from 'react'
-import {Route} from "react-router-dom";
+import {Route, Redirect} from "react-router-dom";
 import MapContainer from './containers/MapContainer.js';
 import { fetchMarkers } from './actions/MarkerActions.js';
 import {fetchUser} from './actions/UserActions.js'
@@ -9,6 +9,7 @@ import Nav from './components/Nav.js'
 import Login from './components/Login.js'
 
 class App extends React.Component {
+
   componentDidMount() {
     this.props.fetchMarkers()
     if (sessionStorage.jwt) {
@@ -21,11 +22,13 @@ class App extends React.Component {
     return (
       <div className="App">
         <Nav/>
-       
           <Route exact path="/public-map" render={() => <MapContainer markers={this.props.markers} heading={"Public Map"}/> }></Route>
-          <Route exact path="/my-map" render={() => <MapContainer markers={this.props.markers.filter(m => m.user_id === this.props.currentUser.id)}cheading={"My Map"}/>}></Route>
+          {this.props.currentUser.username ? 
+            <Route exact path="/my-map" render={() => <MapContainer markers={this.props.markers.filter(m => m.user_id === this.props.currentUser.id)}cheading={"My Map"}/>}></Route>
+            :
+            <Route exact path="/my-map" render={() => <Redirect to="login"/>}></Route>
+          } 
           <Route exact path="/login" render={() => <Login/>}></Route>
-       
       </div>
     );
   }
