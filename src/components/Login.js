@@ -25,7 +25,6 @@ class Login extends React.Component {
         {this.props.heading ? <h5><i>{this.props.heading}</i></h5>: null}
         <a href="http://localhost:3000/authenticate"><img src={googleLogin} alt="Login with Google"/></a>
         {sessionStorage.jwt ? <Redirect to="my-map" /> : null}
-
       </div>
     )
   }

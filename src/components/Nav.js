@@ -7,7 +7,7 @@ class Nav extends React.Component {
       <div className="navbar">
         <NavLink to="/public-map">Public Map</NavLink>
         <NavLink to="/my-map">My Map</NavLink>
-        <NavLink to="/login">Login</NavLink>
+        {!sessionStorage.jwt ? <NavLink to="/login">Login</NavLink> : <NavLink to="/logout">Logout</NavLink>}
       </div>
     )
   }
