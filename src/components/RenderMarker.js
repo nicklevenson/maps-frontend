@@ -8,7 +8,7 @@ const RenderMarker = (props) => {
     var el = document.createElement('div');
     el.className = 'marker';
     el.style.backgroundImage = `url(${props.marker.user.image})`
-
+  
     // console.log(props.marker.user)
     const marker = new mapboxgl.Marker(el)
     .setLngLat(coords)
@@ -16,14 +16,14 @@ const RenderMarker = (props) => {
       .setHTML(
         `<h3>${props.marker.title}</h3>
         <textarea>${props.marker.info}</textarea>
-        <div id="delete-marker${props.marker.id}">Delete</div>`
+        <div>Delete</div>`
       ))
       .addTo(props.map);
-    marker._popup._content.children[2].addEventListener('click', function remove() {
-      props.destroyMarker(props.marker)
-      marker.remove()
-      marker._popup._content.children[2].removeEventListener('click', remove)
-    })
+
+      marker._popup._content.children[2].addEventListener('click', function removeMarker() {
+        props.destroyMarker(props.marker)
+        marker._popup._content.children[2].removeEventListener('click', removeMarker)
+      })
     
   }
   

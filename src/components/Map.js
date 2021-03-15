@@ -24,7 +24,6 @@ class Map extends React.Component {
   }
 
   
-  
   render(){
     if (this.state.redirect) {
       return(
@@ -56,6 +55,10 @@ class Map extends React.Component {
     document.getElementById("temp-marker").remove()
   }
 
+  removeMap = () =>{
+    this.state.map.remove()
+  }
+
   renderMap() {
     mapboxgl.accessToken = process.env.REACT_APP_API_KEY;
     const map = new mapboxgl.Map({
@@ -76,8 +79,9 @@ class Map extends React.Component {
 
   renderMarkers(){
     this.props.markers.forEach(marker => RenderMarker({marker: marker, map: this.state.map, handleMarkerSelect: this.props.handleMarkerSelect, destroyMarker: this.props.destroyMarker}))
-   
   }
+
+  
 
   renderNewMarkerForm = (map) => {
     

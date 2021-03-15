@@ -61,6 +61,7 @@ export const destroyMarker = (marker) => {
       if (json.message) {
         dispatch(removeMarker(marker))
         dispatch(fetchMarkers())
+        alert("Marker Deleted. You may have to refresh to notice changes.")
       }else{
         alert("Errors deleting marker.")
       }
