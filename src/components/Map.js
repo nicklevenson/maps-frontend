@@ -86,8 +86,23 @@ class Map extends React.Component {
       if (this.props.currentUser.username) {
         const triggerState = (newMarkerInfo) => this.setState({newMarkerInfo: newMarkerInfo})
         const renderTempMarker = (marker) => this.renderTempMarker(marker)
+        function handleMouseMove(e) {
+          if (document.getElementById("temp-marker")){
+            document.getElementById("temp-marker").remove()
+          }
+          const coords = [e.lngLat.lng, e.lngLat.lat]
+          const marker = {
+            title: "New Marker",
+            lat: coords[1],
+            lng: coords[0],
+            info: "Be sure to submit me"
+          }
+          renderTempMarker(marker)
+        }
+          map.on('mousemove', handleMouseMove)        
           map.on('click', function mapEvent(e){
-           
+              map.off('mousemove', handleMouseMove)
+              document.getElementById("temp-marker").remove()
               const coords = [e.lngLat.lng, e.lngLat.lat]
               const marker = {
                 title: "New Marker",
