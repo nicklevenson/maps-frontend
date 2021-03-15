@@ -2,7 +2,7 @@ export const addMarker = (marker) => ({type: "ADD_MARKER", payload: marker})
 
 export const fetchMarkers = () => {
   return (dispatch) => {
-    fetch('http://localhost:3000/markers')
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/markers`)
     .then(res => res.json())
     .then(markers => {
         markers.forEach(marker => dispatch(addMarker(marker)))
@@ -23,7 +23,7 @@ export const createMarker = (marker) => {
       },
       body: JSON.stringify({marker: marker})
   }
-    fetch('http://localhost:3000/markers', configObj)
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/markers`, configObj)
     .then(res => res.json())
     .then(json => {
       console.log(json)

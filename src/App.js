@@ -1,6 +1,6 @@
 import './App.css';
 import React from 'react'
-import {Switch, Route} from "react-router-dom";
+import {Route} from "react-router-dom";
 import MapContainer from './containers/MapContainer.js';
 import { fetchMarkers } from './actions/MarkerActions.js';
 import {fetchUser} from './actions/UserActions.js'
