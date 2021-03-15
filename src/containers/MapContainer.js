@@ -9,9 +9,7 @@ class MapContainer extends React.Component{
     selectedMarker: {}
   }
   
-  componentDidMount() {
-    this.props.fetchMarkers()
-  }
+  
 
   handleMarkerSelect = (marker) => {
     this.setState({selectedMarker: marker})
@@ -31,17 +29,4 @@ class MapContainer extends React.Component{
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    fetchMarkers: () => dispatch(fetchMarkers())
-  }
-}
-
-
-const mapStateToProps = (state) => {
-  return {
-      markers: state.markers.markers
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(MapContainer)
+export default MapContainer

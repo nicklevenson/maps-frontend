@@ -1,5 +1,7 @@
 export default function userReducer(state={
-  currentUser: null
+  currentUser: {
+    markers: []
+  }
 }, action) {
   switch(action.type){
     case "SET_USER":
