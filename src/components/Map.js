@@ -4,12 +4,14 @@ import {connect} from 'react-redux'
 import MarkerForm from './MarkerForm.js'
 import RenderMarker from './RenderMarker.js'
 import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
+import Login from './Login.js'
 import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
 
 class Map extends React.Component {
   state = {
     map: "",
-    newMarkerInfo: null
+    newMarkerInfo: null,
+    redirect: false
   }
 
   componentDidMount() {
@@ -19,25 +21,33 @@ class Map extends React.Component {
   componentDidUpdate() {
     this.renderMarkers()
   }
+
+  
   
   render(){
-    return(
-      <>
-        <div className="map-container">
-          <div id="map"></div>
-        </div>
-        <div className="side-bar">
-        {this.state.newMarkerInfo ? <div onClick={this.removeForm}>X</div> : null}
-          <div id="newMarkerContainer">
-            
-            <h5 style={{margin:"0"}}>New Marker</h5>
-            {this.props.currentUser ? <div id="newMarker" className="marker" style={{backgroundImage:`url(${this.props.currentUser.image})`}}></div> : null}
-            
+    if (this.state.redirect) {
+      return(
+        <Login heading={'Please login to use this feature'}/> 
+      )
+    } else{
+      return(
+        <>
+          <div className="map-container">
+            <div id="map"></div>
           </div>
-          {this.state.newMarkerInfo ? <MarkerForm removeForm={this.removeForm} newMarkerInfo={this.state.newMarkerInfo}/> : null}
-        </div>
-      </>
-    )
+          <div className="side-bar">
+          {this.state.newMarkerInfo ? <div onClick={this.removeForm}>X</div> : null}
+            <div id="newMarkerContainer">
+              
+              <h5 style={{margin:"0"}}>New Marker</h5>
+              {this.props.currentUser ? <div id="newMarker" className="marker" style={{backgroundImage:`url(${this.props.currentUser.image})`}}></div> : null}
+              
+            </div>
+            {this.state.newMarkerInfo ? <MarkerForm removeForm={this.removeForm} newMarkerInfo={this.state.newMarkerInfo}/> : null}
+          </div>
+        </>
+      )
+    }
   }
 
   removeForm = () => {
@@ -62,7 +72,7 @@ class Map extends React.Component {
     );
     this.setState({map: map})
     this.renderNewMarkerForm(map)
-} 
+  } 
 
   renderMarkers(){
     this.props.markers.forEach(marker => RenderMarker({marker: marker, map: this.state.map, handleMarkerSelect: this.props.handleMarkerSelect}))
@@ -71,21 +81,25 @@ class Map extends React.Component {
   renderNewMarkerForm = (map) => {
     const newMarkerButton = document.getElementById("newMarkerContainer")
     newMarkerButton.addEventListener('click', (e) => {
-      const triggerState = (newMarkerInfo) => this.setState({newMarkerInfo: newMarkerInfo})
-      const renderTempMarker = (marker) => this.renderTempMarker(marker)
-        map.on('click', function mapEvent(e){
-            const coords = [e.lngLat.lng, e.lngLat.lat]
-            const marker = {
-              title: "New Marker",
-              lat: coords[1],
-              lng: coords[0],
-              info: "Be sure to submit me"
-            }
-            triggerState(marker)
-            renderTempMarker(marker)
-            map.off('click', mapEvent)
+      if (this.props.currentUser.username) {
+        const triggerState = (newMarkerInfo) => this.setState({newMarkerInfo: newMarkerInfo})
+        const renderTempMarker = (marker) => this.renderTempMarker(marker)
+          map.on('click', function mapEvent(e){
+              const coords = [e.lngLat.lng, e.lngLat.lat]
+              const marker = {
+                title: "New Marker",
+                lat: coords[1],
+                lng: coords[0],
+                info: "Be sure to submit me"
+              }
+              triggerState(marker)
+              renderTempMarker(marker)
+              map.off('click', mapEvent)
         })
-      })
+      }else{
+        this.setState({redirect: true})
+      }
+    })
   }
 
 

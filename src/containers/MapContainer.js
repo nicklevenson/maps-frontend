@@ -1,6 +1,5 @@
 import React from 'react'
 import Map from '../components/Map.js';
-import MarkerInfo from '../components/MarkerInfo.js'
 
 class MapContainer extends React.Component{
   state = {
@@ -19,9 +18,6 @@ class MapContainer extends React.Component{
         <h1 className="map-header">{this.props.heading}</h1>
         <Map markers={this.props.markers} handleMarkerSelect={this.handleMarkerSelect}/>
         <br/>
-        <div id="marker-info-container">
-          {this.state.selectedMarker.title ? <MarkerInfo marker={this.state.selectedMarker} handleMarkerSelect={this.handleMarkerSelect}/> : null}
-        </div>
       </div>
     )
   }
