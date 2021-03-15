@@ -61,6 +61,14 @@ class Map extends React.Component {
       })
     );
     this.setState({map: map})
+    this.renderNewMarkerForm(map)
+} 
+
+  renderMarkers(){
+    this.props.markers.forEach(marker => RenderMarker({marker: marker, map: this.state.map, handleMarkerSelect: this.props.handleMarkerSelect}))
+  }
+
+  renderNewMarkerForm = (map) => {
     const newMarkerButton = document.getElementById("newMarkerContainer")
     newMarkerButton.addEventListener('click', (e) => {
       const triggerState = (newMarkerInfo) => this.setState({newMarkerInfo: newMarkerInfo})
@@ -73,22 +81,13 @@ class Map extends React.Component {
               lng: coords[0],
               info: "Be sure to submit me"
             }
-            // addMarker(marker)
             triggerState(marker)
             renderTempMarker(marker)
             map.off('click', mapEvent)
-            //trigger a form, disable click
-            //create instance of a new point in state
-          
         })
-    }
-   )
-}
+      })
+  }
 
-  renderMarkers(){
-   
-    this.props.markers.forEach(marker => RenderMarker({marker: marker, map: this.state.map, handleMarkerSelect: this.props.handleMarkerSelect}))
-  }  
 
   renderTempMarker(marker) {
     var coords = [marker.lng, marker.lat];
