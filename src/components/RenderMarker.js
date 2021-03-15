@@ -1,7 +1,8 @@
 import mapboxgl from 'mapbox-gl'
 
 const RenderMarker = (props) => {
-  var coords = [props.marker.lng, props.marker.lat];
+  if (props.marker.user) {
+    var coords = [props.marker.lng, props.marker.lat];
 // create DOM element for the marker
     var el = document.createElement('div');
     el.className = 'marker';
@@ -16,7 +17,7 @@ const RenderMarker = (props) => {
         <textarea>${props.marker.info}</textarea>`
       ))
     .addTo(props.map);
-
+  }
 
 
     // let markerEvent = (marker, handleMarkerSelect) => {
