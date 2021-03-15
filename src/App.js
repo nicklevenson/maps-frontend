@@ -17,12 +17,13 @@ class App extends React.Component {
   }
 
   render(){
+  
     return (
       <div className="App">
         <Nav/>
        
           <Route exact path="/public-map" render={() => <MapContainer markers={this.props.markers} heading={"Public Map"}/> }></Route>
-          <Route exact path="/my-map" render={() => <MapContainer markers={this.props.currentUserMarkers} heading={"My Map"}/>}></Route>
+          <Route exact path="/my-map" render={() => <MapContainer markers={this.props.markers.filter(m => m.user_id === this.props.currentUser.id)}cheading={"My Map"}/>}></Route>
           <Route exact path="/login" render={() => <Login/>}></Route>
        
       </div>
@@ -41,7 +42,7 @@ const mapDispatchToProps = (dispatch) => {
 const mapStateToProps = (state) => {
   return {
       markers: state.markers.markers,
-      currentUserMarkers: state.currentUser.currentUser.markers
+      currentUser: state.currentUser.currentUser
   }
 }
 

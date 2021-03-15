@@ -68,7 +68,7 @@
   cursor: pointer;
   width: 25px;
   height: 25px;
-  background-color: #61dafb;
+  background-size: cover;
   border-radius: 100%;
   z-index: 10;
 }
