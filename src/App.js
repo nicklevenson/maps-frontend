@@ -3,6 +3,7 @@ import React from 'react'
 import {Switch, Route} from "react-router-dom";
 import MapContainer from './containers/MapContainer.js';
 import { fetchMarkers } from './actions/MarkerActions.js';
+import {fetchUser} from './actions/UserActions.js'
 import {connect} from 'react-redux'  
 import Nav from './components/Nav.js'
 import Login from './components/Login.js'
@@ -10,17 +11,20 @@ import Login from './components/Login.js'
 class App extends React.Component {
   componentDidMount() {
     this.props.fetchMarkers()
+    if (sessionStorage.jwt) {
+      this.props.fetchUser()
+    }
   }
 
   render(){
     return (
       <div className="App">
         <Nav/>
-        <Switch>
+       
           <Route exact path="/public-map" render={() => <MapContainer markers={this.props.markers} heading={"Public Map"}/> }></Route>
           <Route exact path="/my-map" render={() => <MapContainer markers={this.props.currentUserMarkers} heading={"My Map"}/>}></Route>
           <Route exact path="/login" render={() => <Login/>}></Route>
-        </Switch>
+       
       </div>
     );
   }
@@ -28,7 +32,8 @@ class App extends React.Component {
 }
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchMarkers: () => dispatch(fetchMarkers())
+    fetchMarkers: () => dispatch(fetchMarkers()),
+    fetchUser: () => dispatch(fetchUser())
   }
 }
 

@@ -13,7 +13,8 @@ class Login extends React.Component {
       const jwt = urlParams.get('token');
       const id = parseInt(urlParams.get('id'))
       sessionStorage.setItem("jwt", jwt)
-      this.props.fetchUser(id)
+      sessionStorage.setItem("userId", id)
+      this.props.fetchUser()
       this.setState({redirect: true})
     }
   
@@ -31,7 +32,7 @@ class Login extends React.Component {
 }
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchUser: (userId) => dispatch(fetchUser(userId))
+    fetchUser: () => dispatch(fetchUser())
   }
 }
 

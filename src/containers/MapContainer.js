@@ -1,8 +1,6 @@
 import React from 'react'
 import Map from '../components/Map.js';
-import {connect} from 'react-redux'  
 import MarkerInfo from '../components/MarkerInfo.js'
-import { fetchMarkers } from '../actions/MarkerActions.js';
 
 class MapContainer extends React.Component{
   state = {
