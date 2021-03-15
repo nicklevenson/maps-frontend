@@ -81,7 +81,7 @@ class Map extends React.Component {
     const newMarkerButton = document.getElementById("newMarkerContainer")
     const currentUserImage = this.props.currentUser.image
     
-    newMarkerButton.addEventListener('click', (e) => {
+    newMarkerButton.addEventListener('mousedown', (e) => {
       
       if (this.props.currentUser.username) {
         const triggerState = (newMarkerInfo) => this.setState({newMarkerInfo: newMarkerInfo})
@@ -100,7 +100,7 @@ class Map extends React.Component {
           renderTempMarker(marker)
         }
           map.on('mousemove', handleMouseMove)        
-          map.on('click', function mapEvent(e){
+          map.on('mouseup', function mapEvent(e){
               map.off('mousemove', handleMouseMove)
               document.getElementById("temp-marker").remove()
               const coords = [e.lngLat.lng, e.lngLat.lat]
@@ -112,12 +112,8 @@ class Map extends React.Component {
               }
               triggerState(marker)
               renderTempMarker(marker)
-              
-              map.off('click',  mapEvent)
-              
+              map.off('click',  mapEvent)   
         })
-      
-    
       }else{
         this.setState({redirect: true})
       }
