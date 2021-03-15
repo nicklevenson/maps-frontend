@@ -69,6 +69,7 @@
   width: 25px;
   height: 25px;
   background-size: cover;
+  background-color: lightgray;
   border-radius: 100%;
   z-index: 10;
 }

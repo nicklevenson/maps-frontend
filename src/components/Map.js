@@ -38,10 +38,8 @@ class Map extends React.Component {
           <div className="side-bar">
           {this.state.newMarkerInfo ? <div onClick={this.removeForm}>X</div> : null}
             <div id="newMarkerContainer">
-              
               <h5 style={{margin:"0"}}>New Marker</h5>
               {this.props.currentUser ? <div id="newMarker" className="marker" style={{backgroundImage:`url(${this.props.currentUser.image})`}}></div> : null}
-              
             </div>
             {this.state.newMarkerInfo ? <MarkerForm removeForm={this.removeForm} newMarkerInfo={this.state.newMarkerInfo}/> : null}
           </div>
