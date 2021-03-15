@@ -1,8 +1,8 @@
 import React from 'react'
 import {createMarker} from '../actions/MarkerActions.js'
-
 import {connect} from 'react-redux'
 import { Redirect } from 'react-router-dom'
+
 class MarkerForm extends React.Component {
   handleSubmit = (e) => {
     e.preventDefault()
