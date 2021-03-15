@@ -1,6 +1,7 @@
 
 
 export const addMarker = (marker) => ({type: "ADD_MARKER", payload: marker})
+export const removeMarker = (marker) => ({type: "REMOVE_MARKER", payload: marker})
 
 export const fetchMarkers = () => {
   return (dispatch) => {
@@ -20,6 +21,7 @@ export const createMarker = (marker) => {
     let configObj = {
       method: 'POST',
       headers: {
+          Authorization: `Bearer ${sessionStorage.jwt}`,
           'Accept': 'application/json',
           'Content-Type': 'application/json'
       },
@@ -38,6 +40,34 @@ export const createMarker = (marker) => {
     
     .catch(function(error) {
       alert("Errors saving marker.")
+    })
+  }
+}
+
+
+export const destroyMarker = (marker) => {
+  return (dispatch) => {
+    let configObj = {
+      method: 'DELETE',
+      headers: {
+          Authorization: `Bearer ${sessionStorage.jwt}`,
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+      }
+    }
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/markers/${marker.id}`, configObj)
+    .then(res => res.json())
+    .then(json => {
+      if (json.message) {
+        dispatch(removeMarker(marker))
+        dispatch(fetchMarkers())
+      }else{
+        alert("Errors deleting marker.")
+      }
+    })
+    
+    .catch(function(error) {
+      alert("Errors deleting marker.")
     })
   }
 }

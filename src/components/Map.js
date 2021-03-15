@@ -4,6 +4,7 @@ import {connect} from 'react-redux'
 import MarkerForm from './MarkerForm.js'
 import RenderMarker from './RenderMarker.js'
 import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
+import {destroyMarker} from '../actions/MarkerActions.js'
 import Login from './Login.js'
 import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
 
@@ -27,8 +28,9 @@ class Map extends React.Component {
   render(){
     if (this.state.redirect) {
       return(
-        <Login heading={'Please login to use this feature'}/> 
+        <Login heading={'Please login to use this feature'}/>
       )
+    
     } else{
       return(
         <>
@@ -60,7 +62,7 @@ class Map extends React.Component {
       container: 'map', // container ID
       style: 'mapbox://styles/nicklevenson/ckm82ay4haed317r1gmlt32as', // style URL
       center: [-77.0353, 38.8895], // starting position [lng, lat]
-      zoom: 2 // starting zoom
+      zoom: 1 // starting zoom
     });
     map.addControl(
       new MapboxGeocoder({
@@ -73,7 +75,8 @@ class Map extends React.Component {
   } 
 
   renderMarkers(){
-    this.props.markers.forEach(marker => RenderMarker({marker: marker, map: this.state.map, handleMarkerSelect: this.props.handleMarkerSelect}))
+    this.props.markers.forEach(marker => RenderMarker({marker: marker, map: this.state.map, handleMarkerSelect: this.props.handleMarkerSelect, destroyMarker: this.props.destroyMarker}))
+   
   }
 
   renderNewMarkerForm = (map) => {
@@ -134,6 +137,12 @@ class Map extends React.Component {
 
 }
 
+const mapDispatchToProps = (dispatch) => {
+  return {
+    destroyMarker: (marker) => dispatch(destroyMarker(marker))
+  }
+} 
+
 const mapStateToProps = (state) => {
   return {
       currentUser: state.currentUser.currentUser
@@ -144,4 +153,4 @@ const mapStateToProps = (state) => {
 
 
 
-export default connect(mapStateToProps)(Map)
+export default connect(mapStateToProps, mapDispatchToProps)(Map)
