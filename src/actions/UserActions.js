@@ -9,7 +9,7 @@ export const fetchUser = () => {
         dispatch(setUser(json))
     })
     .catch(function(error) {
-      alert("Errors getting markers.")
+      
     })
   }
 }

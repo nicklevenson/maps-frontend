@@ -9,25 +9,29 @@ import Nav from './components/Nav.js'
 import Login from './components/Login.js'
 
 class App extends React.Component {
+  state =  {
+    redirect: false
+  }
 
   componentDidMount() {
     this.props.fetchMarkers()
     if (sessionStorage.jwt) {
       this.props.fetchUser()
+    }else{
+      this.setState({redirect: true})
     }
   }
 
-  render(){
+  isRedirect = () => this.state.redirect ? <Redirect to="login"/> : <MapContainer markers={this.props.markers.filter(m => m.user_id === this.props.currentUser.id)} heading={"My Map"}/>
   
+
+  render(){
+
     return (
       <div className="App">
         <Nav/>
           <Route exact path="/public-map" render={() => <MapContainer markers={this.props.markers} heading={"Public Map"}/> }></Route>
-          {this.props.currentUser.username ? 
-            <Route exact path="/my-map" render={() => <MapContainer markers={this.props.markers.filter(m => m.user_id === this.props.currentUser.id)}cheading={"My Map"}/>}></Route>
-            :
-            <Route exact path="/my-map" render={() => <Redirect to="login"/>}></Route>
-          } 
+          <Route exact path="/my-map" render={this.isRedirect}></Route>
           <Route exact path="/login" render={() => <Login/>}></Route>
       </div>
     );
