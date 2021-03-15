@@ -1,9 +1,9 @@
 // export const setUser = (user) => {({type: "SET_USER", payload: user})}
 
 export const fetchUser = (userId) => {
-  const id = userId
   return (dispatch) => {
-    fetch(`http://localhost:3000/users/${id}`)
+ 
+    fetch(`http://localhost:3000/users/${userId}`)
     .then(res => res.json())
     .then(json => {
         console.log(json)

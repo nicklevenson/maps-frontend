@@ -2,17 +2,19 @@ import React from 'react'
 import googleLogin from '../assets/btn_google.png'
 import {connect} from 'react-redux'  
 import {fetchUser} from '../actions/UserActions.js'
+import { Redirect } from 'react-router-dom'
 class Login extends React.Component {
-
+  state = {
+    redirect: false
+  }
   componentDidMount() { 
     const urlParams = new URLSearchParams(window.location.search);
     if (urlParams.get('token')) {
       const jwt = urlParams.get('token');
       const id = parseInt(urlParams.get('id'))
-      console.log(id)
       sessionStorage.setItem("jwt", jwt)
-      window.location = "/my-map";
       this.props.fetchUser(id)
+      this.setState({redirect: true})
     }
   
 
@@ -21,13 +23,15 @@ class Login extends React.Component {
     return(
       <div className="login-page">
         <a href="http://localhost:3000/authenticate"><img src={googleLogin} alt="Login with Google"/></a>
+        {this.state.redirect ? <Redirect to="my-map" /> : null}
+
       </div>
     )
   }
 }
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchUser: () => dispatch(fetchUser())
+    fetchUser: (userId) => dispatch(fetchUser(userId))
   }
 }
 
