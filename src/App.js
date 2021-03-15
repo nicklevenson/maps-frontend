@@ -22,8 +22,13 @@ class App extends React.Component {
     }
   }
 
-  isRedirect = () => this.state.redirect ? <Redirect to="login"/> : <MapContainer markers={this.props.markers.filter(m => m.user_id === this.props.currentUser.id)} heading={"My Map"}/>
-  
+  isRedirect = () => {
+    if (this.state.redirect) {
+      return <Login heading={'Please login to use this feature'}/> 
+    }else {
+      return <MapContainer markers={this.props.markers.filter(m => m.user_id === this.props.currentUser.id)} heading={"My Map"}/>
+    }
+  }
 
   render(){
 

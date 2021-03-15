@@ -23,6 +23,8 @@ class Login extends React.Component {
   render(){
     return(
       <div className="login-page">
+        <h2>Login/Signup with Google</h2>
+        {this.props.heading ? <h5><i>{this.props.heading}</i></h5>: null}
         <a href="http://localhost:3000/authenticate"><img src={googleLogin} alt="Login with Google"/></a>
         {this.state.redirect ? <Redirect to="my-map" /> : null}
 
