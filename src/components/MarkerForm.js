@@ -4,13 +4,8 @@ import {createMarker} from '../actions/MarkerActions.js'
 import {connect} from 'react-redux'
 import { Redirect } from 'react-router-dom'
 class MarkerForm extends React.Component {
-  state = {
-    redirect: false
-  }
   handleSubmit = (e) => {
     e.preventDefault()
-
-    if (this.props.currentUser.username) {
       let marker = this.props.newMarkerInfo
       marker.title = e.target.title.value
       marker.info = e.target.info.value
@@ -18,18 +13,14 @@ class MarkerForm extends React.Component {
       this.props.createMarker(marker)
       this.props.removeForm()
       document.getElementById("newMarkerContainer").style.display = "inline-block"
-   
-    }else{
-      this.setState({redirect: true})
-    }
-
   }
+  
    render() {
     document.getElementById("newMarkerContainer").style.display = "none"
     
     return (
       <div id="newMarkerForm">
-        {this.state.redirect ? <Redirect to="login" /> : null}
+        {!sessionStorage.jwt ? <Redirect to="login" /> : null}
         <h3>New Marker</h3>
         <form onSubmit={e=>this.handleSubmit(e)}>
           <label>Marker Title</label><br/>

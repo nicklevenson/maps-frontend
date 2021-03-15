@@ -18,22 +18,6 @@ const RenderMarker = (props) => {
       ))
     .addTo(props.map);
   }
-
-
-    // let markerEvent = (marker, handleMarkerSelect) => {
-    //   el.addEventListener("click", function renderInfo(event) {
-    //     handleMarkerSelect(marker)
-    //     const container = document.getElementById("marker-info-container")
-    //     var x = event.clientX;
-    //     var y = event.clientY;
-    //     container.style.position = 'absolute';
-    //     container.style.left = x + 'px';
-    //     container.style.top = y + 'px';
-    //     container.style.width = "30vw";
-   
-    //   })
-    // }
-    // markerEvent(props.marker, props.handleMarkerSelect) 
 }
 
 
