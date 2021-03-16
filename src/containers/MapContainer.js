@@ -1,29 +1,18 @@
 import React from 'react'
+
+import UserFilter from '../components/UserFilter.js';
 import Map from '../components/Map.js';
 
 class MapContainer extends React.Component{
   state = {
     selectedMarker: {},
-    userOptions: [],
-    selectedOption: "All",
-    detectChange: ""
+    filteredMarkers: []
   }
 
-  componentDidMount() {
-    this.renderUserOptions()
-  }
-
-  
-  renderUserOptions = () => {
-    const users = this.props.markers.map(m=>m.user.username)
-    const uniqueUsers = new Set()
-    users.forEach(u=>uniqueUsers.add(u))
-    const array = Array.from(uniqueUsers)
-    this.setState({userOptions: array})
-  }
+ 
 
   handleUserOption = (e) => {
-    this.setState({selectedOption: e.target.value})
+    this.filterMarkers(e.target.value)
     
   }
 
@@ -31,26 +20,25 @@ class MapContainer extends React.Component{
     this.setState({selectedMarker: marker})
   }
 
-  filterMarkers = () => {
-    if ( this.state.selectedOption === "All"){
-      return this.props.markers
+  filterMarkers = (value) => {
+    let filteredMarks;
+    if ( value === "All"){
+      filteredMarks = this.props.markers
+      this.setState({filteredMarkers: filteredMarks})
     }else{
-      return this.props.markers.filter(m=>{return m.user.username === this.state.selectedOption})
+      filteredMarks = this.props.markers.filter(m=>{return m.user.username !== value})
+      this.setState({filteredMarkers: filteredMarks})
     }
-    
+
   }
  
   render(){
+    console.log(this.state.filteredMarkers)
     return(
       <div className="outer-map-container">
         <h1 className="map-header">{this.props.heading}</h1>
-        <Map markers={this.filterMarkers()} handleMarkerSelect={this.handleMarkerSelect}/>
-        <form onChange={e=>this.handleUserOption(e)}>
-          <select>
-            <option>All</option>
-            {this.state.userOptions.map(u=><option>{u}</option>)}
-          </select>
-        </form>
+        <Map markers={this.state.filteredMarkers} handleMarkerSelect={this.handleMarkerSelect}/>
+        <UserFilter markers={this.props.markers} handleUserOption={this.handleUserOption}/>
         <br/>
       </div>
     )

@@ -17,20 +17,30 @@ class Map extends React.Component {
 
   componentDidMount() {
     this.renderMap()
+    
   }
 
   componentDidUpdate() {
     this.renderMarkers()
   }
 
+  shouldComponentUpdate(nextProps) {
+    if (nextProps.markers !== this.props.markers) {
+      return true
+    }else{
+      return false
+    }
+  }
   
   render(){
+  
     if (this.state.redirect) {
       return(
         <Login heading={'Please login to use this feature'}/>
       )
     
     } else{
+      
       return(
         <>
           <div className="map-container">
@@ -47,6 +57,7 @@ class Map extends React.Component {
         </>
       )
     }
+   
   }
 
   removeForm = () => {
@@ -60,6 +71,7 @@ class Map extends React.Component {
   }
 
   renderMap() {
+ 
     mapboxgl.accessToken = process.env.REACT_APP_API_KEY;
     const map = new mapboxgl.Map({
       container: 'map', // container ID
@@ -73,11 +85,14 @@ class Map extends React.Component {
       mapboxgl: mapboxgl
       })
     );
+    
     this.setState({map: map})
     this.renderNewMarkerForm(map)
+    
   } 
 
   renderMarkers(){
+    
     this.props.markers.forEach(marker => RenderMarker({
       marker: marker, map: this.state.map, 
       handleMarkerSelect: this.props.handleMarkerSelect, 
