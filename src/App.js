@@ -22,7 +22,8 @@ class App extends React.Component {
 
   currentUserMarkers = () => {
     const liked = this.props.markers.filter(m=>this.props.currentUser.likedMarkers.map(m=>m.id).includes(m.id))
-    return [...liked, ...this.props.currentUser.markers]
+    const userMarkers = this.props.markers.filter(m=>this.props.currentUser.markers.map(m=>m.id).includes(m.id))
+    return [...liked, ...userMarkers]
   }
 
   isRedirect = () => {
