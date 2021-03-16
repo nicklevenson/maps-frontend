@@ -15,7 +15,7 @@ const RenderMarker = (props) => {
         .setHTML(
           `<h3>${props.marker.title}</h3>
           <textarea>${props.marker.info}</textarea>
-          <div>Delete</div>`
+          <div class="delete-marker">Delete</div>`
         ))
         .addTo(props.map);
   
@@ -24,15 +24,20 @@ const RenderMarker = (props) => {
           marker._popup._content.children[2].removeEventListener('click', removeMarker)
         })
     }else{
-      new mapboxgl.Marker(el)
+      const marker = new mapboxgl.Marker(el)
       .setLngLat(coords)
         .setPopup(new mapboxgl.Popup({ offset: 25 }) // add popups
         .setHTML(
           `<h3>${props.marker.title}</h3>
           <textarea>${props.marker.info}</textarea>
+          <div class="like-marker">Add To My Map</div>
           `
         ))
         .addTo(props.map);
+        marker._popup._content.children[2].addEventListener('click', function likeMarker() {
+          props.likeMarker(props.marker, props.currentUser.id)
+          marker._popup._content.children[2].removeEventListener('click', likeMarker)
+        })
     }
     // console.log(props.marker.user)
    

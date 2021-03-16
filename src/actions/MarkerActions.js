@@ -72,3 +72,32 @@ export const destroyMarker = (marker) => {
     })
   }
 }
+
+export const likeMarker = (marker, currentUserId) => {
+  return (dispatch) => {
+    let configObj = {
+      method: 'POST',
+      headers: {
+          Authorization: `Bearer ${sessionStorage.jwt}`,
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({marker: marker, currentUserId: currentUserId})
+    }
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/likes`, configObj)
+    .then(res => res.json())
+    .then(json => {
+      if (json.message) {
+        
+        dispatch(fetchMarkers())
+        
+      }else{
+        alert("Errors adding marker to your map.")
+      }
+    })
+    
+    .catch(function(error) {
+      alert("Errors adding marker to your map.")
+    })
+  }
+}
