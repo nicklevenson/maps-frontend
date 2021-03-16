@@ -22,12 +22,14 @@ class UserFilter extends React.Component {
   render(){
     return(
       <div class="user-filter">
-        <h4>Filter Markers by User </h4>
+        <h5>Filter Markers by User </h5>
+
         <form onChange={e=>this.handleChange(e)}>
-            <select>
+            <input list="usersFilter"></input>
+            <datalist id="usersFilter">
               <option>All</option>
               {this.renderUserOptions().map(u=><option>{u}</option>)}
-            </select>
+            </datalist>
         </form>
       </div>
     )

@@ -10,7 +10,7 @@
   grid-template-columns: 2fr;
   grid-template-rows: 10% 2fr;
   height: 90vh;
-  width: 80vw;
+  width: 95vw;
 }
 .map-header {
   grid-column-start: 1;
