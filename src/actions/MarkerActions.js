@@ -3,6 +3,7 @@ import { fetchUser } from "./UserActions"
 
 export const addMarker = (marker) => ({type: "ADD_MARKER", payload: marker})
 export const removeMarker = (marker) => ({type: "REMOVE_MARKER", payload: marker})
+export const filterMarkers = (username) => ({type: "FILTER_MARKERS", payload: username})
 
 export const fetchMarkers = () => {
   return (dispatch) => {
