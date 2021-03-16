@@ -18,6 +18,7 @@ export const fetchMarkers = () => {
 }
 
 export const createMarker = (marker) => {
+  
   return (dispatch) => {
     let configObj = {
       method: 'POST',
@@ -32,7 +33,7 @@ export const createMarker = (marker) => {
     .then(res => res.json())
     .then(json => {
         console.log(json)
-        dispatch(addMarker(json.marker))
+        dispatch(addMarker(json))
         dispatch(fetchMarkers())
         dispatch(fetchUser())
     

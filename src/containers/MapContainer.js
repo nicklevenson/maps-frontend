@@ -6,10 +6,10 @@ import Map from '../components/Map.js';
 class MapContainer extends React.Component{
   state = {
     selectedMarker: {},
-    filteredMarkers: []
+    // filteredMarkers: []
   }
   componentDidMount() {
-    this.filterMarkers("All")
+    // this.filterMarkers("All")
   }
  
 

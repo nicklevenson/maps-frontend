@@ -1,6 +1,5 @@
 import mapboxgl from 'mapbox-gl'
 
-
 const RenderMarker = (props) => {
   const coords = [props.marker.lng, props.marker.lat];
   if (sessionStorage.jwt) {
@@ -53,7 +52,7 @@ const RenderMarker = (props) => {
     const el = document.createElement('div');
     el.className = 'marker';
     el.style.backgroundImage = `url(${props.marker.user.image})`
-       new mapboxgl.Marker(el)
+      const marker = new mapboxgl.Marker(el)
       .setLngLat(coords)
         .setPopup(new mapboxgl.Popup({ offset: 25 }) // add popups
         .setHTML(

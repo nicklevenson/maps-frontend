@@ -6,10 +6,12 @@ import { Redirect } from 'react-router-dom'
 class MarkerForm extends React.Component {
   handleSubmit = (e) => {
     e.preventDefault()
+
       let marker = this.props.newMarkerInfo
       marker.title = e.target.title.value
       marker.info = e.target.info.value
       marker.user_id = this.props.currentUser.id
+      
       this.props.createMarker(marker)
       this.props.removeForm()
       document.getElementById("newMarkerContainer").style.display = "inline-block"

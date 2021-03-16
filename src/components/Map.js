@@ -104,6 +104,7 @@ class Map extends React.Component {
             document.getElementById("temp-marker").remove()
           }
           const coords = [e.lngLat.lng, e.lngLat.lat]
+       
           const marker = {
             title: "New Marker",
             lat: coords[1],
@@ -123,6 +124,7 @@ class Map extends React.Component {
                 lng: coords[0],
                 info: "Be sure to submit me"
               }
+           
               triggerState(marker)
               renderTempMarker(marker)
               map.off('mouseup',  mapEvent)

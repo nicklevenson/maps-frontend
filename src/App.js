@@ -20,12 +20,16 @@ class App extends React.Component {
     }
   }
 
+  currentUserMarkers = () => {
+    const liked = this.props.markers.filter(m=>this.props.currentUser.likedMarkers.map(m=>m.id).includes(m.id))
+    return [...liked, ...this.props.currentUser.markers]
+  }
+
   isRedirect = () => {
     if (!sessionStorage.jwt) {
       return <Login heading={'Please login to use this feature'}/> 
     }else {
-      
-      return <MapContainer markers={this.props.currentUser.markers} heading={"My Map"}/>
+      return <MapContainer markers={this.currentUserMarkers()} heading={"My Map"}/>
     }
   }
 
