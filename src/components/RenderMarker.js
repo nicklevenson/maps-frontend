@@ -22,6 +22,7 @@ const RenderMarker = (props) => {
         marker._popup._content.children[2].addEventListener('click', function removeMarker() {
           props.destroyMarker(props.marker)
           marker._popup._content.children[2].removeEventListener('click', removeMarker)
+          
         })
     }else{
       const marker = new mapboxgl.Marker(el)
@@ -34,15 +35,17 @@ const RenderMarker = (props) => {
           `
         ))
         .addTo(props.map);
-
+       
         marker._popup._content.children[2].addEventListener('click', function likeMarker() {
           if (props.currentUser.likedMarkers.map(m=>m.id).includes(props.marker.id)) {
             props.unlikeMarker(props.marker, props.currentUser.id)
           }else{
             props.likeMarker(props.marker, props.currentUser.id)
           }
-     
+          
           marker._popup._content.children[2].removeEventListener('click', likeMarker)
+          marker.remove()
+          RenderMarker(props)
         })
     }
     // console.log(props.marker.user)

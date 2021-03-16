@@ -78,6 +78,13 @@ class Map extends React.Component {
   } 
 
   renderMarkers(){
+    if (document.querySelectorAll('.mapboxgl-marker').length > 0) {
+      document.querySelectorAll('.mapboxgl-marker').forEach(m=>m.remove())
+    }
+    if (document.querySelectorAll('.mapboxgl-popup').length > 0) {
+      document.querySelectorAll('.mapboxgl-popup').forEach(m=>m.remove())
+    }
+    
     this.props.markers.forEach(marker => RenderMarker({
       marker: marker, map: this.state.map, 
       handleMarkerSelect: this.props.handleMarkerSelect, 

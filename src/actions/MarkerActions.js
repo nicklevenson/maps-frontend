@@ -63,7 +63,7 @@ export const destroyMarker = (marker) => {
       if (json.message) {
         dispatch(removeMarker(marker))
         dispatch(fetchMarkers())
-        alert("Marker Deleted. You may have to refresh to notice changes.")
+        // alert("Marker Deleted. You may have to refresh to notice changes.")
       }else{
         alert("Errors deleting marker.")
       }
@@ -122,7 +122,7 @@ export const unlikeMarker = (marker, currentUserId) => {
       if (json.message) {
         dispatch(fetchMarkers())
         dispatch(fetchUser())
-        alert("Marker Removed from your map. You may have to refresh to notice changes.")
+        // alert("Marker Removed from your map. You may have to refresh to notice changes.")
       }else{
         alert("Errors removing marker to your map.")
       }
