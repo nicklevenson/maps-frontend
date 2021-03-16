@@ -22,9 +22,9 @@ class UserFilter extends React.Component {
   render(){
     return(
       <div class="user-filter">
-        <h5>Filter Markers by User </h5>
+        <h5 style={{display: "inline-block"}}>Filter Markers by User: </h5>
 
-        <form onChange={e=>this.handleChange(e)}>
+        <form onChange={e=>this.handleChange(e)}style={{display: "inline-block"}}>
             <input list="usersFilter"></input>
             <datalist id="usersFilter">
               <option>All</option>
