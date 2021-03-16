@@ -1,3 +1,4 @@
+import { fetchUser } from "./UserActions"
 
 
 export const addMarker = (marker) => ({type: "ADD_MARKER", payload: marker})
@@ -88,8 +89,8 @@ export const likeMarker = (marker, currentUserId) => {
     .then(res => res.json())
     .then(json => {
       if (json.message) {
-        
         dispatch(fetchMarkers())
+        dispatch(fetchUser())
         
       }else{
         alert("Errors adding marker to your map.")
