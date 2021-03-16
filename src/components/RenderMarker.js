@@ -30,12 +30,18 @@ const RenderMarker = (props) => {
         .setHTML(
           `<h3>${props.marker.title}</h3>
           <textarea>${props.marker.info}</textarea>
-          <div class="like-marker">Add To My Map</div>
+          ${props.currentUser.likedMarkers.map(m=>m.id).includes(props.marker.id) ? '<div class="like-marker">Remove from My Map</div>' : '<div class="like-marker">Add To My Map</div>'}
           `
         ))
         .addTo(props.map);
+
         marker._popup._content.children[2].addEventListener('click', function likeMarker() {
-          props.likeMarker(props.marker, props.currentUser.id)
+          if (props.currentUser.likedMarkers.map(m=>m.id).includes(props.marker.id)) {
+            props.unlikeMarker(props.marker, props.currentUser.id)
+          }else{
+            props.likeMarker(props.marker, props.currentUser.id)
+          }
+     
           marker._popup._content.children[2].removeEventListener('click', likeMarker)
         })
     }

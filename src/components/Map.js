@@ -4,7 +4,7 @@ import {connect} from 'react-redux'
 import MarkerForm from './MarkerForm.js'
 import RenderMarker from './RenderMarker.js'
 import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
-import {destroyMarker, likeMarker} from '../actions/MarkerActions.js'
+import {destroyMarker, likeMarker, unlikeMarker} from '../actions/MarkerActions.js'
 import Login from './Login.js'
 import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
 
@@ -83,7 +83,8 @@ class Map extends React.Component {
       handleMarkerSelect: this.props.handleMarkerSelect, 
       destroyMarker: this.props.destroyMarker, 
       currentUser: this.props.currentUser,
-      likeMarker: this.props.likeMarker
+      likeMarker: this.props.likeMarker,
+      unlikeMarker: this.props.unlikeMarker
     }))
   }
 
@@ -150,7 +151,8 @@ class Map extends React.Component {
 const mapDispatchToProps = (dispatch) => {
   return {
     destroyMarker: (marker) => dispatch(destroyMarker(marker)),
-    likeMarker: (marker, currentUserId) => dispatch(likeMarker(marker, currentUserId))
+    likeMarker: (marker, currentUserId) => dispatch(likeMarker(marker, currentUserId)),
+    unlikeMarker: (marker, currentUserId) => dispatch(unlikeMarker(marker, currentUserId))
   }
 } 
 
