@@ -1,5 +1,6 @@
 export default function markersReducer(state={
-  markers: []
+  markers: [],
+  filteredMarkers: []
 }, action) {
   switch(action.type){
     case "ADD_MARKER":
@@ -7,8 +8,11 @@ export default function markersReducer(state={
     case "REMOVE_MARKER":
       return {...state, markers: state.markers.filter(marker => marker.id !== action.payload.id)}
     case "FILTER_MARKERS":
-      console.log(action.payload)
-      return {...state, markers: state.markers.filter(marker => marker.user.username === action.payload)}
+      if (action.payload ===  "All"){
+        return {...state, filteredMarkers: state.markers}
+      }else{
+        return {...state, filteredMarkers: state.markers.filter(marker => marker.user.username === action.payload)}
+      }
     default:
       return state
   }

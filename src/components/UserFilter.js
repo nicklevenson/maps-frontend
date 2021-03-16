@@ -1,13 +1,12 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {filterMarkers} from '../actions/MarkerActions.js'
+import { fetchAllUsers } from '../actions/UserActions.js'
 class UserFilter extends React.Component {
-  state = {
-    userOptions: []
-  }
-
   componentDidMount() {
+    this.props.fetchAllUsers()
     this.renderUserOptions()
+    this.props.filterMarkers("All")
   }
 
   // componentDidUpdate() {
@@ -25,11 +24,7 @@ class UserFilter extends React.Component {
     this.props.filterMarkers(e.target.value)
   }
   renderUserOptions = () => {
-    const users = this.props.markers.map(m=>m.user.username)
-    const uniqueUsers = new Set()
-    users.forEach(u=>uniqueUsers.add(u))
-    const array = Array.from(uniqueUsers)
-    return array
+    return this.props.allUsers.map(u=>u.username)
   }
   render(){
     return(
@@ -45,14 +40,16 @@ class UserFilter extends React.Component {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    filterMarkers: (username) => dispatch(filterMarkers(username))
+    filterMarkers: (username) => dispatch(filterMarkers(username)),
+    fetchAllUsers: () => dispatch(fetchAllUsers())
   }
 }
 
 
 const mapStateToProps = (state) => {
   return {
-      markers: state.markers.markers
+      markers: state.markers.markers,
+      allUsers: state.currentUser.allUsers
   }
 }
 

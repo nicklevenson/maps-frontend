@@ -57,7 +57,7 @@ const mapDispatchToProps = (dispatch) => {
 
 const mapStateToProps = (state) => {
   return {
-      markers: state.markers.markers,
+      markers: state.markers.filteredMarkers,
       currentUser: state.currentUser.currentUser
   }
 }

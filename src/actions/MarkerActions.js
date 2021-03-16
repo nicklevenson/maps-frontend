@@ -11,6 +11,7 @@ export const fetchMarkers = () => {
     .then(res => res.json())
     .then(markers => {
         markers.forEach(marker => dispatch(addMarker(marker)))
+        dispatch(filterMarkers("All"))
     })
     .catch(function(error) {
       alert("Errors getting markers.")
