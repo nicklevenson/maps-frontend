@@ -14,12 +14,12 @@ class UserFilter extends React.Component {
   
 
   handleChange = (e) => {
-    this.setState({selectedUser:e.target.value})
+  
     this.props.filterMarkers(e.target.value)
     
   }
   renderUserOptions = () => {
-    return this.props.allUsers.map(u=>u.username)
+    return this.props.allUsers.filter(u=>this.props.markers.map(m=>m.user.id).includes(u.id)).map(u=>u.username)
   }
   render(){
     return(
@@ -43,7 +43,7 @@ const mapDispatchToProps = (dispatch) => {
 
 const mapStateToProps = (state) => {
   return {
-      markers: state.markers.markers,
+   
       allUsers: state.currentUser.allUsers
   }
 }
