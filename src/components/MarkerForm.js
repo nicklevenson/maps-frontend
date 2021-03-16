@@ -22,7 +22,7 @@ class MarkerForm extends React.Component {
     
     return (
       <div id="newMarkerForm">
-        {!sessionStorage.jwt ? <Redirect to="login" /> : null}
+
         <h3>New Marker</h3>
         <form onSubmit={e=>this.handleSubmit(e)}>
           <label>Marker Title</label><br/>

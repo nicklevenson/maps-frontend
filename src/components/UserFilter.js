@@ -3,9 +3,7 @@ import {connect} from 'react-redux'
 import {filterMarkers} from '../actions/MarkerActions.js'
 import { fetchAllUsers } from '../actions/UserActions.js'
 class UserFilter extends React.Component {
-  state = {
-    selectedUser: "All"
-  }
+  
   componentDidMount() {
     this.props.fetchAllUsers()
     this.renderUserOptions()
@@ -19,16 +17,19 @@ class UserFilter extends React.Component {
     
   }
   renderUserOptions = () => {
-    return this.props.allUsers.filter(u=>this.props.markers.map(m=>m.user.id).includes(u.id)).map(u=>u.username)
+    return this.props.allUsers.filter(u=>u.markers.length > 0).map(u=>u.username)
   }
   render(){
     return(
-      <form onChange={e=>this.handleChange(e)}>
-          <select>
-            <option>All</option>
-            {this.renderUserOptions().map(u=><option>{u}</option>)}
-          </select>
-      </form>
+      <div class="user-filter">
+        <h4>Filter Markers by User </h4>
+        <form onChange={e=>this.handleChange(e)}>
+            <select>
+              <option>All</option>
+              {this.renderUserOptions().map(u=><option>{u}</option>)}
+            </select>
+        </form>
+      </div>
     )
   }
 }
@@ -43,7 +44,7 @@ const mapDispatchToProps = (dispatch) => {
 
 const mapStateToProps = (state) => {
   return {
-   
+      markers: state.markers.markers,
       allUsers: state.currentUser.allUsers
   }
 }

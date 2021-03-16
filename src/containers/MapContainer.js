@@ -1,6 +1,5 @@
 import React from 'react'
 
-import UserFilter from '../components/UserFilter.js';
 import Map from '../components/Map.js';
 
 class MapContainer extends React.Component{
@@ -38,7 +37,7 @@ class MapContainer extends React.Component{
       <div className="outer-map-container">
         <h1 className="map-header">{this.props.heading}</h1>
         <Map markers={this.props.markers} handleMarkerSelect={this.handleMarkerSelect}/>
-        <UserFilter markers={this.props.markers}/>
+    
         <br/>
       </div>
     )
