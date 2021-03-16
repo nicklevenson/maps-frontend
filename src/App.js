@@ -10,7 +10,9 @@ import Login from './components/Login.js'
 import Logout from './components/Logout.js'
 
 class App extends React.Component {
-
+  state = {
+    filteredMarkers: []
+  }
   componentDidMount() {
     this.props.fetchMarkers()
     if (sessionStorage.jwt) {
@@ -18,17 +20,12 @@ class App extends React.Component {
     }
   }
 
-  filterMarkers = () => {
-    const userMarkIds = this.props.currentUser.markers.map(m=>m.id)
-    const likedMarkIds = this.props.currentUser.likedMarkers.map(m=>m.id)
-    return this.props.markers.filter(marker => userMarkIds.includes(marker.id) || likedMarkIds.includes(marker.id))
-  }
-
   isRedirect = () => {
     if (!sessionStorage.jwt) {
       return <Login heading={'Please login to use this feature'}/> 
     }else {
-      return <MapContainer markers={this.filterMarkers()} heading={"My Map"}/>
+      
+      return <MapContainer markers={this.props.currentUser.markers} heading={"My Map"}/>
     }
   }
 
@@ -38,7 +35,7 @@ class App extends React.Component {
       <div className="App">
         <Nav/>
           <Route exact path="/public-map" render={() => <MapContainer markers={this.props.markers} heading={"Public Map"}/> }></Route>
-          <Route exact path="/my-map" render={this.isRedirect}></Route>
+          <Route exact path="/my-map" render={()=>this.isRedirect()}></Route>
           <Route exact path="/login"><Login/></Route>
           <Route exact path="/logout"><Logout/></Route>
       </div>

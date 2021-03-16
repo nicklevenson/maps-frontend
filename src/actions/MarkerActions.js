@@ -31,17 +31,16 @@ export const createMarker = (marker) => {
     fetch(`${process.env.REACT_APP_BACKEND_URL}/markers`, configObj)
     .then(res => res.json())
     .then(json => {
-      if (json.message) {
+        console.log(json)
         dispatch(addMarker(json.marker))
         dispatch(fetchMarkers())
         dispatch(fetchUser())
-      }else{
-        alert("Errors saving marker.")
-      }
-    })
     
+    })
     .catch(function(error) {
-      alert("Errors saving marker.")
+    
+      alert(error)
+    
     })
   }
 }
