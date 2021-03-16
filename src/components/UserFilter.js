@@ -6,6 +6,10 @@ export default class UserFilter extends React.Component {
     userOptions: []
   }
 
+  componentDidMount() {
+    this.renderUserOptions()
+  }
+
   componentDidUpdate() {
     this.renderUserOptions()
   }
@@ -23,14 +27,14 @@ export default class UserFilter extends React.Component {
     const uniqueUsers = new Set()
     users.forEach(u=>uniqueUsers.add(u))
     const array = Array.from(uniqueUsers)
-    this.setState({userOptions: array})
+    return array
   }
   render(){
     return(
       <form onChange={e=>this.props.handleUserOption(e)}>
           <select>
             <option>All</option>
-            {this.state.userOptions.map(u=><option>{u}</option>)}
+            {this.renderUserOptions().map(u=><option>{u}</option>)}
           </select>
       </form>
     )

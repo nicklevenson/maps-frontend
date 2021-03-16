@@ -8,12 +8,13 @@ class MapContainer extends React.Component{
     selectedMarker: {},
     filteredMarkers: []
   }
-
+  componentDidMount() {
+    this.filterMarkers("All")
+  }
  
 
   handleUserOption = (e) => {
     this.filterMarkers(e.target.value)
-    
   }
 
   handleMarkerSelect = (marker) => {
@@ -26,14 +27,13 @@ class MapContainer extends React.Component{
       filteredMarks = this.props.markers
       this.setState({filteredMarkers: filteredMarks})
     }else{
-      filteredMarks = this.props.markers.filter(m=>{return m.user.username !== value})
+      filteredMarks = this.props.markers.filter(m=>m.user.username === value)
       this.setState({filteredMarkers: filteredMarks})
     }
 
   }
  
   render(){
-    console.log(this.state.filteredMarkers)
     return(
       <div className="outer-map-container">
         <h1 className="map-header">{this.props.heading}</h1>
