@@ -38,7 +38,7 @@ export const createMarker = (marker) => {
         dispatch(addMarker(json))
         dispatch(fetchMarkers())
         dispatch(fetchUser())
-    
+        
     })
     .catch(function(error) {
     
@@ -65,6 +65,7 @@ export const destroyMarker = (marker) => {
       if (json.message) {
         dispatch(removeMarker(marker))
         dispatch(fetchMarkers())
+        dispatch(fetchUser())
         // alert("Marker Deleted. You may have to refresh to notice changes.")
       }else{
         alert("Errors deleting marker.")

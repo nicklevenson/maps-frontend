@@ -3,25 +3,20 @@ import {connect} from 'react-redux'
 import {filterMarkers} from '../actions/MarkerActions.js'
 import { fetchAllUsers } from '../actions/UserActions.js'
 class UserFilter extends React.Component {
+  state = {
+    selectedUser: "All"
+  }
   componentDidMount() {
     this.props.fetchAllUsers()
     this.renderUserOptions()
     this.props.filterMarkers("All")
   }
+  
 
-  // componentDidUpdate() {
-  //   this.renderUserOptions()
-  // }
-
-  // shouldComponentUpdate(nextProps) {
-  //   if (nextProps.markers !== this.props.markers) {
-  //     return true
-  //   }else{
-  //     return false
-  //   }
-  // }
   handleChange = (e) => {
+    this.setState({selectedUser:e.target.value})
     this.props.filterMarkers(e.target.value)
+    
   }
   renderUserOptions = () => {
     return this.props.allUsers.map(u=>u.username)
