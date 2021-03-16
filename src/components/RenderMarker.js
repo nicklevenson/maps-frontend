@@ -53,7 +53,7 @@ const RenderMarker = (props) => {
     const el = document.createElement('div');
     el.className = 'marker';
     el.style.backgroundImage = `url(${props.marker.user.image})`
-      const marker = new mapboxgl.Marker(el)
+       new mapboxgl.Marker(el)
       .setLngLat(coords)
         .setPopup(new mapboxgl.Popup({ offset: 25 }) // add popups
         .setHTML(
