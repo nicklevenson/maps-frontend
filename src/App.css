@@ -21,12 +21,27 @@ body {
 .map-header {
   grid-column-start: 1;
   grid-column-end: 3;
+  grid-row: 1;
 }
 
 .map-container {
   grid-row: 2;
   grid-column-start: 1;
   grid-column-end: 3;
+}
+
+.map-title {
+  margin: 1%;
+  padding: 1%;
+  justify-self: center;
+  align-self: start;
+  grid-row: 2;
+  grid-column-start: 1;
+  grid-column-end: 3;
+  z-index: 50;
+  background-color: rgba(187, 183, 207, 0.884);
+  border-radius: 5px;
+  min-width: 200px;
 }
 #map {
   width: 100%;
