@@ -97,8 +97,14 @@ class Map extends React.Component {
       destroyMarker: this.props.destroyMarker, 
       currentUser: this.props.currentUser,
       likeMarker: this.props.likeMarker,
-      unlikeMarker: this.props.unlikeMarker
+      unlikeMarker: this.props.unlikeMarker,
+      handleMarkerAdd: this.handleMarkerAdd
     }))
+  }
+
+  handleMarkerAdd = (e) =>{
+    e.preventDefault()
+    console.log(e.target.mapTitle.value)
   }
 
   // renderNewMarkerContainer = () => {

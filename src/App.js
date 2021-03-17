@@ -20,12 +20,6 @@ class App extends React.Component {
     }
   }
 
-  // currentUserMarkers = () => {
-  //   const liked = this.props.markers.filter(m=>this.props.currentUser.likedMarkers.map(m=>m.id).includes(m.id))
-  //   const userMarkers = this.props.markers.filter(m=>this.props.currentUser.markers.map(m=>m.id).includes(m.id))
-  //   return [...liked, ...userMarkers]
-  // }
-
   isRedirect = () => {
     if (!sessionStorage.jwt) {
       return <Login heading={'Please login to use this feature'}/> 
