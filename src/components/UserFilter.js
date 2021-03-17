@@ -29,10 +29,9 @@ class UserFilter extends React.Component {
   render(){
     return(
       <div className="user-filter">
-        <h5 >Filter Markers by User </h5>
 
         <form onChange={e=>this.handleChange(e)}>
-            <input list="usersFilter"></input>
+            <input type="text" list="usersFilter" placeholder="Filter Markers by User"></input>
             <datalist id="usersFilter">
               <option>All</option>
               {this.renderUserOptions().map(u=><option key={u}>{u}</option>)}

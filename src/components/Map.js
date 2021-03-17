@@ -44,8 +44,9 @@ class Map extends React.Component {
               {this.props.currentUser ? <div id="newMarker" className="marker" style={{backgroundImage:`url(${this.props.currentUser.image})`}}></div> : null}
             </div>
             {this.state.newMarkerInfo ? <MarkerForm removeForm={this.removeForm} newMarkerInfo={this.state.newMarkerInfo}/> : null}
-            <UserFilter/>
+           
           </div>
+          <UserFilter/>
         </>
       )
     }
@@ -67,7 +68,7 @@ class Map extends React.Component {
       container: 'map', // container ID
       style: 'mapbox://styles/nicklevenson/ckm82ay4haed317r1gmlt32as', // style URL
       center: [-77.0353, 38.8895], // starting position [lng, lat]
-      zoom: 1 // starting zoom
+      zoom: 0 // starting zoom
     });
     map.addControl(
       new MapboxGeocoder({
