@@ -7,8 +7,8 @@ class MapFilter extends React.Component {
   componentDidMount() {
     // this.props.fetchAllUsers()
     // this.renderUserOptions()
-    // this.props.filterMaps("")
-    // this.renderMapOptions()
+    this.props.filterMaps("")
+    this.renderMapOptions()
   }
   
 
