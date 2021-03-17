@@ -1,6 +1,7 @@
 import { fetchUser } from "./UserActions"
 
-export const addMaps = (maps) => ({type: "ADD_MAP", payload: maps})
+export const addMaps = (maps) => ({type: "ADD_MAPS", payload: maps})
+export const addMap = (map) => ({type: "ADD_MAP", payload: map})
 export const filterMaps = (mapTitle) => ({type: "FILTER_MAP", payload: mapTitle})
 // export const addMapbox = (mapbox) => ({type: "ADD_MAPBOX", payload: mapbox})
 export const fetchMaps = () => {
@@ -32,10 +33,10 @@ export const createMap = (map) => {
     .then(res => res.json())
     .then(json => {
         if (json.id) {
-          // dispatch(addMap(json))
+          dispatch(addMap(json))
           dispatch(fetchUser())
           dispatch(fetchMaps())
-          // dispatch(filterMaps(json.title))
+          dispatch(filterMaps(json.title))
         }else{
           alert("error creating map")
         }

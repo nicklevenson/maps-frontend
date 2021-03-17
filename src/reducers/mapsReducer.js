@@ -6,8 +6,10 @@ export default function MapsReducer(state={
   }
 }, action) {
   switch(action.type){
-    case "ADD_MAP":
+    case "ADD_MAPS":
       return {...state, maps: action.payload}
+    case "ADD_MAP":
+      return {...state, maps: [...state.maps, action.payload]}
     case "FILTER_MAP":
       if (action.payload ===  ""){
         return {...state, selectedMap: {markers: []}}

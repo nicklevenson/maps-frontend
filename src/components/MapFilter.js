@@ -7,7 +7,7 @@ class MapFilter extends React.Component {
   componentDidMount() {
     // this.props.fetchAllUsers()
     // this.renderUserOptions()
-    this.props.filterMaps("")
+    // this.props.filterMaps("")
     this.renderMapOptions()
   }
   
@@ -21,10 +21,9 @@ class MapFilter extends React.Component {
   }
   renderMapOptions = () => {
     if (window.location.pathname === "/my-map"){
-      
       return this.props.currentUser.maps.map(m=>m.title)
     }else{
-      return this.props.maps.map(m=>m.title)
+      return this.props.maps.filter(m=>m.public === true).map(m=>m.title)
     }
 
   }
