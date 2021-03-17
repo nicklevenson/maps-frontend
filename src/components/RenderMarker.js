@@ -28,6 +28,7 @@ const RenderMarker = (props) => {
           
         })
     }else{
+
       const marker = new mapboxgl.Marker(el)
       .setLngLat(coords)
         .setPopup(new mapboxgl.Popup({ offset: 25 }) // add popups
@@ -37,35 +38,39 @@ const RenderMarker = (props) => {
           <br>
           <i>Coordinates: [${coords}]</i>
           <textarea readonly>${props.marker.info}</textarea>
-          ${props.currentUser.maps.map(m=>m.markers).map(mk=>mk.id).includes(props.marker.id) ? '<div class="like-marker">Remove from My Map</div>' : '<div class="like-marker">Add To My Map</div>'}
+          ${props.currentUser.maps.map(m=>m.markers).flat().map(m=>m.id).includes(props.marker.id) ? '<div class="like-marker">Remove from this Map</div>' : '<div class="like-marker">Add To My Map</div>'}
           `
           // ${props.currentUser.likedMarkers.map(m=>m.id).includes(props.marker.id) ? '<div class="like-marker">Remove from My Map</div>' : '<div class="like-marker">Add To My Map</div>'}
         ))
         .addTo(props.map);
        
         marker._popup._content.children[5].addEventListener('click', function likeMarker() {
-          const renderForm = () => {
-            marker._popup._content.children[5].removeEventListener('click', likeMarker)
-            return(
-              `
-              <div id="add-marker-to-map-container">
-                <h4>Which Map?</h4>
-                <form id="add-marker-to-map-form">
-                  <select name="mapTitle">
-                    ${props.currentUser.maps.map(m=>{return `<option>${m.title}</option>`})}
-                  </select>
-                  <input type="submit" value="Add">
-                </form>
-              </div>
-              `
-            )
+          if (!props.currentUser.maps.map(m=>m.markers).flat().map(m=>m.id).includes(props.marker.id)){
+            const renderForm = () => {
+              marker._popup._content.children[5].removeEventListener('click', likeMarker)
+              return(
+                `
+                <div id="add-marker-to-map-container">
+                  <h4>Which Map?</h4>
+                  <form id="add-marker-to-map-form">
+                    <select name="mapTitle">
+                      ${props.currentUser.maps.map(m=>{return `<option>${m.title}</option>`})}
+                    </select>
+                    <input type="submit" value="Add">
+                  </form>
+                </div>
+                `
+              )
+            }
+            marker._popup._content.innerHTML += renderForm()
+            document.getElementById("add-marker-to-map-form").addEventListener("submit", e=>props.handleMarkerAdd(e, props.marker.id))
+          }else{
+            props.handleRemoveMarker(props.marker.id)
           }
-          marker._popup._content.innerHTML += renderForm()
-          document.getElementById("add-marker-to-map-form").addEventListener("submit", e=>props.handleMarkerAdd(e, props.marker.id))
+         
         
           // marker._popup._content.children[5].removeEventListener('click', likeMarker)
-          // marker.remove()
-          // RenderMarker(props)
+          
         })
     }
     // console.log(props.marker.user)

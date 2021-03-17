@@ -23,11 +23,11 @@ class MapFilter extends React.Component {
     if (window.location.pathname === "/my-map"){
       return this.props.currentUser.maps.map(m=>m.title)
     }else{
-      if (this.props.currentUser.username) {
-        return this.props.maps.filter(m=>m.public === true || this.props.currentUser.maps.map(m=>m.id).includes(m.id)).map(m=>m.title)
-      }else{
+      // if (this.props.currentUser.username) {
+      //   return this.props.maps.filter(m=>m.public === true || this.props.currentUser.maps.map(m=>m.id).includes(m.id)).map(m=>m.title)
+      // }else{
         return this.props.maps.filter(m=>m.public === true).map(m=>m.title)
-      }
+      // }
       
     }
 

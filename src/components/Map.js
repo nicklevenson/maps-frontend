@@ -98,12 +98,13 @@ class Map extends React.Component {
       handleMarkerSelect: this.props.handleMarkerSelect, 
       destroyMarker: this.props.destroyMarker, 
       currentUser: this.props.currentUser,
-      likeMarker: this.props.likeMarker,
-      unlikeMarker: this.props.unlikeMarker,
+      handleRemoveMarker: this.handleRemoveMarker,
       handleMarkerAdd: this.handleMarkerAdd
     }))
   }
-
+  handleRemoveMarker = (marker_id) => {
+    console.log(marker_id)
+  }
   handleMarkerAdd = (e, marker_id) =>{
     e.preventDefault()
     const map_id = this.props.currentUser.maps.find(m=>m.title === e.target.mapTitle.value).id
