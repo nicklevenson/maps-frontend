@@ -34,12 +34,20 @@ class App extends React.Component {
     }
   }
 
+  handlePublicMap = () => {
+    if (this.props.selectedMap.public === true || this.props.currentUser.maps.map(m=>m.id).includes(this.props.selectedMap.id)){
+      return this.props.selectedMap
+    }else{
+      return {markers: []}
+    }
+  }
+
   render(){
 
     return (
       <div className="App">
         <Nav/>
-          <Route exact path="/public-map" render={() => <MapContainer map={this.props.selectedMap} heading={"Public Map"}/> }></Route>
+          <Route exact path="/public-map" render={() => <MapContainer map={this.handlePublicMap()} heading={"Public Map"}/> }></Route>
           <Route exact path="/my-map" render={()=>this.isRedirect()}></Route>
           <Route exact path="/login"><Login/></Route>
           <Route exact path="/logout"><Logout/></Route>
