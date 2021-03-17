@@ -30,12 +30,13 @@ class App extends React.Component {
     if (!sessionStorage.jwt) {
       return <Login heading={'Please login to use this feature'}/> 
     }else {
-      return <MapContainer map={this.props.selectedMap} heading={"My Map"}/>
+      return <MapContainer map={this.props.selectedMap} heading={"My Maps"}/>
     }
   }
 
   handlePublicMap = () => {
-    if (this.props.selectedMap.public === true || this.props.currentUser.maps.map(m=>m.id).includes(this.props.selectedMap.id)){
+    // if (this.props.selectedMap.public === true || this.props.currentUser.maps.map(m=>m.id).includes(this.props.selectedMap.id))
+    if (this.props.selectedMap.public === true){
       return this.props.selectedMap
     }else{
       return {markers: []}
@@ -47,7 +48,7 @@ class App extends React.Component {
     return (
       <div className="App">
         <Nav/>
-          <Route exact path="/public-map" render={() => <MapContainer map={this.handlePublicMap()} heading={"Public Map"}/> }></Route>
+          <Route exact path="/public-map" render={() => <MapContainer map={this.handlePublicMap()} heading={"Public Maps"}/> }></Route>
           <Route exact path="/my-map" render={()=>this.isRedirect()}></Route>
           <Route exact path="/login"><Login/></Route>
           <Route exact path="/logout"><Logout/></Route>
