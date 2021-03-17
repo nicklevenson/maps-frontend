@@ -172,13 +172,13 @@ class Map extends React.Component {
 
 }
 
-// const mapDispatchToProps = (dispatch) => {
-//   return {
-//     destroyMarker: (marker) => dispatch(destroyMarker(marker)),
-//     likeMarker: (marker, currentUserId) => dispatch(likeMarker(marker, currentUserId)),
-//     unlikeMarker: (marker, currentUserId) => dispatch(unlikeMarker(marker, currentUserId))
-//   }
-// } 
+const mapDispatchToProps = (dispatch) => {
+  return {
+    destroyMarker: (marker) => dispatch(destroyMarker(marker)),
+    likeMarker: (marker, currentUserId) => dispatch(likeMarker(marker, currentUserId)),
+    unlikeMarker: (marker, currentUserId) => dispatch(unlikeMarker(marker, currentUserId))
+  }
+} 
 
 const mapStateToProps = (state) => {
   return {
@@ -191,4 +191,4 @@ const mapStateToProps = (state) => {
 
 
 
-export default connect(mapStateToProps)(Map)
+export default connect(mapStateToProps, mapDispatchToProps)(Map)

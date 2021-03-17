@@ -1,5 +1,5 @@
 import { fetchUser } from "./UserActions"
-import { addMarkerToMap, fetchMaps } from './MapActions'
+import { addMarkerToMap, fetchMaps, removeMarkerFromMap } from './MapActions'
 
 
 export const addMarker = (marker) => ({type: "ADD_MARKER", payload: marker})
@@ -63,8 +63,8 @@ export const destroyMarker = (marker) => {
     .then(res => res.json())
     .then(json => {
       if (json.message) {
-        dispatch(removeMarker(marker))
-        dispatch(fetchMarkers())
+        dispatch(fetchMaps())
+        dispatch(removeMarkerFromMap(marker))
         dispatch(fetchUser())
         // alert("Marker Deleted. You may have to refresh to notice changes.")
       }else{
