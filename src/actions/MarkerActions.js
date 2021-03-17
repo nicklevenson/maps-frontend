@@ -78,7 +78,7 @@ export const destroyMarker = (marker) => {
   }
 }
 
-export const addMarkerToUserMap = (marker_id, map_id, user_id) => {
+export const addMarkerToUserMap = (marker_id, map_id) => {
   return (dispatch) => {
     let configObj = {
       method: 'POST',
@@ -87,13 +87,18 @@ export const addMarkerToUserMap = (marker_id, map_id, user_id) => {
           'Accept': 'application/json',
           'Content-Type': 'application/json'
       },
-      body: JSON.stringify({marker_id: marker_id, map_id: map_id, user_id: user_id})
+      body: JSON.stringify({marker_id: marker_id, map_id: map_id})
   }
     fetch(`${process.env.REACT_APP_BACKEND_URL}/addToMap`, configObj)
     .then(res => res.json())
     .then(json => {
+      if (json.message){
         dispatch(fetchMaps())
         dispatch(fetchUser())
+      }else{
+        alert(json.error)
+      }
+      
     })
     .catch(function(error) {
         alert(error)

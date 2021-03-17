@@ -104,12 +104,12 @@ class Map extends React.Component {
     }))
   }
 
-  handleMarkerAdd = (e, marker_id, currentUserId) =>{
+  handleMarkerAdd = (e, marker_id) =>{
     e.preventDefault()
     const map_id = this.props.currentUser.maps.find(m=>m.title === e.target.mapTitle.value).id
     // console.log(map_id)
-    this.props.addMarkerToUserMap(marker_id, map_id, currentUserId)
-    // document.getElementById("add-marker-to-map-container").remove()
+    this.props.addMarkerToUserMap(marker_id, map_id)
+    document.getElementById("add-marker-to-map-container").remove()
   }
 
 }
@@ -119,7 +119,7 @@ const mapDispatchToProps = (dispatch) => {
     destroyMarker: (marker) => dispatch(destroyMarker(marker)),
     likeMarker: (marker, currentUserId) => dispatch(likeMarker(marker, currentUserId)),
     unlikeMarker: (marker, currentUserId) => dispatch(unlikeMarker(marker, currentUserId)),
-    addMarkerToUserMap: (marker_id, map_id, user_id) => dispatch(addMarkerToUserMap(marker_id, map_id, user_id))
+    addMarkerToUserMap: (marker_id, map_id) => dispatch(addMarkerToUserMap(marker_id, map_id))
   }
 } 
 
