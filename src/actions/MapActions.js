@@ -1,5 +1,6 @@
 
 export const addMap = (map) => ({type: "ADD_MAP", payload: map})
+export const filterMaps = (mapTitle) => ({type: "FILTER_MAP", payload: mapTitle})
 
 export const fetchMaps = () => {
   return (dispatch) => {
@@ -14,3 +15,4 @@ export const fetchMaps = () => {
     })
   }
 }
+

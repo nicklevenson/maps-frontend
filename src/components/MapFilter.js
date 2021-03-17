@@ -1,26 +1,27 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {filterMarkers} from '../actions/MarkerActions.js'
+import {filterMaps} from '../actions/MapActions.js'
 import { fetchAllUsers } from '../actions/UserActions.js'
 class MapFilter extends React.Component {
   
   componentDidMount() {
     // this.props.fetchAllUsers()
     // this.renderUserOptions()
-    // this.props.filterMarkers("All")
-    this.renderMapOptions()
+    // this.props.filterMaps("")
+    // this.renderMapOptions()
   }
   
 
   handleChange = (e) => {
     if (e.target.value === ""){
-      this.props.filterMarkers("All")
+      this.props.filterMaps("")
     }else{
-      this.props.filterMarkers(e.target.value)
+      this.props.filterMaps(e.target.value)
     }  
   }
   renderMapOptions = () => {
     if (window.location.pathname === "/my-map"){
+      
       return this.props.currentUser.maps.map(m=>m.title)
     }else{
       return this.props.maps.map(m=>m.title)
@@ -48,6 +49,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     // filterMarkers: (username) => dispatch(filterMarkers(username)),
     // fetchAllUsers: () => dispatch(fetchAllUsers())
+    filterMaps: (mapTitle) => dispatch(filterMaps(mapTitle))
   }
 }
 

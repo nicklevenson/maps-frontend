@@ -37,8 +37,9 @@ const RenderMarker = (props) => {
           <br>
           <i>Coordinates: [${coords}]</i>
           <textarea readonly>${props.marker.info}</textarea>
-          ${props.currentUser.likedMarkers.map(m=>m.id).includes(props.marker.id) ? '<div class="like-marker">Remove from My Map</div>' : '<div class="like-marker">Add To My Map</div>'}
+          
           `
+          // ${props.currentUser.likedMarkers.map(m=>m.id).includes(props.marker.id) ? '<div class="like-marker">Remove from My Map</div>' : '<div class="like-marker">Add To My Map</div>'}
         ))
         .addTo(props.map);
        
