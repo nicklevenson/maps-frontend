@@ -10,6 +10,8 @@ import Login from './Login.js'
 import MapFilter from './MapFilter.js';
 import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
 import NewMapContainer from '../containers/NewMapContainer.js';
+import { addMarkerToMap } from '../actions/MapActions.js';
+import {addMarkerToUserMap} from '../actions/MarkerActions.js'
 
 class Map extends React.Component {
   state = {
@@ -102,79 +104,13 @@ class Map extends React.Component {
     }))
   }
 
-  handleMarkerAdd = (e) =>{
+  handleMarkerAdd = (e, marker_id, currentUserId) =>{
     e.preventDefault()
-    console.log(e.target.mapTitle.value)
+    const map_id = this.props.currentUser.maps.find(m=>m.title === e.target.mapTitle.value).id
+    // console.log(map_id)
+    this.props.addMarkerToUserMap(marker_id, map_id, currentUserId)
+    // document.getElementById("add-marker-to-map-container").remove()
   }
-
-  // renderNewMarkerContainer = () => {
-  //   <div id="newMarkerContainer">
-  //     <h5 style={{margin:"0"}}>New Marker</h5>
-  //     {this.props.currentUser ? <div id="newMarker" className="marker" style={{backgroundImage:`url(${this.props.currentUser.image})`}}></div> : null}
-  //   </div>
-  // }
-
-  
-
-//   renderNewMarkerForm = (map) => {
-//     if (document.getElementById("newMarkerContainer")) {
-//       const newMarkerButton = document.getElementById("newMarkerContainer")
-    
-//       newMarkerButton.addEventListener('mousedown', (e) => {
-        
-//         if (this.props.currentUser.username) {
-//           const triggerState = (newMarkerInfo) => this.setState({newMarkerInfo: newMarkerInfo})
-//           const renderTempMarker = (marker) => this.renderTempMarker(marker)
-//           function handleMouseMove(e) {
-//             if (document.getElementById("temp-marker")){
-//               document.getElementById("temp-marker").remove()
-//             }
-//             const coords = [e.lngLat.lng, e.lngLat.lat]
-         
-//             const marker = {
-//               title: "New Marker",
-//               lat: coords[1],
-//               lng: coords[0],
-//               info: "Be sure to submit me"
-//             }
-//             renderTempMarker(marker)
-//           }
-//             map.on('mousemove', handleMouseMove)        
-//             map.on('mouseup', function mapEvent(e){
-//                 map.off('mousemove', handleMouseMove)
-//                 document.getElementById("temp-marker").remove()
-//                 const coords = [e.lngLat.lng, e.lngLat.lat]
-//                 const marker = {
-//                   title: "New Marker",
-//                   lat: coords[1],
-//                   lng: coords[0],
-//                   info: "Be sure to submit me"
-//                 }
-             
-//                 triggerState(marker)
-//                 renderTempMarker(marker)
-//                 map.off('mouseup',  mapEvent)
-                   
-//           })
-//         }else{
-//           this.setState({redirect: true})
-//         }
-//       })
-//     }
-    
-//   }
-
-
-//   renderTempMarker(marker) {
-//     var coords = [marker.lng, marker.lat];
-//     var temp = document.createElement('div');
-//     temp.className = 'marker';
-//     temp.id = 'temp-marker'
-//     temp.style.backgroundImage = `url(${this.props.currentUser.image})`
-//     new mapboxgl.Marker(temp)
-//     .setLngLat(coords)
-//     .addTo(this.state.map);
-//   }
 
 }
 
@@ -182,7 +118,8 @@ const mapDispatchToProps = (dispatch) => {
   return {
     destroyMarker: (marker) => dispatch(destroyMarker(marker)),
     likeMarker: (marker, currentUserId) => dispatch(likeMarker(marker, currentUserId)),
-    unlikeMarker: (marker, currentUserId) => dispatch(unlikeMarker(marker, currentUserId))
+    unlikeMarker: (marker, currentUserId) => dispatch(unlikeMarker(marker, currentUserId)),
+    addMarkerToUserMap: (marker_id, map_id, user_id) => dispatch(addMarkerToUserMap(marker_id, map_id, user_id))
   }
 } 
 
