@@ -1,5 +1,5 @@
 export default function MapsReducer(state={
-  mapbox: null,
+  // mapbox: null,
   maps: [],
   selectedMap: {
     markers: []
@@ -14,8 +14,8 @@ export default function MapsReducer(state={
       }else{
         return {...state, selectedMap: state.maps.filter(map =>map.title === action.payload)[0] || {markers: []}}
       }
-    case "ADD_MAPBOX": 
-      return {...state, mapbox: action.payload}
+    // case "ADD_MAPBOX": 
+    //   return {...state, mapbox: action.payload}
     default:
       return state
   }

@@ -9,7 +9,7 @@ class NewMarkerContainer extends React.Component {
     redirect: false
   }
 
-  componentDidMount() {
+  componentDidUpdate() {
     this.renderNewMarkerForm()
   } 
 
@@ -17,6 +17,7 @@ class NewMarkerContainer extends React.Component {
   render(){
     return(
       <div className="side-bar">
+        {this.state.newMarkerInfo ? <div onClick={this.removeForm}>X</div> : null}
         {this.state.newMarkerInfo ? <MarkerForm removeForm={this.removeForm} newMarkerInfo={this.state.newMarkerInfo}/> : null}
         <div id="newMarkerContainer">
           <h5 style={{margin:"0"}}>New Marker</h5>
@@ -25,6 +26,12 @@ class NewMarkerContainer extends React.Component {
       </div>
 
     )
+  }
+
+  removeForm = () => {
+    this.setState({newMarkerInfo: null})
+    document.getElementById("newMarkerContainer").style.display = "inline-block"
+    document.getElementById("temp-marker").remove()
   }
   
   renderNewMarkerContainer = () => {
@@ -37,7 +44,7 @@ class NewMarkerContainer extends React.Component {
   
 
   renderNewMarkerForm = () => {
-    const map = this.props.mapbox
+    const map = this.props.map
     if (document.getElementById("newMarkerContainer")) {
       const newMarkerButton = document.getElementById("newMarkerContainer")
     
@@ -94,7 +101,7 @@ class NewMarkerContainer extends React.Component {
     temp.style.backgroundImage = `url(${this.props.currentUser.image})`
     new mapboxgl.Marker(temp)
     .setLngLat(coords)
-    .addTo(this.props.mapbox);
+    .addTo(this.props.map);
   }
  
 
@@ -109,8 +116,7 @@ class NewMarkerContainer extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-      currentUser: state.currentUser.currentUser,
-      mapbox: state.maps.mapbox
+      currentUser: state.currentUser.currentUser
   }
 }
 

@@ -5,13 +5,14 @@ import MarkerForm from './MarkerForm.js'
 import RenderMarker from './RenderMarker.js'
 import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
 import {destroyMarker, likeMarker, unlikeMarker} from '../actions/MarkerActions.js'
-import {addMapbox, addMap} from '../actions/MapActions.js'
+import NewMarkerContainer from '../containers/NewMarkerContainer.js'
 import Login from './Login.js'
 import MapFilter from './MapFilter.js';
 import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
 
 class Map extends React.Component {
   state = {
+    map: "",
     newMarkerInfo: null,
     redirect: false
   }
@@ -37,17 +38,17 @@ class Map extends React.Component {
           <div className="map-container">
             <div id="map"></div>
           </div>
-        
+          <NewMarkerContainer map={this.state.map}/>
           <MapFilter/>
         </>
       )
     }
   }
 
-  removeForm = () => {
-    this.setState({newMarkerInfo: null})
-    document.getElementById("newMarkerContainer").style.display = "inline-block"
-    document.getElementById("temp-marker").remove()
+  
+
+  removeMap = () =>{
+    this.state.map.remove()
   }
 
   renderMap() {
@@ -64,7 +65,7 @@ class Map extends React.Component {
       mapboxgl: mapboxgl
       })
     );
-    this.props.addMapbox(map)
+    this.setState({map: map})
    
     // if (navigator.geolocation) {
     //   navigator.geolocation.getCurrentPosition(function(position) {
@@ -164,11 +165,13 @@ class Map extends React.Component {
 
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    addMapbox: (mapbox) => dispatch(addMapbox(mapbox))
-  }
-} 
+// const mapDispatchToProps = (dispatch) => {
+//   return {
+//     destroyMarker: (marker) => dispatch(destroyMarker(marker)),
+//     likeMarker: (marker, currentUserId) => dispatch(likeMarker(marker, currentUserId)),
+//     unlikeMarker: (marker, currentUserId) => dispatch(unlikeMarker(marker, currentUserId))
+//   }
+// } 
 
 const mapStateToProps = (state) => {
   return {
@@ -180,4 +183,4 @@ const mapStateToProps = (state) => {
 
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(Map)
+export default connect(mapStateToProps)(Map)
