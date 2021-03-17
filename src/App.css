@@ -2,7 +2,9 @@
   text-align: center;
 }
 
-
+*:focus {
+  outline: none !important;
+}
 
 .outer-map-container {
   margin: auto;
@@ -41,15 +43,9 @@
   border-radius: 5px;
 }
 
-/* .marker-info{
-  padding: 5%;
-  background-color: rgba(211, 211, 211, 0.959);
-  border-radius: 5px;
-  box-shadow: 0px 1px 5px rgb(94, 93, 93);
-  height: 25vh;
-  overflow-y: scroll;
-} */
-
+.mapboxgl-popup {
+  z-index: 20 !important;
+}
 
 #newMarkerContainer {
   display: inline-block;
@@ -77,6 +73,19 @@
   max-width: 25vw !important;
 }
 
+.mapboxgl-popup-content{
+  background-color: rgb(255, 255, 255);
+}
+.mapboxgl-popup-content textarea{
+  border: none;
+}
+.mapboxgl-popup-content *{
+  z-index: 50;
+  margin: 3px;
+}
+
+
+
 textarea {
   background-color: transparent;
   height: 10vh !important;
@@ -84,6 +93,3 @@ textarea {
   
 }
 
-canvas:focus {
-  outline: none !important;
-}

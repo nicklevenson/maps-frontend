@@ -77,6 +77,13 @@ class Map extends React.Component {
     );
     this.setState({map: map})
     this.renderNewMarkerForm(map)
+   
+    // if (navigator.geolocation) {
+    //   navigator.geolocation.getCurrentPosition(function(position) {
+    //     document.getElementById("map-container").innerHTML += <h1>{position}</h1>
+    //   });
+    // } 
+    
   } 
 
   renderMarkers(){

@@ -19,7 +19,7 @@ class UserFilter extends React.Component {
     }  
   }
   renderUserOptions = () => {
-    if (window.location.pathname == "/my-map"){
+    if (window.location.pathname === "/my-map"){
       return this.props.allUsers.filter(u=> this.props.currentUser.likedMarkers.map(m=>m.user_id).includes(u.id)).map(u=>u.username)
     }else{
       return this.props.allUsers.filter(u=>u.markers.length > 0).map(u=>u.username)
@@ -28,14 +28,14 @@ class UserFilter extends React.Component {
   }
   render(){
     return(
-      <div class="user-filter">
+      <div className="user-filter">
         <h5 >Filter Markers by User </h5>
 
         <form onChange={e=>this.handleChange(e)}>
             <input list="usersFilter"></input>
             <datalist id="usersFilter">
               <option>All</option>
-              {this.renderUserOptions().map(u=><option>{u}</option>)}
+              {this.renderUserOptions().map(u=><option key={u}>{u}</option>)}
             </datalist>
         </form>
       </div>
