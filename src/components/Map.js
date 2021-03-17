@@ -32,7 +32,7 @@ class Map extends React.Component {
           <div className="map-container">
             <div id="map"></div>
           </div>
-          <NewMarkerContainer map={this.state.map}/>
+          {this.props.currentUser.maps.includes(this.props.selectedMap) ? <NewMarkerContainer map={this.state.map}/> : null}
           <MapFilter/>
         </>
       )
@@ -168,7 +168,8 @@ class Map extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-      currentUser: state.currentUser.currentUser
+      currentUser: state.currentUser.currentUser,
+      selectedMap: state.maps.selectedMap
   }
 }
 
