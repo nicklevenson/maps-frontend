@@ -12,12 +12,19 @@ class UserFilter extends React.Component {
   
 
   handleChange = (e) => {
-  
-    this.props.filterMarkers(e.target.value)
-    
+    if (e.target.value === ""){
+      this.props.filterMarkers("All")
+    }else{
+      this.props.filterMarkers(e.target.value)
+    }  
   }
   renderUserOptions = () => {
-    return this.props.allUsers.filter(u=>u.markers.length > 0).map(u=>u.username)
+    if (window.location.pathname == "/my-map"){
+      return this.props.allUsers.filter(u=> this.props.currentUser.likedMarkers.map(m=>m.user_id).includes(u.id)).map(u=>u.username)
+    }else{
+      return this.props.allUsers.filter(u=>u.markers.length > 0).map(u=>u.username)
+    }
+ 
   }
   render(){
     return(
@@ -47,7 +54,8 @@ const mapDispatchToProps = (dispatch) => {
 const mapStateToProps = (state) => {
   return {
       markers: state.markers.markers,
-      allUsers: state.currentUser.allUsers
+      allUsers: state.currentUser.allUsers,
+      currentUser: state.currentUser.currentUser
   }
 }
 
