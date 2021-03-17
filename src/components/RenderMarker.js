@@ -65,7 +65,7 @@ const RenderMarker = (props) => {
             marker._popup._content.innerHTML += renderForm()
             document.getElementById("add-marker-to-map-form").addEventListener("submit", e=>props.handleMarkerAdd(e, props.marker.id))
           }else{
-            props.handleRemoveMarker(props.marker.id)
+            props.handleRemoveMarker(props.marker)
           }
          
         

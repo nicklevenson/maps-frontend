@@ -4,14 +4,14 @@ import {connect} from 'react-redux'
 import MarkerForm from './MarkerForm.js'
 import RenderMarker from './RenderMarker.js'
 import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
-import {destroyMarker, likeMarker, unlikeMarker} from '../actions/MarkerActions.js'
+import {destroyMarker, addMarkerToUserMap, removeMarkerFromUserMap} from '../actions/MarkerActions.js'
 import NewMarkerContainer from '../containers/NewMarkerContainer.js'
 import Login from './Login.js'
 import MapFilter from './MapFilter.js';
 import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
 import NewMapContainer from '../containers/NewMapContainer.js';
 import { addMarkerToMap } from '../actions/MapActions.js';
-import {addMarkerToUserMap} from '../actions/MarkerActions.js'
+
 
 class Map extends React.Component {
   state = {
@@ -102,9 +102,11 @@ class Map extends React.Component {
       handleMarkerAdd: this.handleMarkerAdd
     }))
   }
-  handleRemoveMarker = (marker_id) => {
-    console.log(marker_id)
+
+  handleRemoveMarker = (marker) => {
+    this.props.removeMarkerFromUserMap(marker, this.props.selectedMap.id)
   }
+
   handleMarkerAdd = (e, marker_id) =>{
     e.preventDefault()
     const map_id = this.props.currentUser.maps.find(m=>m.title === e.target.mapTitle.value).id
@@ -118,9 +120,8 @@ class Map extends React.Component {
 const mapDispatchToProps = (dispatch) => {
   return {
     destroyMarker: (marker) => dispatch(destroyMarker(marker)),
-    likeMarker: (marker, currentUserId) => dispatch(likeMarker(marker, currentUserId)),
-    unlikeMarker: (marker, currentUserId) => dispatch(unlikeMarker(marker, currentUserId)),
-    addMarkerToUserMap: (marker_id, map_id) => dispatch(addMarkerToUserMap(marker_id, map_id))
+    addMarkerToUserMap: (marker_id, map_id) => dispatch(addMarkerToUserMap(marker_id, map_id)),
+    removeMarkerFromUserMap: (marker, map_id) => dispatch(removeMarkerFromUserMap(marker, map_id))
   }
 } 
 
