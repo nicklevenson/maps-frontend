@@ -45,14 +45,8 @@ class Map extends React.Component {
           <div className="map-container">
             <div id="map"></div>
           </div>
-          {
-            this.isUserMap() ? 
-            <>
-            <NewMarkerContainer map={this.state.map}/>
-            <NewMapContainer/>
-            </>
-            : null
-          }
+          {this.isUserMap() ? <NewMarkerContainer map={this.state.map}/> : null}
+          <NewMapContainer/>
           <MapFilter/>
         </>
       )
