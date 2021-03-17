@@ -1,0 +1,16 @@
+
+export const addMap = (map) => ({type: "ADD_MAP", payload: map})
+
+export const fetchMaps = () => {
+  return (dispatch) => {
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/maps`)
+    .then(res => res.json())
+    .then(maps => {
+        maps.forEach(map => dispatch(addMap(map)))
+        
+    })
+    .catch(function(error) {
+      alert("Errors getting maps.")
+    })
+  }
+}

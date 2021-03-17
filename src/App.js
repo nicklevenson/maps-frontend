@@ -2,7 +2,7 @@ import './App.css';
 import React from 'react'
 import {Route} from "react-router-dom";
 import MapContainer from './containers/MapContainer.js';
-import { fetchMarkers } from './actions/MarkerActions.js';
+import { fetchMaps} from './actions/MapActions.js';
 import {fetchUser} from './actions/UserActions.js'
 import {connect} from 'react-redux'  
 import Nav from './components/Nav.js'
@@ -14,23 +14,23 @@ class App extends React.Component {
     filteredMarkers: []
   }
   componentDidMount() {
-    this.props.fetchMarkers()
+    this.props.fetchMaps()
     if (sessionStorage.jwt) {
       this.props.fetchUser()
     }
   }
 
-  currentUserMarkers = () => {
-    const liked = this.props.markers.filter(m=>this.props.currentUser.likedMarkers.map(m=>m.id).includes(m.id))
-    const userMarkers = this.props.markers.filter(m=>this.props.currentUser.markers.map(m=>m.id).includes(m.id))
-    return [...liked, ...userMarkers]
-  }
+  // currentUserMarkers = () => {
+  //   const liked = this.props.markers.filter(m=>this.props.currentUser.likedMarkers.map(m=>m.id).includes(m.id))
+  //   const userMarkers = this.props.markers.filter(m=>this.props.currentUser.markers.map(m=>m.id).includes(m.id))
+  //   return [...liked, ...userMarkers]
+  // }
 
   isRedirect = () => {
     if (!sessionStorage.jwt) {
       return <Login heading={'Please login to use this feature'}/> 
     }else {
-      return <MapContainer markers={this.currentUserMarkers()} heading={"My Map"}/>
+      // return <MapContainer markers={this.currentUserMarkers()} heading={"My Map"}/>
     }
   }
 
@@ -50,7 +50,7 @@ class App extends React.Component {
 }
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchMarkers: () => dispatch(fetchMarkers()),
+    fetchMaps: () => dispatch(fetchMaps()),
     fetchUser: () => dispatch(fetchUser())
   }
 }
@@ -58,7 +58,7 @@ const mapDispatchToProps = (dispatch) => {
 
 const mapStateToProps = (state) => {
   return {
-      markers: state.markers.filteredMarkers,
+      maps: state.maps.maps,
       currentUser: state.currentUser.currentUser
   }
 }

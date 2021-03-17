@@ -46,7 +46,7 @@ class Map extends React.Component {
             {this.state.newMarkerInfo ? <MarkerForm removeForm={this.removeForm} newMarkerInfo={this.state.newMarkerInfo}/> : null}
            
           </div>
-          <UserFilter/>
+          {/* <UserFilter/> */}
         </>
       )
     }
