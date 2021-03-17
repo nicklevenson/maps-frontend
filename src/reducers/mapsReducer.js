@@ -17,7 +17,7 @@ export default function MapsReducer(state={
         return {...state, selectedMap: state.maps.filter(map =>map.title === action.payload)[0] || {markers: []}}
       }
     case "ADD_MARKER_TO_MAP":
-      return {...state, selectedMap: {markers: [...state.selectedMap.markers, action.payload]}}
+      return {...state, selectedMap: {...state.selectedMap, markers: [...state.selectedMap.markers, action.payload]}}
     case "REMOVE_MARKER_FROM_MAP":
       return {...state, selectedMap: {markers: state.selectedMap.markers.filter(m=>m.id !== action.payload.id)}}
     default:

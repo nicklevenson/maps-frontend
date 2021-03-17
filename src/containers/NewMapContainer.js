@@ -20,7 +20,7 @@ class NewMapContainer extends React.Component {
         <div className="new-map-container">
           {this.state.newMapForm ? <div onClick={e=>this.removeMapForm()}>X</div> : null }
           <h5 onClick={e=>this.handleClick()} id="new-map-heading">New Map</h5>
-          {this.state.newMapForm ? <NewMapForm/> : null}
+          {this.state.newMapForm ? <NewMapForm removeMapForm={this.removeMapForm}/> : null}
         </div>
       )
   }

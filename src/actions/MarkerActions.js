@@ -1,5 +1,5 @@
 import { fetchUser } from "./UserActions"
-import { addMarkerToMap, fetchMaps, removeMarkerFromMap } from './MapActions'
+import { addMarkerToMap, fetchMaps, removeMarkerFromMap, filterMaps } from './MapActions'
 
 
 export const addMarker = (marker) => ({type: "ADD_MARKER", payload: marker})
@@ -20,7 +20,7 @@ export const fetchMarkers = () => {
   }
 }
 
-export const createMarker = (marker) => {
+export const createMarker = (marker, mapTitle) => {
   
   return (dispatch) => {
     let configObj = {
@@ -35,10 +35,11 @@ export const createMarker = (marker) => {
     fetch(`${process.env.REACT_APP_BACKEND_URL}/markers`, configObj)
     .then(res => res.json())
     .then(json => {
+    
         dispatch(addMarkerToMap(json))
-        dispatch(fetchMaps())
-        dispatch(fetchUser())
-        
+        // dispatch(filterMaps(mapTitle))
+    
+      
     })
     .catch(function(error) {
     

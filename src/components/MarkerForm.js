@@ -12,7 +12,7 @@ class MarkerForm extends React.Component {
       marker.info = e.target.info.value
       marker.user_id = this.props.currentUser.id
       marker.map_id = this.props.selectedMap.id
-      this.props.createMarker(marker)
+      this.props.createMarker(marker, this.props.selectedMap.title)
       this.props.removeForm()
       document.getElementById("newMarkerContainer").style.display = "inline-block"
   }
@@ -37,7 +37,7 @@ class MarkerForm extends React.Component {
 }
 const mapDispatchToProps = (dispatch) => {
   return {
-    createMarker: (marker) => dispatch(createMarker(marker))
+    createMarker: (marker, mapTitle) => dispatch(createMarker(marker, mapTitle))
   }
 }
 

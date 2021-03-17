@@ -10,11 +10,12 @@ class NewMapForm extends React.Component {
     const publicMap = e.target.public.checked
     const map = {title: title, description: description, public: publicMap, user_id: this.props.currentUser.id}
     this.props.createMap(map)
+    this.props.removeMapForm()
   }
 
   render() {
     return(
-      <div className="new-map-form">
+      <div id="new-map-form">
         <form onSubmit={e=>this.handleSubmit(e)}>
           <input type="text" placeholder="Map Title" name="title"></input><br/>
           <textarea placeholder="Description" name="description"></textarea><br/>
