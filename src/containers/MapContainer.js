@@ -36,8 +36,8 @@ class MapContainer extends React.Component{
     return(
       <div className="outer-map-container">
         <h1 className="map-header">{this.props.heading}</h1>
-        <Map markers={this.props.markers} handleMarkerSelect={this.handleMarkerSelect}/>
-    
+        <Map markers={this.props.map.markers} handleMarkerSelect={this.handleMarkerSelect}/>
+        
         <br/>
       </div>
     )

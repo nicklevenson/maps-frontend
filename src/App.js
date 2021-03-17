@@ -30,7 +30,7 @@ class App extends React.Component {
     if (!sessionStorage.jwt) {
       return <Login heading={'Please login to use this feature'}/> 
     }else {
-      // return <MapContainer markers={this.currentUserMarkers()} heading={"My Map"}/>
+      return <MapContainer map={this.props.selectedMap} heading={"My Map"}/>
     }
   }
 
@@ -39,7 +39,7 @@ class App extends React.Component {
     return (
       <div className="App">
         <Nav/>
-          <Route exact path="/public-map" render={() => <MapContainer markers={this.props.markers} heading={"Public Map"}/> }></Route>
+          <Route exact path="/public-map" render={() => <MapContainer map={this.props.selectedMap} heading={"Public Map"}/> }></Route>
           <Route exact path="/my-map" render={()=>this.isRedirect()}></Route>
           <Route exact path="/login"><Login/></Route>
           <Route exact path="/logout"><Logout/></Route>
@@ -58,7 +58,7 @@ const mapDispatchToProps = (dispatch) => {
 
 const mapStateToProps = (state) => {
   return {
-      maps: state.maps.maps,
+      selectedMap: state.maps.selectedMap,
       currentUser: state.currentUser.currentUser
   }
 }

@@ -6,7 +6,7 @@ import RenderMarker from './RenderMarker.js'
 import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
 import {destroyMarker, likeMarker, unlikeMarker} from '../actions/MarkerActions.js'
 import Login from './Login.js'
-import UserFilter from './UserFilter.js';
+import MapFilter from './MapFilter.js';
 import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
 
 class Map extends React.Component {
@@ -46,7 +46,7 @@ class Map extends React.Component {
             {this.state.newMarkerInfo ? <MarkerForm removeForm={this.removeForm} newMarkerInfo={this.state.newMarkerInfo}/> : null}
            
           </div>
-          {/* <UserFilter/> */}
+          <MapFilter/>
         </>
       )
     }

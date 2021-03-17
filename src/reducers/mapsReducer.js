@@ -1,5 +1,8 @@
 export default function MapsReducer(state={
-  maps: []
+  maps: [],
+  selectedMap: {
+    markers: []
+  }
 }, action) {
   switch(action.type){
     case "ADD_MAP":
