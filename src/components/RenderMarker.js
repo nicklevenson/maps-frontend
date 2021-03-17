@@ -14,6 +14,7 @@ const RenderMarker = (props) => {
         .setPopup(new mapboxgl.Popup({ offset: 25 }) // add popups
         .setHTML(
           `<h3>${props.marker.title}</h3>
+          <i>By: ${props.marker.user.username}</i>
           <textarea>${props.marker.info}</textarea>
           <div class="delete-marker">Delete</div>`
         ))
@@ -30,6 +31,7 @@ const RenderMarker = (props) => {
         .setPopup(new mapboxgl.Popup({ offset: 25 }) // add popups
         .setHTML(
           `<h3>${props.marker.title}</h3>
+          <i>By: ${props.marker.user.username}</i>
           <textarea>${props.marker.info}</textarea>
           ${props.currentUser.likedMarkers.map(m=>m.id).includes(props.marker.id) ? '<div class="like-marker">Remove from My Map</div>' : '<div class="like-marker">Add To My Map</div>'}
           `
@@ -60,6 +62,7 @@ const RenderMarker = (props) => {
         .setPopup(new mapboxgl.Popup({ offset: 25 }) // add popups
         .setHTML(
           `<h3>${props.marker.title}</h3>
+          <i>By: ${props.marker.user.username}</i>
           <textarea>${props.marker.info}</textarea>
           `
         ))
