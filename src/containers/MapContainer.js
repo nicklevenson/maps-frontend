@@ -1,6 +1,7 @@
 import React from 'react'
 
 import Map from '../components/Map.js';
+import NewMarkerContainer from './NewMarkerContainer.js'
 
 class MapContainer extends React.Component{
   state = {
@@ -36,9 +37,11 @@ class MapContainer extends React.Component{
     return(
       <div className="outer-map-container">
         <h1 className="map-header">{this.props.heading}</h1>
-        <Map markers={this.props.map.markers} handleMarkerSelect={this.handleMarkerSelect}/>
+        <NewMarkerContainer/>
+          <Map markers={this.props.map.markers} mapTitle={this.props.map.title} handleMarkerSelect={this.handleMarkerSelect}/>
         
         <br/>
+        
       </div>
     )
   }
