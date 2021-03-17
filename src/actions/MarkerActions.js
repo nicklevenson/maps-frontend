@@ -1,5 +1,5 @@
 import { fetchUser } from "./UserActions"
-import { addMarkerToMap } from './MapActions'
+import { addMarkerToMap, fetchMaps } from './MapActions'
 
 
 export const addMarker = (marker) => ({type: "ADD_MARKER", payload: marker})
@@ -36,6 +36,7 @@ export const createMarker = (marker) => {
     .then(res => res.json())
     .then(json => {
         dispatch(addMarkerToMap(json))
+        dispatch(fetchMaps())
         dispatch(fetchUser())
         
     })
