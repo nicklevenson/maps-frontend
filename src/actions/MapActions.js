@@ -31,13 +31,15 @@ export const createMap = (map) => {
     fetch(`${process.env.REACT_APP_BACKEND_URL}/maps`, configObj)
     .then(res => res.json())
     .then(json => {
-        console.log(json)
-        
+        if (json.id) {
+          dispatch(addMap(json))
+          dispatch(filterMaps(json.title))
+        }else{
+          alert("error creating map")
+        }
     })
-    .catch(function(error) {
-    
+    .catch(function(error) {  
       alert(error)
-    
     })
   }
 }
