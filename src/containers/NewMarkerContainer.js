@@ -8,9 +8,15 @@ class NewMarkerContainer extends React.Component {
     newMarkerInfo: null,
     redirect: false
   }
-
+  componentDidMount() {
+    if (this.props.map) {
+      this.renderNewMarkerForm()
+    }
+  }
   componentDidUpdate() {
-    this.renderNewMarkerForm()
+    if (this.props.map) {
+      this.renderNewMarkerForm()
+    }
   } 
 
 
@@ -122,7 +128,7 @@ class NewMarkerContainer extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-      currentUser: state.currentUser.currentUser
+      currentUser: state.currentUser.currentUser,
   }
 }
 

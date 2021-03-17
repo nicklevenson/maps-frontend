@@ -3,6 +3,7 @@ import { fetchUser } from "./UserActions"
 export const addMaps = (maps) => ({type: "ADD_MAPS", payload: maps})
 export const addMap = (map) => ({type: "ADD_MAP", payload: map})
 export const filterMaps = (mapTitle) => ({type: "FILTER_MAP", payload: mapTitle})
+export const addMarkerToMap = (marker) => ({type: "ADD_MARKER_TO_MAP", payload: marker})
 // export const addMapbox = (mapbox) => ({type: "ADD_MAPBOX", payload: mapbox})
 export const fetchMaps = () => {
   return (dispatch) => {
