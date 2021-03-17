@@ -9,6 +9,7 @@ import NewMarkerContainer from '../containers/NewMarkerContainer.js'
 import Login from './Login.js'
 import MapFilter from './MapFilter.js';
 import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
+import NewMapContainer from '../containers/NewMapContainer.js';
 
 class Map extends React.Component {
   state = {
@@ -25,6 +26,18 @@ class Map extends React.Component {
     this.renderMarkers()
   }
 
+  isUserMap = () => {
+    if (this.props.selectedMap.users) {
+      if(this.props.selectedMap.users.map(u => u.id).includes(this.props.currentUser.id)){
+        return true
+      }else{
+        return false
+      }
+     
+    }else{
+      return false
+    }
+  }
   
   render(){
       return(
@@ -32,7 +45,14 @@ class Map extends React.Component {
           <div className="map-container">
             <div id="map"></div>
           </div>
-          {this.props.currentUser.maps.includes(this.props.selectedMap) ? <NewMarkerContainer map={this.state.map}/> : null}
+          {
+            this.isUserMap() ? 
+            <>
+            <NewMarkerContainer map={this.state.map}/>
+            <NewMapContainer/>
+            </>
+            : null
+          }
           <MapFilter/>
         </>
       )

@@ -1,3 +1,4 @@
+import { fetchUser } from "./UserActions"
 
 export const addMap = (map) => ({type: "ADD_MAP", payload: map})
 export const filterMaps = (mapTitle) => ({type: "FILTER_MAP", payload: mapTitle})
@@ -8,7 +9,6 @@ export const fetchMaps = () => {
     .then(res => res.json())
     .then(maps => {
         maps.forEach(map => dispatch(addMap(map)))
-        
     })
     .catch(function(error) {
       alert("Errors getting maps.")
