@@ -1,3 +1,7 @@
+body {
+  background-color: black;
+}
+
 .App {
   text-align: center;
 }
@@ -27,6 +31,7 @@
 #map {
   width: 100%;
   height: 100%;
+  border-radius: 3px;
 }
 
 .mapboxgl-ctrl-logo,.mapboxgl-ctrl-attrib{
@@ -90,8 +95,8 @@ input[type="text"]{
 }
 .marker {
   cursor: pointer;
-  width: 25px;
-  height: 25px;
+  width: 50px;
+  height: 50px;
   background-size: cover;
   background-color: lightgray;
   border-radius: 100%;

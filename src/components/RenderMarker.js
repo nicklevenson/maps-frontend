@@ -15,14 +15,16 @@ const RenderMarker = (props) => {
         .setHTML(
           `<h3>${props.marker.title}</h3>
           <i>By: ${props.marker.user.username}</i>
+          <br>
+          <i>Coordinates: [${coords}]</i>
           <textarea readonly>${props.marker.info}</textarea>
           <div class="delete-marker">Delete</div>`
         ))
         .addTo(props.map);
   
-        marker._popup._content.children[3].addEventListener('click', function removeMarker() {
+        marker._popup._content.children[5].addEventListener('click', function removeMarker() {
           props.destroyMarker(props.marker)
-          marker._popup._content.children[3].removeEventListener('click', removeMarker)
+          marker._popup._content.children[5].removeEventListener('click', removeMarker)
           
         })
     }else{
@@ -32,20 +34,22 @@ const RenderMarker = (props) => {
         .setHTML(
           `<h3>${props.marker.title}</h3>
           <i>By: ${props.marker.user.username}</i>
+          <br>
+          <i>Coordinates: [${coords}]</i>
           <textarea readonly>${props.marker.info}</textarea>
           ${props.currentUser.likedMarkers.map(m=>m.id).includes(props.marker.id) ? '<div class="like-marker">Remove from My Map</div>' : '<div class="like-marker">Add To My Map</div>'}
           `
         ))
         .addTo(props.map);
        
-        marker._popup._content.children[3].addEventListener('click', function likeMarker() {
+        marker._popup._content.children[5].addEventListener('click', function likeMarker() {
           if (props.currentUser.likedMarkers.map(m=>m.id).includes(props.marker.id)) {
             props.unlikeMarker(props.marker, props.currentUser.id)
           }else{
             props.likeMarker(props.marker, props.currentUser.id)
           }
           
-          marker._popup._content.children[3].removeEventListener('click', likeMarker)
+          marker._popup._content.children[5].removeEventListener('click', likeMarker)
           marker.remove()
           RenderMarker(props)
         })
@@ -63,6 +67,8 @@ const RenderMarker = (props) => {
         .setHTML(
           `<h3>${props.marker.title}</h3>
           <i>By: ${props.marker.user.username}</i>
+          <br>
+          <i>Coordinates: [${coords}]</i>
           <textarea readonly>${props.marker.info}</textarea>
           `
         ))

@@ -68,7 +68,7 @@ class Map extends React.Component {
       container: 'map', // container ID
       style: 'mapbox://styles/nicklevenson/ckm82ay4haed317r1gmlt32as', // style URL
       center: [-77.0353, 38.8895], // starting position [lng, lat]
-      zoom: 0 // starting zoom
+      zoom: 1 // starting zoom
     });
     map.addControl(
       new MapboxGeocoder({
