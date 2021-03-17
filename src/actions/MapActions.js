@@ -16,3 +16,28 @@ export const fetchMaps = () => {
   }
 }
 
+
+export const createMap = (map) => {
+  return (dispatch) => {
+    let configObj = {
+      method: 'POST',
+      headers: {
+          Authorization: `Bearer ${sessionStorage.jwt}`,
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({map: map})
+  }
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/maps`, configObj)
+    .then(res => res.json())
+    .then(json => {
+        console.log(json)
+        
+    })
+    .catch(function(error) {
+    
+      alert(error)
+    
+    })
+  }
+}
