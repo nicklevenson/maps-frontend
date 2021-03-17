@@ -27,12 +27,6 @@ class Map extends React.Component {
 
   
   render(){
-    if (this.state.redirect) {
-      return(
-        <Login heading={'Please login to use this feature'}/>
-      )
-    
-    } else{
       return(
         <>
           <div className="map-container">
@@ -42,7 +36,6 @@ class Map extends React.Component {
           <MapFilter/>
         </>
       )
-    }
   }
 
   

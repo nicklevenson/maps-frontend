@@ -2,9 +2,9 @@ import React from 'react'
 import MarkerForm from '../components/MarkerForm.js'
 import {connect} from 'react-redux'
 import mapboxgl from 'mapbox-gl'
+import Login from '../components/Login.js'
 class NewMarkerContainer extends React.Component {
   state = {
-    map: "",
     newMarkerInfo: null,
     redirect: false
   }
@@ -15,17 +15,23 @@ class NewMarkerContainer extends React.Component {
 
 
   render(){
-    return(
-      <div className="side-bar">
-        {this.state.newMarkerInfo ? <div onClick={this.removeForm}>X</div> : null}
-        {this.state.newMarkerInfo ? <MarkerForm removeForm={this.removeForm} newMarkerInfo={this.state.newMarkerInfo}/> : null}
-        <div id="newMarkerContainer">
-          <h5 style={{margin:"0"}}>New Marker</h5>
-          <div id="newMarker" className="marker" style={{backgroundImage:`url(${this.props.currentUser.image})`}}></div>
+    if (this.state.redirect) {
+      return(
+        <Login heading={'Please login to use this feature'}/>
+      )
+    
+    }else {
+      return(
+        <div className="side-bar">
+          {this.state.newMarkerInfo ? <div onClick={this.removeForm}>X</div> : null}
+          {this.state.newMarkerInfo ? <MarkerForm removeForm={this.removeForm} newMarkerInfo={this.state.newMarkerInfo}/> : null}
+          <div id="newMarkerContainer">
+            <h5 style={{margin:"0"}}>New Marker</h5>
+            <div id="newMarker" className="marker" style={{backgroundImage:`url(${this.props.currentUser.image})`}}></div>
+          </div>
         </div>
-      </div>
-
-    )
+      )
+    }
   }
 
   removeForm = () => {
@@ -85,7 +91,7 @@ class NewMarkerContainer extends React.Component {
                    
           })
         }else{
-          this.setState({redirect: true})
+          document.getElementById("newMarkerContainer").innerHTML = "Please Login"
         }
       })
     }
