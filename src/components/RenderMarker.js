@@ -1,7 +1,13 @@
 import mapboxgl from 'mapbox-gl'
-
+import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
+import {mapboxSdk} from '@mapbox/mapbox-sdk/umd/mapbox-sdk.min.js'
 const RenderMarker = (props) => {
   const coords = [props.marker.lng, props.marker.lat];
+  // let address;
+  // fetch(`https://api.mapbox.com/geocoding/v5/mapbox.places/-73.989,40.733.json?access_token=${process.env.REACT_APP_API_KEY}`)
+  // .then(resp=>resp.json())
+  // .then(json=>(address = json))
+  // console.log(address)
   if (sessionStorage.jwt) {
     
 // create DOM element for the marker
