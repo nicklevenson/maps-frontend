@@ -40,7 +40,7 @@ export const createMap = (map) => {
           dispatch(fetchMaps())
           dispatch(filterMaps(json.title))
         }else{
-          alert("error creating map")
+          alert(json.error)
         }
     })
     .catch(function(error) {  
@@ -68,7 +68,7 @@ export const editMap = (map) => {
           dispatch(fetchMaps())
           dispatch(filterMaps(json.title))
         }else{
-          alert("error creating map")
+          alert(json.error)
         }
     })
     .catch(function(error) {  
