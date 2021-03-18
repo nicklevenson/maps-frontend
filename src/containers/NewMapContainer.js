@@ -1,7 +1,7 @@
 import React from 'react'
 import NewMapForm from '../components/NewMapForm.js'
 import EditMapForm from '../components/EditMapForm.js'
-import Login from '../components/Login.js'
+
 class NewMapContainer extends React.Component {
   state = {
     newMapForm: false,
