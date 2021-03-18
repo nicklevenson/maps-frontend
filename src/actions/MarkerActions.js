@@ -38,7 +38,7 @@ export const createMarker = (marker, mapTitle) => {
     
         dispatch(addMarkerToMap(json))
         // dispatch(filterMaps(mapTitle))
-    
+        dispatch(fetchMaps())
       
     })
     .catch(function(error) {

@@ -2,7 +2,8 @@ import React from 'react'
 import {connect} from 'react-redux'
 import Map from '../components/Map.js';
 import NewMarkerContainer from './NewMarkerContainer.js'
-
+import NewMapContainer from './NewMapContainer.js'
+import MapFilter from '../components/MapFilter'
 class MapContainer extends React.Component{
   state = {
     selectedMarker: {},
@@ -64,7 +65,8 @@ class MapContainer extends React.Component{
           </div> 
           : null}
           <Map markers={this.props.map.markers} mapTitle={this.props.map.title} handleMarkerSelect={this.handleMarkerSelect}/>
-        
+          <NewMapContainer/>
+          <MapFilter/>
         <br/>
         
       </div>

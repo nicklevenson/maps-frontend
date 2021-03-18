@@ -17,7 +17,7 @@ class NewMapForm extends React.Component {
     return(
       <div id="new-map-form">
         <form onSubmit={e=>this.handleSubmit(e)}>
-          <input type="text" placeholder="Map Title" name="title"></input><br/>
+          <input type="text" placeholder="Map Title" name="title" ></input><br/>
           <textarea placeholder="Description" name="description"></textarea><br/>
           <label>Public?</label><input type="checkbox" name="public"/><br/>
           <input type="submit"></input>
