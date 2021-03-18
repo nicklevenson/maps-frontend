@@ -9,7 +9,7 @@ class NewMapContainer extends React.Component {
     if (sessionStorage.jwt) {
       this.setState({newMapForm: true})
     }else{
-      document.getElementById("new-map-heading").innerText = "Please Login First"
+      document.getElementById("new-map-heading").innerHTML = "<a href='/login'>Please Login First</a>"
     }
   }
   removeMapForm = () => {

@@ -1,13 +1,14 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {filterMaps} from '../actions/MapActions.js'
-import { fetchAllUsers } from '../actions/UserActions.js'
+import {filterMaps, fetchMaps} from '../actions/MapActions.js'
+
 class MapFilter extends React.Component {
   
   componentDidMount() {
     // this.props.fetchAllUsers()
     // this.renderUserOptions()
     // this.props.filterMaps("")
+    this.props.fetchMaps()
     this.renderMapOptions()
   }
   
@@ -21,12 +22,12 @@ class MapFilter extends React.Component {
   }
   renderMapOptions = () => {
     if (window.location.pathname === "/my-map"){
-      return this.props.currentUser.maps.map(m=>m.title)
+      return this.props.currentUser.maps.map(m=>m)
     }else{
       // if (this.props.currentUser.username) {
       //   return this.props.maps.filter(m=>m.public === true || this.props.currentUser.maps.map(m=>m.id).includes(m.id)).map(m=>m.title)
       // }else{
-        return this.props.maps.filter(m=>m.public === true).map(m=>m.title)
+        return this.props.maps.filter(m=>m.public === true).map(m=>m)
       // }
       
     }
@@ -41,7 +42,7 @@ class MapFilter extends React.Component {
             <input type="text" list="usersFilter" placeholder="Search for a map"></input>
             <datalist id="usersFilter">
              
-              {this.renderMapOptions().map(m=><option key={m}>{m}</option>)}
+              {this.renderMapOptions().map(m=><option key={m.id}>{m.title}</option>)}
             </datalist>
         </form>
       </div>
@@ -53,7 +54,8 @@ const mapDispatchToProps = (dispatch) => {
   return {
     // filterMarkers: (username) => dispatch(filterMarkers(username)),
     // fetchAllUsers: () => dispatch(fetchAllUsers())
-    filterMaps: (mapTitle) => dispatch(filterMaps(mapTitle))
+    filterMaps: (mapTitle) => dispatch(filterMaps(mapTitle)),
+    fetchMaps: () => dispatch(fetchMaps())
   }
 }
 
