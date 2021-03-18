@@ -1,5 +1,5 @@
 import React from 'react'
-
+import {connect} from 'react-redux'
 import Map from '../components/Map.js';
 import NewMarkerContainer from './NewMarkerContainer.js'
 
@@ -32,6 +32,17 @@ class MapContainer extends React.Component{
     }
 
   }
+  isUserMap = () => {
+    if (this.props.map.users) {
+      if(this.props.map.users.map(u => u.id).includes(this.props.currentUser.id)){
+        return true
+      }else{
+        return false
+      }
+    }else{
+      return false
+    }
+  }
  
   render(){
     return(
@@ -41,6 +52,15 @@ class MapContainer extends React.Component{
           <div className="map-title">
             <h2>{this.props.map.title} by {this.props.map.users.map(u=>u.username)}</h2>
             <i>{this.props.map.description}</i>
+            {
+            this.isUserMap() ? 
+              <div className="edit-map">
+                <br></br>
+                <div>Edit</div><div>Delete</div> 
+              </div>  
+              : 
+              null
+            }
           </div> 
           : null}
           <Map markers={this.props.map.markers} mapTitle={this.props.map.title} handleMarkerSelect={this.handleMarkerSelect}/>
@@ -52,4 +72,16 @@ class MapContainer extends React.Component{
   }
 }
 
-export default MapContainer
+
+const mapStateToProps = (state) => {
+  return {
+      currentUser: state.currentUser.currentUser,
+      selectedMap: state.maps.selectedMap
+  }
+}
+
+
+
+
+
+export default connect(mapStateToProps)(MapContainer)
