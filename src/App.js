@@ -42,8 +42,8 @@ class App extends React.Component {
     return (
       <div className="App">
         <Nav/>
-          <Route exact path="/public-map" render={() => <MapContainer map={this.handlePublicMap()} heading={"Public Maps"}/> }></Route>
-          <Route exact path="/my-map" render={()=>this.isRedirect()}></Route>
+          <Route exact path="/public-maps" render={() => <MapContainer map={this.handlePublicMap()} heading={"Public Maps"}/> }></Route>
+          <Route exact path="/my-maps" render={()=>this.isRedirect()}></Route>
           <Route exact path="/login"><Login/></Route>
           <Route exact path="/logout"><Logout/></Route>
       </div>

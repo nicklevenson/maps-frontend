@@ -20,6 +20,8 @@ class NewMapForm extends React.Component {
           <input type="text" placeholder="Map Title" name="title" ></input><br/>
           <textarea placeholder="Description" name="description"></textarea><br/>
           <label>Public?</label><input type="checkbox" name="public"/><br/>
+          {/* <label>Add a collaborator?</label> */}
+
           <input type="submit"></input>
         </form>
       </div>

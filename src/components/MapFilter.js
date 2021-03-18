@@ -21,7 +21,7 @@ class MapFilter extends React.Component {
     }  
   }
   renderMapOptions = () => {
-    if (window.location.pathname === "/my-map"){
+    if (window.location.pathname === "/my-maps"){
       return this.props.currentUser.maps.map(m=>m)
     }else{
       // if (this.props.currentUser.username) {

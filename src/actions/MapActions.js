@@ -12,6 +12,7 @@ export const fetchMaps = () => {
     .then(res => res.json())
     .then(maps => {
        dispatch(addMaps(maps))
+       
     })
     .catch(function(error) {
       alert("Errors getting maps.")
@@ -39,6 +40,7 @@ export const createMap = (map) => {
           dispatch(fetchUser())
           dispatch(fetchMaps())
           dispatch(filterMaps(json.title))
+          
         }else{
           alert(json.error)
         }
