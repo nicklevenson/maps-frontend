@@ -7,6 +7,7 @@ import MapFilter from '../components/MapFilter'
 class MapContainer extends React.Component{
   state = {
     selectedMarker: {},
+    editMapForm: false
     // filteredMarkers: []
   }
   componentDidMount() {
@@ -44,6 +45,14 @@ class MapContainer extends React.Component{
       return false
     }
   }
+
+  triggerEditForm = () => {
+    this.setState({editMapForm: true})
+  }
+
+  removeEditForm = () => {
+    this.setState({editMapForm: false})
+  }
  
   render(){
     return(
@@ -57,7 +66,7 @@ class MapContainer extends React.Component{
             this.isUserMap() ? 
               <div className="edit-map">
                 <br></br>
-                <div>Edit</div><div>Delete</div> 
+                <div onClick={this.triggerEditForm} className="X">Edit</div>
               </div>  
               : 
               null
@@ -65,7 +74,7 @@ class MapContainer extends React.Component{
           </div> 
           : null}
           <Map markers={this.props.map.markers} mapTitle={this.props.map.title} handleMarkerSelect={this.handleMarkerSelect}/>
-          <NewMapContainer/>
+          <NewMapContainer editMapForm={this.state.editMapForm} removeEditForm={this.removeEditForm}/>
           <MapFilter/>
         <br/>
         

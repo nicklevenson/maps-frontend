@@ -1,9 +1,23 @@
 import React from 'react'
 import NewMapForm from '../components/NewMapForm.js'
+import EditMapForm from '../components/EditMapForm.js'
 import Login from '../components/Login.js'
 class NewMapContainer extends React.Component {
   state = {
-    newMapForm: false
+    newMapForm: false,
+    editMapForm: false
+  }
+
+  componentDidUpdate() {
+    this.triggerState()
+  }
+
+  triggerState = () => {
+    if (this.props.editMapForm && this.state.editMapForm === false) {
+      this.setState({editMapForm: true})
+    }else if (this.props.editMapForm === false && this.state.editMapForm === true){
+      this.setState({editMapForm: false})
+    }
   }
   handleClick = (e) => {
     if (sessionStorage.jwt) {
@@ -18,9 +32,10 @@ class NewMapContainer extends React.Component {
   render() {
       return (
         <div className="new-map-container">
-          {this.state.newMapForm ? <div onClick={e=>this.removeMapForm()} className="X">X</div> : null }
-          <h5 onClick={e=>this.handleClick()} id="new-map-heading">New Map</h5>
+          {this.state.newMapForm || this.state.editMapForm ? <div onClick={e=>{this.removeMapForm(); this.props.removeEditForm()}} className="X">X</div> : null }
+          {this.state.editMapForm ? <h5 onClick={e=>this.handleClick()} id="new-map-heading">Edit Map</h5> : <h5 onClick={e=>this.handleClick()} id="new-map-heading">New Map</h5>}
           {this.state.newMapForm ? <NewMapForm removeMapForm={this.removeMapForm}/> : null}
+          {this.state.editMapForm ? <EditMapForm removeMapForm={this.removeMapForm}/> : null}
         </div>
       )
   }
