@@ -2,7 +2,8 @@ export default function MapsReducer(state={
   // mapbox: null,
   maps: [],
   selectedMap: {
-    markers: []
+    markers: [],
+    users: []
   }
 }, action) {
   switch(action.type){
