@@ -166,6 +166,9 @@ input[type="text"]{
   border-radius: 100%;
   z-index: 10;
 }
+.marker-image {
+  width: 80%;
+}
 .mapboxgl-popup {
   z-index: 20 !important;
   max-width: 25vw !important;

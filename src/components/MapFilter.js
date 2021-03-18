@@ -10,6 +10,7 @@ class MapFilter extends React.Component {
     // this.props.filterMaps("")
     this.props.fetchMaps()
     this.renderMapOptions()
+    
   }
   
 

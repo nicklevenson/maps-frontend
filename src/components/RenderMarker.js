@@ -24,13 +24,14 @@ const RenderMarker = (props) => {
           <br>
           <i>Coordinates: [${coords}]</i>
           <textarea readonly>${props.marker.info}</textarea>
+          ${props.marker.image ? `<image src=${props.marker.image} alt="marker image" class="marker-image"></image>`: `<br>`}
           <div class="delete-marker">Delete</div>`
         ))
         .addTo(props.map);
   
-        marker._popup._content.children[5].addEventListener('click', function removeMarker() {
+        marker._popup._content.children[6].addEventListener('click', function removeMarker() {
           props.destroyMarker(props.marker)
-          marker._popup._content.children[5].removeEventListener('click', removeMarker)
+          marker._popup._content.children[6].removeEventListener('click', removeMarker)
           
         })
     }else{
@@ -44,16 +45,17 @@ const RenderMarker = (props) => {
           <br>
           <i>Coordinates: [${coords}]</i>
           <textarea readonly>${props.marker.info}</textarea>
+          ${props.marker.image ? `<image src=${props.marker.image} alt="marker image class="marker-image"></image>`: `<br>`}
           ${props.currentUser.maps.map(m=>m.markers).flat().map(m=>m.id).includes(props.marker.id) && props.currentUser.maps.map(m=>m.id).includes(props.selectedMap.id) ? '<div class="like-marker">Remove from this Map</div>' : ``}
           ${!(props.currentUser.maps.map(m=>m.id).includes(props.selectedMap.id)) && props.currentUser.maps.length ? '<div class="like-marker">Add To My Map</div>' :``}
           `
         ))
         .addTo(props.map);
        
-        marker._popup._content.children[5].addEventListener('click', function likeMarker() {
+        marker._popup._content.children[6].addEventListener('click', function likeMarker() {
           if (!(props.currentUser.maps.map(m=>m.id).includes(props.selectedMap.id)) && props.currentUser.maps.length){
             const renderForm = () => {
-              marker._popup._content.children[5].removeEventListener('click', likeMarker)
+              marker._popup._content.children[6].removeEventListener('click', likeMarker)
               return(
                 `
                 <div id="add-marker-to-map-container">
@@ -75,7 +77,7 @@ const RenderMarker = (props) => {
           }
          
         
-          // marker._popup._content.children[5].removeEventListener('click', likeMarker)
+          // marker._popup._content.children[6].removeEventListener('click', likeMarker)
           
         })
     }
@@ -95,6 +97,7 @@ const RenderMarker = (props) => {
           <br>
           <i>Coordinates: [${coords}]</i>
           <textarea readonly>${props.marker.info}</textarea>
+          ${props.marker.image ? `<image src=${props.marker.image} alt="marker image" class="marker-image"></image> `: `<br>`}
           `
         ))
         .addTo(props.map);

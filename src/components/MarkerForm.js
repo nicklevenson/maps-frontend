@@ -10,8 +10,10 @@ class MarkerForm extends React.Component {
       let marker = this.props.newMarkerInfo
       marker.title = e.target.title.value
       marker.info = e.target.info.value
+      marker.image = e.target.image.value
       marker.user_id = this.props.currentUser.id
       marker.map_id = this.props.selectedMap.id
+
       this.props.createMarker(marker, this.props.selectedMap.title)
       this.props.removeForm()
       document.getElementById("newMarkerContainer").style.display = "inline-block"
@@ -30,6 +32,8 @@ class MarkerForm extends React.Component {
           <input type="text" name="title" required={true}></input><br/>
           <label>Marker Info</label><br/>
           <textarea name="info" required={true}></textarea><br/>
+          <label>Image Url: </label>
+          <input type="text" name="image"></input><br/>
           <input type="submit"></input>
         </form>
       </div>
