@@ -38,7 +38,7 @@ class MapFilter extends React.Component {
     return(
       <div className="user-filter">
 
-        <form onChange={e=>this.handleChange(e)}>
+        <form onChange={e=>this.handleChange(e)} onSelect={e=>this.handleChange(e)}>
             <input type="text" list="usersFilter" placeholder="Search for a map"></input>
             <input type="reset" id="reset" value="X" onClick={e => this.handleChange(e)}></input>
             <datalist id="usersFilter">

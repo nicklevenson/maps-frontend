@@ -29,11 +29,20 @@ class App extends React.Component {
   }
 
   handlePublicMap = () => {
-    if (this.props.selectedMap.public === true || this.props.currentUser.maps.map(m=>m.id).includes(this.props.selectedMap.id)){
-      return this.props.selectedMap
-    }else{
-      return {markers: []}
+    if (sessionStorage.jwt) {
+      if (this.props.selectedMap.public === true || this.props.currentUser.maps.map(m=>m.id).includes(this.props.selectedMap.id)){
+        return this.props.selectedMap
+      }else{
+        return {markers: []}
+      }
+    }else {
+      if (this.props.selectedMap.public === true){
+        return this.props.selectedMap
+      }else{
+        return {markers: []}
+      }
     }
+  
   }
 
   render(){
