@@ -9,7 +9,7 @@ class EditMapForm extends React.Component {
     const publicMap = e.target.public.checked
     const map = {id: this.props.selectedMap.id, title: title, description: description, public: publicMap, user_id: this.props.currentUser.id}
     this.props.editMap(map)
-    this.props.removeMapForm()
+    this.props.removeEditForm()
   }
 
   render() {

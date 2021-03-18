@@ -35,7 +35,7 @@ class NewMapContainer extends React.Component {
           {this.state.newMapForm || this.state.editMapForm ? <div onClick={e=>{this.removeMapForm(); this.props.removeEditForm()}} className="X">X</div> : null }
           {this.state.editMapForm ? <h5 onClick={e=>this.handleClick()} id="new-map-heading">Edit Map</h5> : <h5 onClick={e=>this.handleClick()} id="new-map-heading">New Map</h5>}
           {this.state.newMapForm ? <NewMapForm removeMapForm={this.removeMapForm}/> : null}
-          {this.state.editMapForm ? <EditMapForm removeMapForm={this.removeMapForm}/> : null}
+          {this.state.editMapForm ? <EditMapForm removeEditForm={this.props.removeEditForm}/> : null}
         </div>
       )
   }
