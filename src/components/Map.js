@@ -96,6 +96,7 @@ class Map extends React.Component {
       handleMarkerSelect: this.props.handleMarkerSelect, 
       destroyMarker: this.props.destroyMarker, 
       currentUser: this.props.currentUser,
+      selectedMap: this.props.selectedMap,
       handleRemoveMarker: this.handleRemoveMarker,
       handleMarkerAdd: this.handleMarkerAdd
     }))
