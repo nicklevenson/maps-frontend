@@ -48,3 +48,31 @@ export const createMap = (map) => {
     })
   }
 }
+export const editMap = (map) => {
+  return (dispatch) => {
+    let configObj = {
+      method: 'PATCH',
+      headers: {
+          Authorization: `Bearer ${sessionStorage.jwt}`,
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({map: map})
+  }
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/maps/${map.id}`, configObj)
+    .then(res => res.json())
+    .then(json => {
+        if (json.id) {
+          dispatch(addMap(json))
+          dispatch(fetchUser())
+          dispatch(fetchMaps())
+          dispatch(filterMaps(json.title))
+        }else{
+          alert("error creating map")
+        }
+    })
+    .catch(function(error) {  
+      alert(error)
+    })
+  }
+}
