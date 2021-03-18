@@ -29,7 +29,7 @@ class NewMarkerContainer extends React.Component {
     }else {
       return(
         <div className="side-bar">
-          {this.state.newMarkerInfo ? <div onClick={this.removeForm}>X</div> : null}
+          {this.state.newMarkerInfo ? <div onClick={this.removeForm} className="X">X</div> : null}
           {this.state.newMarkerInfo ? <MarkerForm removeForm={this.removeForm} newMarkerInfo={this.state.newMarkerInfo}/> : null}
           <div id="newMarkerContainer">
             <h5 style={{margin:"0"}}>New Marker</h5>

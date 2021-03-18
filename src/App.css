@@ -54,7 +54,7 @@ body {
 }
 
 .new-map-container {
-  justify-self: center;
+  justify-self: right;
   align-self: end;
   /* margin-top: 5vh !important; */
   background-color: rgba(187, 183, 207, 0.884);
@@ -71,7 +71,11 @@ body {
 .new-map-container * {
   margin: 5px;
 }
+#new-map-heading:hover, .X{
+  cursor: pointer;
+}
 .side-bar {
+  user-select: none; 
   justify-self: left;
   align-self: end;
   /* margin-top: 5vh !important; */
@@ -88,25 +92,36 @@ body {
 }
 .user-filter {
   display: inline-block;
-  justify-self: right;
+  justify-self: center;
   align-self: end;
   grid-row: 2;
   grid-column: 1;
-  z-index: 50;
+  z-index: 2;
 }
 .user-filter form {
   display: inline-block;
   margin: 20px;
 }
 
-input{
+input {
+  border-radius: 3px;
+  box-shadow: 0px 0px 2px gray;
   text-align: center;
   border: none;
-  width: 200px;
+}
+
+.user-filter input{
+  text-align: center;
+  border: none;
+  width: 500px;
   height: 30px;
   min-width: 200px;
+  max-width: 30vw;
   border-radius: 3px;
-  box-shadow: 0px 0px 5px gray;
+  box-shadow: 0px 0px 3px gray;
+}
+.user-filter:hover {
+  z-index: 50;
 }
 input[type="text"]{
   font-size: 1rem;

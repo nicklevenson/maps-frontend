@@ -18,7 +18,7 @@ class NewMapContainer extends React.Component {
   render() {
       return (
         <div className="new-map-container">
-          {this.state.newMapForm ? <div onClick={e=>this.removeMapForm()}>X</div> : null }
+          {this.state.newMapForm ? <div onClick={e=>this.removeMapForm()} className="X">X</div> : null }
           <h5 onClick={e=>this.handleClick()} id="new-map-heading">New Map</h5>
           {this.state.newMapForm ? <NewMapForm removeMapForm={this.removeMapForm}/> : null}
         </div>
