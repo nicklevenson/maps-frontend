@@ -84,7 +84,7 @@ class Map extends React.Component {
           : null}
           
           {this.isUserMap() ? <NewMarkerContainer map={this.state.map}/> : null}
-          {this.isUserMap() ? <NewMapContainer editMapForm={this.state.editMapForm} removeEditForm={this.removeEditForm}/> : null}
+          <NewMapContainer editMapForm={this.state.editMapForm} removeEditForm={this.removeEditForm}/>
           
         </>
       )

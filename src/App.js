@@ -29,8 +29,7 @@ class App extends React.Component {
   }
 
   handlePublicMap = () => {
-    // if (this.props.selectedMap.public === true || this.props.currentUser.maps.map(m=>m.id).includes(this.props.selectedMap.id))
-    if (this.props.selectedMap.public === true){
+    if (this.props.selectedMap.public === true || this.props.currentUser.maps.map(m=>m.id).includes(this.props.selectedMap.id)){
       return this.props.selectedMap
     }else{
       return {markers: []}

@@ -40,7 +40,7 @@ export const createMap = (map) => {
           dispatch(fetchUser())
           dispatch(fetchMaps())
           dispatch(filterMaps(json.title))
-          
+         
         }else{
           alert(json.error)
         }

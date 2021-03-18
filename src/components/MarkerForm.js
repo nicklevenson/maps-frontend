@@ -15,6 +15,7 @@ class MarkerForm extends React.Component {
       this.props.createMarker(marker, this.props.selectedMap.title)
       this.props.removeForm()
       document.getElementById("newMarkerContainer").style.display = "inline-block"
+      
   }
   
    render() {
