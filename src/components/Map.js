@@ -17,7 +17,9 @@ class Map extends React.Component {
   state = {
     map: "",
     newMarkerInfo: null,
-    redirect: false
+    editMapForm: false,
+    redirect: false,
+ 
   }
 
   componentDidMount() {
@@ -39,6 +41,25 @@ class Map extends React.Component {
       return false
     }
   }
+  isUserMapEditable = () => {
+    if (this.props.selectedMap.users) {
+      if(this.props.selectedMap.users[0].id === this.props.currentUser.id){
+        return true
+      }else{
+        return false
+      }
+    }else{
+      return false
+    }
+  }
+
+  triggerEditForm = () => {
+    this.setState({editMapForm: true})
+  }
+
+  removeEditForm = () => {
+    this.setState({editMapForm: false})
+  }
   
   render(){
       return(
@@ -46,7 +67,24 @@ class Map extends React.Component {
           <div className="map-container">
             <div id="map"></div>
           </div>
+          {this.props.selectedMap.users ? 
+          <div className="map-title">
+            <h2>{this.props.selectedMap.title} by {this.props.selectedMap.users.map(u=>u.username)}</h2>
+            <i>{this.props.selectedMap.description}</i>
+            {
+            this.isUserMapEditable() ? 
+              <div className="edit-map">
+                <br></br>
+                <div onClick={this.triggerEditForm} className="X"><h6 style={{margin: "0"}}>Edit</h6></div>
+              </div>  
+              : 
+              null
+            }
+          </div> 
+          : null}
+          
           {this.isUserMap() ? <NewMarkerContainer map={this.state.map}/> : null}
+          {this.isUserMap() ? <NewMapContainer editMapForm={this.state.editMapForm} removeEditForm={this.removeEditForm}/> : null}
           
         </>
       )

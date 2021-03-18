@@ -6,8 +6,7 @@ import NewMapContainer from './NewMapContainer.js'
 import MapFilter from '../components/MapFilter'
 class MapContainer extends React.Component{
   state = {
-    selectedMarker: {},
-    editMapForm: false
+    selectedMarker: {}
     // filteredMarkers: []
   }
   componentDidMount() {
@@ -34,47 +33,13 @@ class MapContainer extends React.Component{
     }
 
   }
-  isUserMapEditable = () => {
-    if (this.props.map.users) {
-      if(this.props.map.users[0].id === this.props.currentUser.id){
-        return true
-      }else{
-        return false
-      }
-    }else{
-      return false
-    }
-  }
 
-  triggerEditForm = () => {
-    this.setState({editMapForm: true})
-  }
-
-  removeEditForm = () => {
-    this.setState({editMapForm: false})
-  }
- 
   render(){
     return(
       <div className="outer-map-container">
         <h2 className="map-header">{this.props.heading}</h2>
-        {this.props.map.users ? 
-          <div className="map-title">
-            <h2>{this.props.map.title} by {this.props.map.users.map(u=>u.username)}</h2>
-            <i>{this.props.map.description}</i>
-            {
-            this.isUserMapEditable() ? 
-              <div className="edit-map">
-                <br></br>
-                <div onClick={this.triggerEditForm} className="X"><h6 style={{margin: "0"}}>Edit</h6></div>
-              </div>  
-              : 
-              null
-            }
-          </div> 
-          : null}
+
           <Map markers={this.props.map.markers} mapTitle={this.props.map.title} handleMarkerSelect={this.handleMarkerSelect}/>
-          <NewMapContainer editMapForm={this.state.editMapForm} removeEditForm={this.removeEditForm}/>
           <MapFilter/>
         <br/>
         
