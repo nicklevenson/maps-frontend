@@ -40,7 +40,7 @@ class MapFilter extends React.Component {
 
         <form onChange={e=>this.handleChange(e)}>
             <input type="text" list="usersFilter" placeholder="Search for a map"></input>
-            <input type="reset" id="reset" value="X"></input>
+            <input type="reset" id="reset" value="X" onClick={e => this.handleChange(e)}></input>
             <datalist id="usersFilter">
               {this.renderMapOptions().map(m=><option key={m.id}>{m.title}</option>)}
             </datalist>
