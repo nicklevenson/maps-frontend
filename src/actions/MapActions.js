@@ -76,3 +76,30 @@ export const editMap = (map) => {
     })
   }
 }
+
+export const deleteMap = (map) => {
+  return (dispatch) => {
+    let configObj = {
+      method: 'DELETE',
+      headers: {
+          Authorization: `Bearer ${sessionStorage.jwt}`,
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+      }
+  }
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/maps/${map.id}`, configObj)
+    .then(res => res.json())
+    .then(json => {
+        if (json.message) {
+          dispatch(fetchUser())
+          dispatch(fetchMaps())
+          dispatch(filterMaps(""))
+        }else{
+          alert("Error deleting map")
+        }
+    })
+    .catch(function(error) {  
+      alert("Error deleting map")
+    })
+  }
+}

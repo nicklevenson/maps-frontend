@@ -34,9 +34,9 @@ class MapContainer extends React.Component{
     }
 
   }
-  isUserMap = () => {
+  isUserMapEditable = () => {
     if (this.props.map.users) {
-      if(this.props.map.users.map(u => u.id).includes(this.props.currentUser.id)){
+      if(this.props.map.users[0].id === this.props.currentUser.id){
         return true
       }else{
         return false
@@ -63,10 +63,10 @@ class MapContainer extends React.Component{
             <h2>{this.props.map.title} by {this.props.map.users.map(u=>u.username)}</h2>
             <i>{this.props.map.description}</i>
             {
-            this.isUserMap() ? 
+            this.isUserMapEditable() ? 
               <div className="edit-map">
                 <br></br>
-                <div onClick={this.triggerEditForm} className="X">Edit</div>
+                <div onClick={this.triggerEditForm} className="X"><h6 style={{margin: "0"}}>Edit</h6></div>
               </div>  
               : 
               null

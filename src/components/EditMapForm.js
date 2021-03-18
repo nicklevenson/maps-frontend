@@ -1,5 +1,5 @@
 import React from 'react'
-import {editMap} from '../actions/MapActions.js'
+import {editMap, deleteMap} from '../actions/MapActions.js'
 import {connect} from 'react-redux'
 class EditMapForm extends React.Component {
   handleSubmit = (e) => {
@@ -12,6 +12,12 @@ class EditMapForm extends React.Component {
     this.props.removeEditForm()
   }
 
+  deleteMap = () => {
+    this.props.deleteMap(this.props.selectedMap)
+    this.props.removeEditForm()
+    alert("Map Deleted")
+  }
+
   render() {
     return(
       <div id="new-map-form">
@@ -21,6 +27,7 @@ class EditMapForm extends React.Component {
           <label>Public?</label><input type="checkbox" name="public" defaultChecked={this.props.selectedMap.public}/><br/>
           <input type="submit"></input>
         </form>
+        <div style={{width:"min-content"}} className="X" onClick={e=>this.deleteMap()}><h6>Delete Map</h6></div>
       </div>
     )
   }
@@ -28,7 +35,8 @@ class EditMapForm extends React.Component {
 const mapDispatchToProps = (dispatch) => {
   return {
     // createMap: (map) => dispatch(createMap(map))
-    editMap: (map) => dispatch(editMap(map))
+    editMap: (map) => dispatch(editMap(map)),
+    deleteMap: (map) => dispatch(deleteMap(map))
   }
 }
 
