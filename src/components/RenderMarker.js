@@ -47,7 +47,7 @@ const RenderMarker = (props) => {
           <textarea readonly>${props.marker.info}</textarea>
           ${props.marker.image ? `<image src=${props.marker.image} alt="marker image class="marker-image"></image>`: `<br>`}
           ${props.currentUser.maps.map(m=>m.markers).flat().map(m=>m.id).includes(props.marker.id) && props.currentUser.maps.map(m=>m.id).includes(props.selectedMap.id) ? '<div class="like-marker">Remove from this Map</div>' : ``}
-          ${!(props.currentUser.maps.map(m=>m.id).includes(props.selectedMap.id)) && props.currentUser.maps.length ? '<div class="like-marker">Add To My Map</div>' :``}
+          ${!(props.currentUser.maps.map(m=>m.id).includes(props.selectedMap.id)) && props.currentUser.maps.length ? '<div class="like-marker">Add To A Map</div>' :``}
           `
         ))
         .addTo(props.map);

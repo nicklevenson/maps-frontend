@@ -22,14 +22,11 @@ class Login extends React.Component {
   render(){
     return(
       <div className="login-page">
-        <h2>Please Login/Signup with one of the folllowing providers</h2>
+        <h2>Please Login/Signup</h2>
         {this.props.heading ? <h5><i>{this.props.heading}</i></h5>: null}
         <a href={`${process.env.REACT_APP_BACKEND_URL}/authenticate`}><img src={googleLogin} alt="Login with Google"/></a>
         <a href={`${process.env.REACT_APP_BACKEND_URL}/authenticate-facebook`}><img src={facebookLogin} alt="Login with Facebook"></img></a>
         {sessionStorage.jwt ? <Redirect to="my-maps" /> : null}
-
-        
-       
       </div>
     )
   }
