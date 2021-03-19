@@ -14,10 +14,10 @@ body {
 .outer-map-container {
   margin: auto;
   display: grid;
-  grid-template-columns: 2fr;
+  grid-template-columns: 2fr min-content;
   grid-template-rows: min-content 70vh;
   height: min-content;
-  width: 90vw;
+  width: 95vw;
 }
 .map-header {
   grid-column-start: 1;
@@ -28,7 +28,7 @@ body {
 .map-container {
   grid-row: 2;
   grid-column-start: 1;
-  grid-column-end: 3;
+  grid-column-end: 2;
 }
 
 .map-title {
@@ -38,7 +38,7 @@ body {
   align-self: start;
   grid-row: 1;
   grid-column-start: 1;
-  grid-column-end: 3;
+  grid-column-end: 2;
   z-index: 50;
   background-color: rgba(235, 233, 243, 0.884);
   border-radius: 5px;
@@ -90,21 +90,69 @@ body {
 .side-bar {
   justify-self: left;
 }
-
+/* 
 .user-filter {
+  padding: 0 2% 0 2%;
   display: inline-block;
   justify-self: center;
-  align-self: end;
-  grid-row: 2;
-  grid-column: 1;
+  align-self: start;
+  grid-row-start: 1;
+  grid-row-end: 3;
+  grid-column: 2;
   z-index: 2;
+  min-width: 100px;
+  width: 20vw;
+  overflow-y: scroll;
+  height: 80vh;
+} */
+.maps-list-header{
+  align-self: flex-end;
+  grid-column: 2;
+  grid-row: 1;
+}
+.maps-list {
+  min-width: 100px;
+  width: 20vw;
+
+  padding: 2%;
+  display: inline-block !important;
+  grid-column: 2;
+  grid-row: 2;
+  height: 100%;
+  overflow-y: scroll;
+}
+
+.map-card {
+  margin: 2%;
+  cursor: pointer;
 }
 .user-filter form {
   display: grid;
-  margin: 20px;
+  margin: 0 10px 0 10px;
   grid-template-rows: 1;
   grid-template-columns: 1;
   
+}
+.user-filter input{
+  text-align: center;
+  border: none;
+  width: 20vw;
+  height: 40px;
+  border-radius: 3px;
+  box-shadow: 0px 0px 3px gray;
+  grid-row: 1;
+  grid-column: 1;
+}
+#reset {
+  background-color: transparent;
+  justify-self: right;
+  width: 20px !important;
+  min-width: 20px !important;
+  box-shadow: none;
+}
+
+.user-filter:hover {
+  z-index: 50;
 }
 
 input {
@@ -117,30 +165,9 @@ input::-webkit-calendar-picker-indicator {
 	display: none;
 }
 
-.user-filter input{
-  text-align: center;
-  border: none;
-  width: 500px;
-  height: 40px;
-  min-width: 200px;
-  max-width: 30vw;
-  border-radius: 3px;
-  box-shadow: 0px 0px 3px gray;
-  grid-row: 1;
-  grid-column: 1;
-}
-.user-filter:hover {
-  z-index: 50;
-}
+
 input[type="text"]{
   font-size: 1rem;
-}
-#reset {
-  background-color: transparent;
-  justify-self: right;
-  width: 20px !important;
-  min-width: 20px !important;
-  box-shadow: none;
 }
 
 #newMarkerContainer {

@@ -1,7 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {filterMaps, fetchMaps} from '../actions/MapActions.js'
-
+import { Card } from 'semantic-ui-react'
 class MapFilter extends React.Component {
   
   componentDidMount() {
@@ -14,11 +14,12 @@ class MapFilter extends React.Component {
   }
   
 
-  handleChange = (e) => {
-    if (e.target.value === ""){
+  handleChange = (e, title) => {
+    
+    if (title === ""){
       this.props.filterMaps("")
     }else{
-      this.props.filterMaps(e.target.value)
+      this.props.filterMaps(title)
     }  
   }
   renderMapOptions = () => {
@@ -37,16 +38,30 @@ class MapFilter extends React.Component {
 
   render(){
     return(
-      <div className="user-filter">
+      <>
 
-        <form onChange={e=>this.handleChange(e)} onSelect={e=>this.handleChange(e)}>
+        {/* <form onChange={e=>this.handleChange(e)} onSelect={e=>this.handleChange(e)}>
             <input type="text" list="usersFilter" placeholder="Search for a Map"></input>
             <input type="reset" id="reset" value="X" onClick={e => this.handleChange(e)}></input>
             <datalist id="usersFilter">
               {this.renderMapOptions().map(m=><option key={m.id}>{m.title}</option>)}
             </datalist>
-        </form>
-      </div>
+            
+        </form> */}
+        <h2 className="maps-list-header">Maps</h2>
+        <div className="maps-list">
+        <Card >
+          {this.renderMapOptions().map(map => {
+            return (
+              <Card.Content onClick={e => this.handleChange(e, map.title)} className="map-card">
+                <Card.Header name="title">{map.title}</Card.Header>
+                <Card.Description>{map.description.substr(0,30)}</Card.Description>
+              </Card.Content>
+            )
+          })}
+        </Card>
+        </div>
+      </>
     )
   }
 }
