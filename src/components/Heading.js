@@ -4,8 +4,8 @@ const Heading = (props) => {
   return(
     <div>
       
-        <Header as='h1' icon textAlign='center'>
-          Map Mate
+        <Header as='h1' icon textAlign='center' className="brand">
+          <i>Map Mate</i>
         </Header>
         
     </div>

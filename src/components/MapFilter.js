@@ -49,15 +49,19 @@ class MapFilter extends React.Component {
             
         </form> */}
         
-        <h2 className="maps-list-header">Maps</h2>
+        <div className="maps-list-header">
+          <h3>Maps</h3>
+          {/* <input type="text" placeholder="Search"></input> */}
+        </div>
+
         <div className="maps-list">
         <Card className="maps-list-card">
           {this.renderMapOptions().map(map => {
             return (
               <Card.Content onClick={e => this.handleChange(e, map.title)} className="map-card" 
-              style={this.props.selectedMap.title === map.title ? {backgroundColor: "lightgray"} : null}>
+              style={this.props.selectedMap.title === map.title ? {backgroundColor: "rgba(235, 233, 243, 0.849)"} : null}>
                 <Card.Header name="title">{map.title}</Card.Header>
-                <Card.Description>{map.description.substr(0,30)}</Card.Description>
+                <Card.Description>{map.description.substr(0,10)}</Card.Description>
               </Card.Content>
             )
           })}

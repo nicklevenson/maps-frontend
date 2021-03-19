@@ -8,11 +8,11 @@ export default class Nav extends React.Component {
   render() {
     const { activeItem } = this.state
     return(
-      <div className="ui center aligned container">
+      <div className="ui middle aligned container nav">
         
         <Menu secondary compact>   
           {this.props.currentUser.image ? <Image circular src={this.props.currentUser.image} style={{height: "50px"}}/> : null }
-         <Menu.Menu> 
+         <Menu.Menu > 
           <Menu.Item
             name='public-maps'
             active={activeItem === 'public-maps'}

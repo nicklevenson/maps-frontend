@@ -1,5 +1,5 @@
 body {
-  /* background-color: black; */
+  background-color: rgba(247, 247, 247, 0.664) !important;
 }
 
 .App {
@@ -11,6 +11,10 @@ body {
   outline: none !important;
 }
 
+
+.brand {
+  letter-spacing: 5px;
+}
 .outer-map-container {
   margin: auto;
   display: grid;
@@ -18,6 +22,7 @@ body {
   grid-template-rows: min-content 70vh;
   height: min-content;
   width: 95vw;
+  /* background-color: rgba(235, 233, 243, 0.884); */
 }
 .map-header {
   grid-column-start: 1;
@@ -36,13 +41,14 @@ body {
   padding: 1%;
   justify-self: center;
   align-self: start;
-  grid-row: 1;
+  grid-row: 2;
   grid-column-start: 1;
   grid-column-end: 2;
   z-index: 50;
   background-color: rgba(235, 233, 243, 0.884);
   border-radius: 5px;
-  width: 100%;
+  width: 30vw;
+  min-width: min-content;
   height: min-content;
   
 }
@@ -109,20 +115,24 @@ body {
   align-self: flex-end;
   grid-column: 2;
   grid-row: 1;
-  width: 20vw;
-
+  width: 15vw;
+  min-width: 100px;
 }
 .maps-list {
   padding: 3%;
+  width: 15vw;
+  min-width: 100px;
+  grid-column: 2;
+  grid-row: 2;
 }
 .maps-list-card {
-  min-width: 100px;
+  
   width: 100% !important;
 
   display: inline-block !important;
-  grid-column: 2;
-  grid-row: 2;
-  height: 100%;
+ 
+  height: min-content;
+  max-height: 100%;
   overflow-y: scroll;
 }
 
