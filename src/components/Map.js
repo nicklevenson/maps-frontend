@@ -70,7 +70,7 @@ class Map extends React.Component {
           {this.props.selectedMap.users ? 
           <div className="map-title">
             <h3>{this.props.selectedMap.title}</h3> 
-            {this.props.selectedMap.users.map(u => <Image className="very-tiny" circular src={u.image}></Image>)}
+            {this.props.selectedMap.users.map(u => <Image className="very-tiny" circular src={u.image}></Image>)}<br/>
             {this.props.selectedMap.description ? <textarea readOnly>{this.props.selectedMap.description}</textarea> : null }
             {
             this.isUserMapEditable() ? 

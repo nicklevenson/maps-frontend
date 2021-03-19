@@ -45,8 +45,8 @@ const RenderMarker = (props) => {
           <br>
           <i>Coordinates: [${coords}]</i>
           <textarea readonly>${props.marker.info}</textarea>
-          ${props.marker.image ? `<image src=${props.marker.image} alt="marker image class="marker-image"></image>`: `<br>`}
-          ${props.currentUser.maps.map(m=>m.markers).flat().map(m=>m.id).includes(props.marker.id) && props.currentUser.maps.map(m=>m.id).includes(props.selectedMap.id) ? '<div class="like-marker">Remove from this Map</div>' : ``}
+          ${props.marker.image ? `<image src=${props.marker.image} alt="marker image" class="marker-image"></image>`: `<br>`}
+          ${props.currentUser.maps.map(m=>m.markers).flat().map(m=>m.id).includes(props.marker.id) && props.selectedMap.users[0].id === props.currentUser.id ? '<div class="like-marker">Remove from this Map</div>' : ``}
           ${!(props.currentUser.maps.map(m=>m.id).includes(props.selectedMap.id)) && props.currentUser.maps.length ? '<div class="like-marker">Add To A Map</div>' :``}
           `
         ))
@@ -72,7 +72,7 @@ const RenderMarker = (props) => {
             }
             marker._popup._content.innerHTML += renderForm()
             document.getElementById("add-marker-to-map-form").addEventListener("submit", e=>props.handleMarkerAdd(e, props.marker.id))
-          }else if(props.currentUser.maps.map(m=>m.markers).flat().map(m=>m.id).includes(props.marker.id) && props.currentUser.maps.map(m=>m.id).includes(props.selectedMap.id)){
+          }else if(props.currentUser.maps.map(m=>m.markers).flat().map(m=>m.id).includes(props.marker.id) && props.selectedMap.users[0].id === props.currentUser.id){
             props.handleRemoveMarker(props.marker)
           }
          

@@ -229,7 +229,8 @@ input[type="text"]{
 textarea {
   border: none;
   background-color: transparent;
-  height: 10vh !important;
+  height: max-content;
+  min-height: 70px;
   width: 100vw !important;
   max-width: 300px;
 }
