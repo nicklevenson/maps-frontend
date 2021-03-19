@@ -27,7 +27,7 @@ class MarkerForm extends React.Component {
       <div id="newMarkerForm">
         
         <h3>New Marker</h3>
-        <Form onSubmit={e=>this.handleSubmit(e)}>
+        <Form onSubmit={e=>this.handleSubmit(e)}  autocomplete="off">
           <Form.Field>
             <label>Marker Title</label>
             <input type="text" name="title" required={true}></input>

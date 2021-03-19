@@ -69,7 +69,7 @@ class Map extends React.Component {
           </div>
           {this.props.selectedMap.users ? 
           <div className="map-title">
-            <h3>{this.props.selectedMap.title} by {this.props.selectedMap.users.map(u=>u.username)}</h3>
+            <h3>{this.props.selectedMap.title} by {this.props.selectedMap.users.map(u=><>{u.username} <br/></>)}</h3>
             {this.props.selectedMap.description ? <i>{this.props.selectedMap.description}</i> : null }
             {
             this.isUserMapEditable() ? 
