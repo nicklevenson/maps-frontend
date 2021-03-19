@@ -14,7 +14,7 @@ body {
   margin: auto;
   display: grid;
   grid-template-columns: 2fr;
-  grid-template-rows: min-content 2fr;
+  grid-template-rows: 10vh 2fr;
   height: 80vh;
   width: 90vw;
 }
@@ -31,7 +31,7 @@ body {
 }
 
 .map-title {
-  margin: 1%;
+  /* margin: 1%; */
   padding: 1%;
   justify-self: center;
   align-self: start;
@@ -39,12 +39,14 @@ body {
   grid-column-start: 1;
   grid-column-end: 3;
   z-index: 50;
-  background-color: rgba(187, 183, 207, 0.884);
+  background-color: rgba(235, 233, 243, 0.884);
   border-radius: 5px;
-  min-width: 200px;
+  width: 100%;
+  overflow-y: scroll;
+  height: 100%;
 }
 
-.map-title h2 {
+.map-title h3{
   margin: 0;
 }
 
