@@ -3,7 +3,7 @@ import React from 'react'
 import {Route} from "react-router-dom";
 import MapContainer from './containers/MapContainer.js';
 import { fetchMaps} from './actions/MapActions.js';
-import {fetchUser} from './actions/UserActions.js'
+import {fetchUser, fetchAllUsers} from './actions/UserActions.js'
 import {connect} from 'react-redux'  
 import Nav from './components/Nav.js'
 import Login from './components/Login.js'
@@ -11,11 +11,10 @@ import Logout from './components/Logout.js'
 import Heading from './components/Heading';
 
 class App extends React.Component {
-  state = {
-    filteredMarkers: []
-  }
+
   componentDidMount() {
     this.props.fetchMaps()
+    this.props.fetchAllUsers()
     if (sessionStorage.jwt) {
       this.props.fetchUser()
     }
@@ -64,7 +63,8 @@ class App extends React.Component {
 const mapDispatchToProps = (dispatch) => {
   return {
     fetchMaps: () => dispatch(fetchMaps()),
-    fetchUser: () => dispatch(fetchUser())
+    fetchUser: () => dispatch(fetchUser()),
+    fetchAllUsers: () => dispatch(fetchAllUsers())
   }
 }
 

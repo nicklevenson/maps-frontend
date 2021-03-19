@@ -121,7 +121,7 @@ input::-webkit-calendar-picker-indicator {
   text-align: center;
   border: none;
   width: 500px;
-  height: 30px;
+  height: 40px;
   min-width: 200px;
   max-width: 30vw;
   border-radius: 3px;

@@ -22,7 +22,7 @@ class Login extends React.Component {
   }
   render(){
     return(
-      <div className="login-page" style={{width: "300px", height: "50vh",margin: "auto", marginTop: "20vh"}}>
+      <div className="login-page" style={{width: "300px", height: "50vh",margin: "auto", marginTop: "10vh"}}>
         <Card fluid>
           <br></br>
           <Card.Header><h2>Please Login/Signup</h2></Card.Header>
