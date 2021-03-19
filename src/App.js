@@ -1,6 +1,6 @@
 import './App.css';
 import React from 'react'
-import {Route} from "react-router-dom";
+import {Route, Redirect} from "react-router-dom";
 import MapContainer from './containers/MapContainer.js';
 import { fetchMaps} from './actions/MapActions.js';
 import {fetchUser, fetchAllUsers} from './actions/UserActions.js'
@@ -13,11 +13,17 @@ import Heading from './components/Heading';
 class App extends React.Component {
 
   componentDidMount() {
-    this.props.fetchMaps()
-    this.props.fetchAllUsers()
-    if (sessionStorage.jwt) {
-      this.props.fetchUser()
+    if (window.location.pathname === "/") {
+      window.location.pathname = '/public-maps'
+    }else{
+      this.props.fetchMaps()
+      this.props.fetchAllUsers()
+      if (sessionStorage.jwt) {
+        this.props.fetchUser()
+      }
     }
+ 
+   
   }
 
   isRedirect = () => {
@@ -46,11 +52,12 @@ class App extends React.Component {
   }
 
   render(){
-
+  
     return (
       <div className="App">
         <Heading />
         <Nav currentUser={this.props.currentUser}/>
+          
           <Route exact path="/public-maps" render={() => <MapContainer map={this.handlePublicMap()} heading={"Public Maps"}/> }></Route>
           <Route exact path="/my-maps" render={()=>this.isRedirect()}></Route>
           <Route exact path="/login"><Login/></Route>
