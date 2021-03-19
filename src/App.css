@@ -109,12 +109,16 @@ body {
   align-self: flex-end;
   grid-column: 2;
   grid-row: 1;
-}
-.maps-list {
-  min-width: 100px;
   width: 20vw;
 
-  padding: 2%;
+}
+.maps-list {
+  padding: 3%;
+}
+.maps-list-card {
+  min-width: 100px;
+  width: 100% !important;
+
   display: inline-block !important;
   grid-column: 2;
   grid-row: 2;
@@ -123,6 +127,7 @@ body {
 }
 
 .map-card {
+  width: 100%;
   margin: 2%;
   cursor: pointer;
 }
