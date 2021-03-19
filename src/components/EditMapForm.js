@@ -1,5 +1,6 @@
 import React from 'react'
 import {editMap, deleteMap} from '../actions/MapActions.js'
+import { Form, Button } from 'semantic-ui-react'
 import {connect} from 'react-redux'
 class EditMapForm extends React.Component {
   handleSubmit = (e) => {
@@ -21,13 +22,22 @@ class EditMapForm extends React.Component {
   render() {
     return(
       <div id="new-map-form">
-        <form onSubmit={e=>this.handleSubmit(e)}>
-          <input type="text" placeholder="Map Title" name="title" defaultValue={this.props.selectedMap.title}></input><br/>
-          <textarea placeholder="Description" name="description" defaultValue={this.props.selectedMap.description}></textarea><br/>
-          <label>Public?</label><input type="checkbox" name="public" defaultChecked={this.props.selectedMap.public}/><br/>
-          <input type="submit"></input>
-        </form>
-        <div style={{width:"min-content"}} className="X" onClick={e=>this.deleteMap()}><h6>Delete Map</h6></div>
+           <Form onSubmit={e=>this.handleSubmit(e)}>
+          <Form.Field>
+            <input type="text" placeholder="Map Title" name="title" defaultValue={this.props.selectedMap.title}></input>
+          </Form.Field>
+          <Form.Field>
+            <textarea placeholder="Description" name="description" defaultValue={this.props.selectedMap.description}></textarea>
+          </Form.Field>
+          <Form.Field>
+            <label>Public?</label><input type="checkbox" name="public" defaultChecked={this.props.selectedMap.public}/><br/>
+          </Form.Field>
+          {/* <label>Add a collaborator?</label> */}
+          <Form.Field control={Button}>
+           Update
+          </Form.Field>
+        </Form>
+        <div style={{width:"max-content"}} className="X" onClick={e=>this.deleteMap()}><h6>Delete Map</h6></div>
       </div>
     )
   }
