@@ -1,5 +1,5 @@
 import React from 'react'
-import NewMapContainer from '../containers/NewMapContainer'
+import { Form, Button } from 'semantic-ui-react'
 import {createMap} from '../actions/MapActions.js'
 import {connect} from 'react-redux'
 class NewMapForm extends React.Component {
@@ -16,14 +16,21 @@ class NewMapForm extends React.Component {
   render() {
     return(
       <div id="new-map-form">
-        <form onSubmit={e=>this.handleSubmit(e)}>
-          <input type="text" placeholder="Map Title" name="title" ></input><br/>
-          <textarea placeholder="Description" name="description"></textarea><br/>
-          <label>Public?</label><input type="checkbox" name="public"/><br/>
+        <Form onSubmit={e=>this.handleSubmit(e)}>
+          <Form.Field>
+            <input type="text" placeholder="Map Title" name="title" ></input>
+          </Form.Field>
+          <Form.Field>
+            <textarea placeholder="Description" name="description"></textarea>
+          </Form.Field>
+          <Form.Field>
+            <label>Public?</label><input type="checkbox" name="public"/><br/>
+          </Form.Field>
           {/* <label>Add a collaborator?</label> */}
-
-          <input type="submit"></input>
-        </form>
+          <Form.Field control={Button}>
+           Create
+          </Form.Field>
+        </Form>
       </div>
     )
   }

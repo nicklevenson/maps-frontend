@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import {NavLink} from 'react-router-dom'
-import { Menu, Segment } from 'semantic-ui-react'
+import { Menu, Image} from 'semantic-ui-react'
 export default class Nav extends React.Component {
 
   state = { activeItem: 'home' }
@@ -9,8 +9,9 @@ export default class Nav extends React.Component {
     const { activeItem } = this.state
     return(
       <div className="ui center aligned container">
+        
         <Menu secondary compact>   
-       
+          {this.props.currentUser.image ? <Image circular src={this.props.currentUser.image} style={{height: "50px"}}/> : null }
          <Menu.Menu> 
           <Menu.Item
             name='public-maps'

@@ -70,7 +70,7 @@ class Map extends React.Component {
           {this.props.selectedMap.users ? 
           <div className="map-title">
             <h3>{this.props.selectedMap.title} by {this.props.selectedMap.users.map(u=>u.username)}</h3>
-            <i>{this.props.selectedMap.description}</i>
+            {this.props.selectedMap.description ? <i>{this.props.selectedMap.description}</i> : null }
             {
             this.isUserMapEditable() ? 
               <div className="edit-map">
@@ -82,7 +82,7 @@ class Map extends React.Component {
           </div> 
           : 
           <div className="map-title">
-            <h2>Search for Maps or Make One!</h2>
+            <h3>Search for Maps or Make One!</h3>
           </div>}
           
           {this.isUserMap() ? <NewMarkerContainer map={this.state.map}/> : null}

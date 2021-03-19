@@ -14,8 +14,8 @@ body {
   margin: auto;
   display: grid;
   grid-template-columns: 2fr;
-  grid-template-rows: 10vh 2fr;
-  height: 80vh;
+  grid-template-rows: min-content 70vh;
+  height: min-content;
   width: 90vw;
 }
 .map-header {
@@ -31,7 +31,7 @@ body {
 }
 
 .map-title {
-  /* margin: 1%; */
+  margin: 1%;
   padding: 1%;
   justify-self: center;
   align-self: start;
@@ -42,11 +42,12 @@ body {
   background-color: rgba(235, 233, 243, 0.884);
   border-radius: 5px;
   width: 100%;
-  overflow-y: scroll;
-  height: 100%;
+  height: min-content;
+  
 }
 
 .map-title h3{
+  font-size: 2vh;
   margin: 0;
 }
 

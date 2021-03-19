@@ -8,6 +8,7 @@ import {connect} from 'react-redux'
 import Nav from './components/Nav.js'
 import Login from './components/Login.js'
 import Logout from './components/Logout.js'
+import Heading from './components/Heading';
 
 class App extends React.Component {
   state = {
@@ -49,8 +50,8 @@ class App extends React.Component {
 
     return (
       <div className="App">
-        <h1>Map Mate</h1>
-        <Nav/>
+        <Heading />
+        <Nav currentUser={this.props.currentUser}/>
           <Route exact path="/public-maps" render={() => <MapContainer map={this.handlePublicMap()} heading={"Public Maps"}/> }></Route>
           <Route exact path="/my-maps" render={()=>this.isRedirect()}></Route>
           <Route exact path="/login"><Login/></Route>
