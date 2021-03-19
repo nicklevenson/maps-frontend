@@ -1,7 +1,7 @@
 import React from 'react'
 import {createMarker} from '../actions/MarkerActions.js'
 import {connect} from 'react-redux'
-
+import { Form, Button } from 'semantic-ui-react'
 
 class MarkerForm extends React.Component {
   handleSubmit = (e) => {
@@ -25,17 +25,28 @@ class MarkerForm extends React.Component {
     
     return (
       <div id="newMarkerForm">
-
+        
         <h3>New Marker</h3>
-        <form onSubmit={e=>this.handleSubmit(e)}>
-          <label>Marker Title</label><br/>
-          <input type="text" name="title" required={true}></input><br/>
-          <label>Marker Info</label><br/>
-          <textarea name="info" required={true}></textarea><br/>
-          <label>Image Url: </label>
-          <input type="text" name="image"></input><br/>
-          <input type="submit"></input>
-        </form>
+        <Form onSubmit={e=>this.handleSubmit(e)}>
+          <Form.Field>
+            <label>Marker Title</label>
+            <input type="text" name="title" required={true}></input>
+          </Form.Field>
+         
+          <Form.Field>
+            <label>Marker Info</label>
+            <textarea name="info" required={true}></textarea>
+          </Form.Field>
+        
+          <Form.Field>
+            <label>Image Url: </label>
+            <input type="text" name="image"></input>
+          </Form.Field>
+         
+          <Form.Field control={Button}>
+            Submit
+          </Form.Field>
+        </Form>
       </div>
     )
   }
