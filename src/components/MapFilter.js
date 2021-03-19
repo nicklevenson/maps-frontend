@@ -1,7 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {filterMaps, fetchMaps} from '../actions/MapActions.js'
-import { Card } from 'semantic-ui-react'
+import { Card, Image} from 'semantic-ui-react'
 class MapFilter extends React.Component {
 
   state = {
@@ -67,9 +67,9 @@ class MapFilter extends React.Component {
           {this.renderMapOptions().filter(m=>m.title.toLowerCase().includes(this.state.filterQuery) || m.markers.map(m=>m.user.username.toLowerCase()).some(u => u.includes(this.state.filterQuery))).map(map => {
             return (
               <Card.Content onClick={e => this.handleChange(e, map.title)} className="map-card" 
-              style={this.props.selectedMap.title === map.title ? {backgroundColor: "rgba(235, 233, 243, 0.849)"} : null}>
+                style={this.props.selectedMap.title === map.title ? {backgroundColor: "rgba(235, 233, 243, 0.849)"} : null}>
                 <Card.Header name="title">{map.title}</Card.Header>
-                <Card.Description>{map.description.substr(0,10)}</Card.Description>
+                {map.users.map(u => <Image className="very-tiny" circular src={u.image}></Image>)}
               </Card.Content>
             )
           })}

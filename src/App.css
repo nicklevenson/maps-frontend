@@ -227,9 +227,15 @@ input[type="text"]{
 }
 
 textarea {
+  border: none;
   background-color: transparent;
   height: 10vh !important;
   width: 100vw !important;
   max-width: 300px;
 }
 
+.very-tiny {
+  display: inline-block !important;
+  margin: 0 !important;
+  height: 2em;
+}

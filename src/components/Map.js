@@ -11,7 +11,7 @@ import MapFilter from './MapFilter.js';
 import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
 import NewMapContainer from '../containers/NewMapContainer.js';
 import { addMarkerToMap } from '../actions/MapActions.js';
-
+import { Image} from 'semantic-ui-react'
 
 class Map extends React.Component {
   state = {
@@ -69,8 +69,9 @@ class Map extends React.Component {
           </div>
           {this.props.selectedMap.users ? 
           <div className="map-title">
-            <h3>{this.props.selectedMap.title} by {this.props.selectedMap.users.map(u=><>{u.username} <br/></>)}</h3>
-            {this.props.selectedMap.description ? <i>{this.props.selectedMap.description}</i> : null }
+            <h3>{this.props.selectedMap.title}</h3> 
+            {this.props.selectedMap.users.map(u => <Image className="very-tiny" circular src={u.image}></Image>)}
+            {this.props.selectedMap.description ? <textarea readOnly>{this.props.selectedMap.description}</textarea> : null }
             {
             this.isUserMapEditable() ? 
               <div className="edit-map">
