@@ -8,7 +8,11 @@ class EditMapForm extends React.Component {
     const title = e.target.title.value
     const description = e.target.description.value
     const publicMap = e.target.public.checked
+    const collaborator = this.props.allUsers.filter(u => u.id !== this.props.currentUser.id).find(u => u.username === e.target.collaborator.value) || null
     const map = {id: this.props.selectedMap.id, title: title, description: description, public: publicMap, user_id: this.props.currentUser.id}
+    if (collaborator) {
+      map.collaborator = collaborator.id
+    }
     this.props.editMap(map)
     this.props.removeEditForm()
   }
@@ -28,6 +32,14 @@ class EditMapForm extends React.Component {
           </Form.Field>
           <Form.Field>
             <textarea placeholder="Description" name="description" defaultValue={this.props.selectedMap.description}></textarea>
+          </Form.Field>
+          <Form.Field>
+            <label>Add a Mate?</label>
+            <i>(Once added, they may add markers to this map)</i>
+            <input type="text" list="users" name="collaborator" placeholder="Select or Search for a Mate"></input>
+            <datalist id="users" >
+              {this.props.allUsers.filter(u => u.id !== this.props.currentUser.id).map(u=><option key={u.id}>{u.username}</option>)}
+            </datalist>
           </Form.Field>
           <Form.Field>
             <label>Public?</label><input type="checkbox" name="public" defaultChecked={this.props.selectedMap.public}/><br/>
@@ -54,7 +66,8 @@ const mapDispatchToProps = (dispatch) => {
 const mapStateToProps = (state) => {
   return {
       currentUser: state.currentUser.currentUser,
-      selectedMap: state.maps.selectedMap
+      selectedMap: state.maps.selectedMap,
+      allUsers: state.currentUser.allUsers
   }
 }
 

@@ -9,7 +9,7 @@ class NewMapForm extends React.Component {
     const description = e.target.description.value
     const publicMap = e.target.public.checked
     const collaborator = this.props.allUsers.filter(u => u.id !== this.props.currentUser.id).find(u => u.username === e.target.collaborator.value) || null
-    console.log(collaborator)
+
     const map = {title: title, description: description, public: publicMap, user_id: this.props.currentUser.id}
     if (collaborator) {
       map.collaborator = collaborator.id
