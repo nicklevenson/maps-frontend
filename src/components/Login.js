@@ -4,6 +4,7 @@ import facebookLogin from '../assets/facebook-login.png'
 import {connect} from 'react-redux'  
 import {fetchUser} from '../actions/UserActions.js'
 import { Redirect } from 'react-router-dom'
+import { Card} from 'semantic-ui-react'
 class Login extends React.Component {
  
   componentDidMount() { 
@@ -21,12 +22,19 @@ class Login extends React.Component {
   }
   render(){
     return(
-      <div className="login-page">
-        <h2>Please Login/Signup</h2>
-        {this.props.heading ? <h5><i>{this.props.heading}</i></h5>: null}
-        <a href={`${process.env.REACT_APP_BACKEND_URL}/authenticate`}><img src={googleLogin} alt="Login with Google"/></a>
-        <a href={`${process.env.REACT_APP_BACKEND_URL}/authenticate-facebook`}><img src={facebookLogin} alt="Login with Facebook"></img></a>
-        {sessionStorage.jwt ? <Redirect to="my-maps" /> : null}
+      <div className="login-page" style={{width: "300px", height: "50vh",margin: "auto", marginTop: "20vh"}}>
+        <Card fluid>
+          <br></br>
+          <Card.Header><h2>Please Login/Signup</h2></Card.Header>
+          
+          {this.props.heading ? <Card.Content><h5><i>{this.props.heading}</i></h5></Card.Content>: null}
+          <br></br>
+          <Card.Content>
+          <a href={`${process.env.REACT_APP_BACKEND_URL}/authenticate`}><img src={googleLogin} alt="Login with Google" style={{width: "200px"}}/></a><br></br> <br></br>
+          <a href={`${process.env.REACT_APP_BACKEND_URL}/authenticate-facebook`}><img src={facebookLogin} alt="Login with Facebook"  style={{width: "200px"}}></img></a> <br></br> <br></br>
+          </Card.Content>
+          {sessionStorage.jwt ? <Redirect to="my-maps" /> : null}
+        </Card>
       </div>
     )
   }

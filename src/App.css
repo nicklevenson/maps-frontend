@@ -4,6 +4,7 @@ body {
 
 .App {
   text-align: center;
+  padding-top: 2vw;
 }
 
 *:focus {
@@ -64,7 +65,7 @@ body {
 .new-map-container, .side-bar {
   align-self: end;
   /* margin-top: 5vh !important; */
-  background-color:  rgba(235, 233, 243, 0.884);
+  background-color:  rgba(235, 233, 243, 0.849);
   grid-row: 2;
   grid-column: 1;
   z-index: 10;
@@ -73,7 +74,7 @@ body {
   margin: 1%;
   padding: 1%;
   border-radius: 5px;
-  box-shadow: 0px 0px 5px gray;
+  box-shadow: 0px 0px 3px gray;
   user-select: none;
 }
 
