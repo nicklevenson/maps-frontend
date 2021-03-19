@@ -10,7 +10,7 @@ import rootReducer from './reducers/rootReducer.js'
 import {composeWithDevTools} from 'redux-devtools-extension'
 import thunk from 'redux-thunk'
 import 'semantic-ui-css/semantic.min.css'
-
+import 'mapbox-gl/dist/mapbox-gl.css'
 const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)))
 ReactDOM.render(
   <React.StrictMode>
