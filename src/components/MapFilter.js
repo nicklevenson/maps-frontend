@@ -59,7 +59,7 @@ class MapFilter extends React.Component {
         
         <div className="maps-list-header">
           <h3>Maps</h3>
-          <input type="text" placeholder="Search" onChange={e=>this.handleSearch(e)}></input>
+          <input className="map-filter" type="text" placeholder="Search Maps by Title or Username" onChange={e=>this.handleSearch(e)}></input>
         </div>
 
         <div className="maps-list">
