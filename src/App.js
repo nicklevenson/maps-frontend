@@ -49,6 +49,7 @@ class App extends React.Component {
 
     return (
       <div className="App">
+        <h1>Map Mate</h1>
         <Nav/>
           <Route exact path="/public-maps" render={() => <MapContainer map={this.handlePublicMap()} heading={"Public Maps"}/> }></Route>
           <Route exact path="/my-maps" render={()=>this.isRedirect()}></Route>

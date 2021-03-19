@@ -74,14 +74,16 @@ class Map extends React.Component {
             {
             this.isUserMapEditable() ? 
               <div className="edit-map">
-                <br></br>
                 <div onClick={this.triggerEditForm} className="X"><h6 style={{margin: "0"}}>Edit</h6></div>
               </div>  
               : 
               null
             }
           </div> 
-          : null}
+          : 
+          <div className="map-title">
+            <h2>Search for a map!</h2>
+          </div>}
           
           {this.isUserMap() ? <NewMarkerContainer map={this.state.map}/> : null}
           <NewMapContainer editMapForm={this.state.editMapForm} removeEditForm={this.removeEditForm}/>

@@ -37,11 +37,10 @@ class MapContainer extends React.Component{
   render(){
     return(
       <div className="outer-map-container">
-        <h2 className="map-header">{this.props.heading}</h2>
+        {/* <h2 className="map-header">{this.props.heading}</h2> */}
 
           <Map markers={this.props.map.markers} mapTitle={this.props.map.title} handleMarkerSelect={this.handleMarkerSelect}/>
           <MapFilter/>
-        <br/>
         
       </div>
     )

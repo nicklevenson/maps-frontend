@@ -8,8 +8,10 @@ export default class Nav extends React.Component {
   render() {
     const { activeItem } = this.state
     return(
-      // <div className="navbar">
-        <Menu>    
+      <div className="ui center aligned container">
+        <Menu secondary compact>   
+       
+         <Menu.Menu> 
           <Menu.Item
             name='public-maps'
             active={activeItem === 'public-maps'}
@@ -26,7 +28,7 @@ export default class Nav extends React.Component {
             to="/my-maps"
           />
            {/* <NavLink to="/my-maps" >My Maps</NavLink> */}
-          <Menu.Menu position='right'>
+         
       
              {!sessionStorage.jwt ?
                 <Menu.Item
@@ -49,7 +51,7 @@ export default class Nav extends React.Component {
   
         </Menu>
      
-      // </div>
+      </div>
     )
   }
 }
