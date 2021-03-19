@@ -3,6 +3,10 @@ import {connect} from 'react-redux'
 import {filterMaps, fetchMaps} from '../actions/MapActions.js'
 import { Card } from 'semantic-ui-react'
 class MapFilter extends React.Component {
+
+  state = {
+    filterQuery: ""
+  }
   
   componentDidMount() {
     // this.props.fetchAllUsers()
@@ -21,6 +25,10 @@ class MapFilter extends React.Component {
     }else{
       this.props.filterMaps(title)
     }  
+  }
+
+  handleSearch = (e) => {
+    this.setState({filterQuery: e.target.value.toLowerCase()})
   }
   renderMapOptions = () => {
     if (window.location.pathname === "/my-maps"){
@@ -51,12 +59,12 @@ class MapFilter extends React.Component {
         
         <div className="maps-list-header">
           <h3>Maps</h3>
-          {/* <input type="text" placeholder="Search"></input> */}
+          <input type="text" placeholder="Search" onChange={e=>this.handleSearch(e)}></input>
         </div>
 
         <div className="maps-list">
         <Card className="maps-list-card">
-          {this.renderMapOptions().map(map => {
+          {this.renderMapOptions().filter(m=>m.title.toLowerCase().includes(this.state.filterQuery)).map(map => {
             return (
               <Card.Content onClick={e => this.handleChange(e, map.title)} className="map-card" 
               style={this.props.selectedMap.title === map.title ? {backgroundColor: "rgba(235, 233, 243, 0.849)"} : null}>
