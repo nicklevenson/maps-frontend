@@ -21,7 +21,7 @@ class NewMapForm extends React.Component {
   render() {
     return(
       <div id="new-map-form">
-        <Form onSubmit={e=>this.handleSubmit(e)}>
+        <Form onSubmit={e=>this.handleSubmit(e)}  autocomplete="off">
           <Form.Field>
             <input type="text" placeholder="Map Title" name="title" ></input>
           </Form.Field>
