@@ -12,7 +12,8 @@ import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
 import NewMapContainer from '../containers/NewMapContainer.js';
 import { addMarkerToMap } from '../actions/MapActions.js';
 import { Image} from 'semantic-ui-react'
-
+// eslint-disable-next-line import/no-webpack-loader-syntax
+mapboxgl.workerClass = require('worker-loader!mapbox-gl/dist/mapbox-gl-csp-worker').default;
 class Map extends React.Component {
   state = {
     map: "",
