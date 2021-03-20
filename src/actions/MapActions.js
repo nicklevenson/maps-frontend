@@ -12,7 +12,7 @@ export const fetchMaps = () => {
     .then(res => res.json())
     .then(maps => {
        dispatch(addMaps(maps))
-      
+       dispatch(filterMaps(""))
     })
     .catch(function(error) {
       alert("Errors getting maps.")
