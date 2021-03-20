@@ -2,7 +2,7 @@ import './App.css';
 import React from 'react'
 import {Route, Redirect} from "react-router-dom";
 import MapContainer from './containers/MapContainer.js';
-import { fetchMaps} from './actions/MapActions.js';
+import { fetchMaps, filterMaps} from './actions/MapActions.js';
 import {fetchUser, fetchAllUsers} from './actions/UserActions.js'
 import {connect} from 'react-redux'  
 import Nav from './components/Nav.js'
@@ -22,7 +22,7 @@ class App extends React.Component {
         this.props.fetchUser()
       }
     }
- 
+    this.props.filterMaps("")
    
   }
 
@@ -71,7 +71,8 @@ const mapDispatchToProps = (dispatch) => {
   return {
     fetchMaps: () => dispatch(fetchMaps()),
     fetchUser: () => dispatch(fetchUser()),
-    fetchAllUsers: () => dispatch(fetchAllUsers())
+    fetchAllUsers: () => dispatch(fetchAllUsers()),
+    filterMaps: (title) => dispatch(filterMaps())
   }
 }
 
