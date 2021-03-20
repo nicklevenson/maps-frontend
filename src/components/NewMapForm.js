@@ -26,7 +26,7 @@ class NewMapForm extends React.Component {
             <input type="text" placeholder="Map Title" name="title" ></input>
           </Form.Field>
           <Form.Field>
-            <textarea placeholder="Description" name="description"></textarea>
+            <input placeholder="Description" name="description"></input>
           </Form.Field>
           <Form.Field>
             <label>Add a Mate?</label>
