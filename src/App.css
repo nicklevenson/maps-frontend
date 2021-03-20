@@ -212,7 +212,8 @@ input[type="text"]{
 }
 .mapboxgl-popup {
   z-index: 20 !important;
-  max-width: 25vw !important;
+  max-width: min-content !important;
+  min-width: min-content !important;
 }
 
 .mapboxgl-popup-content{
@@ -233,6 +234,7 @@ textarea {
   min-height: 70px;
   width: 100vw !important;
   max-width: 300px;
+  min-width: min-content !important;
 }
 
 .img-holder {
