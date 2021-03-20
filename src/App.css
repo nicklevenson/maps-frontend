@@ -20,7 +20,7 @@ body {
   margin: auto;
   display: grid;
   grid-template-columns: 2fr min-content;
-  grid-template-rows: min-content 70vh min-content;
+  grid-template-rows: min-content 60vh min-content;
   height: min-content;
   width: 95vw;
   /* background-color: rgba(235, 233, 243, 0.884); */
