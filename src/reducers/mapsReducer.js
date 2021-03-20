@@ -12,7 +12,7 @@ export default function MapsReducer(state={
       return {...state, maps: [...state.maps, action.payload]}
     case "FILTER_MAP":
       if (action.payload ===  ""){
-        return {...state, selectedMap: {markers: []}}
+        return {...state, selectedMap: state.maps[0]}
       }else{
         return {...state, selectedMap: state.maps.filter(map =>map.title === action.payload)[0] || {markers: []}}
       }

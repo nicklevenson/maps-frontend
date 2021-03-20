@@ -11,10 +11,10 @@ class MapFilter extends React.Component {
   componentDidMount() {
     // this.props.fetchAllUsers()
     // this.renderUserOptions()
-    // this.props.filterMaps("")
+   
     this.props.fetchMaps()
     this.renderMapOptions()
-    
+ 
   }
   
 
@@ -69,7 +69,7 @@ class MapFilter extends React.Component {
               <Card.Content onClick={e => this.handleChange(e, map.title)} className="map-card" 
                 style={this.props.selectedMap.title === map.title ? {backgroundColor: "rgba(235, 233, 243, 0.849)"} : null}>
                 <Card.Header name="title">{map.title}</Card.Header>
-                {map.users.map(u => <Image className="very-tiny" circular src={u.image}></Image>)}
+                <div className="img-holder">{map.users.map(u => <Image className="very-tiny" circular src={u.image}></Image>)}</div>
               </Card.Content>
             )
           })}

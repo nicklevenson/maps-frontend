@@ -235,7 +235,14 @@ textarea {
   max-width: 300px;
 }
 
+.img-holder {
+  white-space: nowrap;
+  overflow-x: scroll;
+  height: min-content;
+}
+
 .very-tiny {
+
   display: inline-block !important;
   margin: 0 !important;
   height: 2em;
