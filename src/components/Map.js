@@ -4,16 +4,23 @@ import {connect} from 'react-redux'
 import MarkerForm from './MarkerForm.js'
 import RenderMarker from './RenderMarker.js'
 import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
-import {destroyMarker, likeMarker, unlikeMarker} from '../actions/MarkerActions.js'
+import {destroyMarker, addMarkerToUserMap, removeMarkerFromUserMap} from '../actions/MarkerActions.js'
+import NewMarkerContainer from '../containers/NewMarkerContainer.js'
 import Login from './Login.js'
-import UserFilter from './UserFilter.js';
+import MapFilter from './MapFilter.js';
 import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
-
+import NewMapContainer from '../containers/NewMapContainer.js';
+import { addMarkerToMap } from '../actions/MapActions.js';
+import { Image} from 'semantic-ui-react'
+// eslint-disable-next-line import/no-webpack-loader-syntax
+mapboxgl.workerClass = require('worker-loader!mapbox-gl/dist/mapbox-gl-csp-worker').default;
 class Map extends React.Component {
   state = {
     map: "",
     newMarkerInfo: null,
-    redirect: false
+    editMapForm: false,
+    redirect: false,
+ 
   }
 
   componentDidMount() {
@@ -24,39 +31,70 @@ class Map extends React.Component {
     this.renderMarkers()
   }
 
+  isUserMap = () => {
+    if (this.props.selectedMap.users) {
+      if(this.props.selectedMap.users.map(u => u.id).includes(this.props.currentUser.id)){
+        return true
+      }else{
+        return false
+      }
+    }else{
+      return false
+    }
+  }
+  isUserMapEditable = () => {
+    if (this.props.selectedMap.users) {
+      if(this.props.selectedMap.users[0].id === this.props.currentUser.id){
+        return true
+      }else{
+        return false
+      }
+    }else{
+      return false
+    }
+  }
+
+  triggerEditForm = () => {
+    this.setState({editMapForm: true})
+  }
+
+  removeEditForm = () => {
+    this.setState({editMapForm: false})
+  }
   
   render(){
-    if (this.state.redirect) {
-      return(
-        <Login heading={'Please login to use this feature'}/>
-      )
-    
-    } else{
       return(
         <>
           <div className="map-container">
             <div id="map"></div>
           </div>
-          <div className="side-bar">
-          {this.state.newMarkerInfo ? <div onClick={this.removeForm}>X</div> : null}
-            <div id="newMarkerContainer">
-              <h5 style={{margin:"0"}}>New Marker</h5>
-              {this.props.currentUser ? <div id="newMarker" className="marker" style={{backgroundImage:`url(${this.props.currentUser.image})`}}></div> : null}
-            </div>
-            {this.state.newMarkerInfo ? <MarkerForm removeForm={this.removeForm} newMarkerInfo={this.state.newMarkerInfo}/> : null}
-           
-          </div>
-          <UserFilter/>
+          {this.props.selectedMap.users ? 
+          <div className="map-title">
+            <h3>{this.props.selectedMap.title}</h3> 
+            {this.props.selectedMap.users.map(u => <Image className="very-tiny" circular src={u.image}></Image>)}<br/>
+            <textarea readOnly value={this.props.selectedMap.description}></textarea>
+            {
+            this.isUserMapEditable() ? 
+              <div className="edit-map">
+                <div onClick={this.triggerEditForm} className="X"><h6 style={{margin: "0"}}>Edit</h6></div>
+              </div>  
+              : 
+              null
+            }
+          </div> 
+          : 
+          <div className="map-title">
+            <h3>Search for Maps or Make One!</h3>
+          </div>}
+          
+          {this.isUserMap() ? <NewMarkerContainer map={this.state.map}/> : null}
+          <NewMapContainer editMapForm={this.state.editMapForm} removeEditForm={this.removeEditForm}/>
+          
         </>
       )
-    }
   }
 
-  removeForm = () => {
-    this.setState({newMarkerInfo: null})
-    document.getElementById("newMarkerContainer").style.display = "inline-block"
-    document.getElementById("temp-marker").remove()
-  }
+  
 
   removeMap = () =>{
     this.state.map.remove()
@@ -77,13 +115,13 @@ class Map extends React.Component {
       })
     );
     this.setState({map: map})
-    this.renderNewMarkerForm(map)
-   
+    document.querySelectorAll(".mapboxgl-ctrl-geocoder--input")[0].placeholder = "Search for Places"
     // if (navigator.geolocation) {
     //   navigator.geolocation.getCurrentPosition(function(position) {
     //     document.getElementById("map-container").innerHTML += <h1>{position}</h1>
     //   });
     // } 
+    // this.renderNewMarkerForm(map)
     
   } 
 
@@ -100,69 +138,22 @@ class Map extends React.Component {
       handleMarkerSelect: this.props.handleMarkerSelect, 
       destroyMarker: this.props.destroyMarker, 
       currentUser: this.props.currentUser,
-      likeMarker: this.props.likeMarker,
-      unlikeMarker: this.props.unlikeMarker
+      selectedMap: this.props.selectedMap,
+      handleRemoveMarker: this.handleRemoveMarker,
+      handleMarkerAdd: this.handleMarkerAdd
     }))
   }
 
-  
-
-  renderNewMarkerForm = (map) => {
-    
-    const newMarkerButton = document.getElementById("newMarkerContainer")
-    
-    newMarkerButton.addEventListener('mousedown', (e) => {
-      
-      if (this.props.currentUser.username) {
-        const triggerState = (newMarkerInfo) => this.setState({newMarkerInfo: newMarkerInfo})
-        const renderTempMarker = (marker) => this.renderTempMarker(marker)
-        function handleMouseMove(e) {
-          if (document.getElementById("temp-marker")){
-            document.getElementById("temp-marker").remove()
-          }
-          const coords = [e.lngLat.lng, e.lngLat.lat]
-       
-          const marker = {
-            title: "New Marker",
-            lat: coords[1],
-            lng: coords[0],
-            info: "Be sure to submit me"
-          }
-          renderTempMarker(marker)
-        }
-          map.on('mousemove', handleMouseMove)        
-          map.on('mouseup', function mapEvent(e){
-              map.off('mousemove', handleMouseMove)
-              document.getElementById("temp-marker").remove()
-              const coords = [e.lngLat.lng, e.lngLat.lat]
-              const marker = {
-                title: "New Marker",
-                lat: coords[1],
-                lng: coords[0],
-                info: "Be sure to submit me"
-              }
-           
-              triggerState(marker)
-              renderTempMarker(marker)
-              map.off('mouseup',  mapEvent)
-                 
-        })
-      }else{
-        this.setState({redirect: true})
-      }
-    })
+  handleRemoveMarker = (marker) => {
+    this.props.removeMarkerFromUserMap(marker, this.props.selectedMap.id)
   }
 
-
-  renderTempMarker(marker) {
-    var coords = [marker.lng, marker.lat];
-    var temp = document.createElement('div');
-    temp.className = 'marker';
-    temp.id = 'temp-marker'
-    temp.style.backgroundImage = `url(${this.props.currentUser.image})`
-    new mapboxgl.Marker(temp)
-    .setLngLat(coords)
-    .addTo(this.state.map);
+  handleMarkerAdd = (e, marker_id) =>{
+    e.preventDefault()
+    const map_id = this.props.currentUser.maps.find(m=>m.title === e.target.mapTitle.value).id
+    // console.log(map_id)
+    this.props.addMarkerToUserMap(marker_id, map_id)
+    document.getElementById("add-marker-to-map-container").remove()
   }
 
 }
@@ -170,14 +161,15 @@ class Map extends React.Component {
 const mapDispatchToProps = (dispatch) => {
   return {
     destroyMarker: (marker) => dispatch(destroyMarker(marker)),
-    likeMarker: (marker, currentUserId) => dispatch(likeMarker(marker, currentUserId)),
-    unlikeMarker: (marker, currentUserId) => dispatch(unlikeMarker(marker, currentUserId))
+    addMarkerToUserMap: (marker_id, map_id) => dispatch(addMarkerToUserMap(marker_id, map_id)),
+    removeMarkerFromUserMap: (marker, map_id) => dispatch(removeMarkerFromUserMap(marker, map_id))
   }
 } 
 
 const mapStateToProps = (state) => {
   return {
-      currentUser: state.currentUser.currentUser
+      currentUser: state.currentUser.currentUser,
+      selectedMap: state.maps.selectedMap
   }
 }
 

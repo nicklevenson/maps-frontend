@@ -1,33 +1,64 @@
 body {
-  background-color: black;
+  background-color: rgba(247, 247, 247, 0.664) !important;
 }
 
 .App {
   text-align: center;
+  padding-top: 2vw;
 }
 
 *:focus {
   outline: none !important;
 }
 
+
+.brand {
+  letter-spacing: 5px;
+}
 .outer-map-container {
+  margin-top: 2% !important;
   margin: auto;
   display: grid;
-  grid-template-columns: 2fr;
-  grid-template-rows: 10% 2fr;
-  height: 90vh;
+  grid-template-columns: 2fr min-content;
+  grid-template-rows: min-content 60vh min-content;
+  height: min-content;
   width: 95vw;
+  /* background-color: rgba(235, 233, 243, 0.884); */
 }
 .map-header {
   grid-column-start: 1;
   grid-column-end: 3;
+  grid-row: 1;
 }
 
 .map-container {
   grid-row: 2;
   grid-column-start: 1;
-  grid-column-end: 3;
+  grid-column-end: 2;
 }
+
+.map-title {
+  margin: 1%;
+  padding: 1%;
+  justify-self: center;
+  align-self: start;
+  grid-row: 3;
+  grid-column-start: 1;
+  grid-column-end: 2;
+  z-index: 50;
+  background-color: rgba(235, 233, 243, 0.884);
+  border-radius: 5px;
+  width: 100%;
+  min-width: min-content;
+  height: min-content;
+  
+}
+
+.map-title h3{
+  font-size: 2vh;
+  margin: 0;
+}
+
 #map {
   width: 100%;
   height: 100%;
@@ -37,11 +68,11 @@ body {
 .mapboxgl-ctrl-logo,.mapboxgl-ctrl-attrib{
   display: none !important;
 }
-.side-bar {
-  justify-self: left;
+
+.new-map-container, .side-bar {
   align-self: end;
   /* margin-top: 5vh !important; */
-  background-color: rgba(187, 183, 207, 0.884);
+  background-color:  rgba(235, 233, 243, 0.849);
   grid-row: 2;
   grid-column: 1;
   z-index: 10;
@@ -50,35 +81,112 @@ body {
   margin: 1%;
   padding: 1%;
   border-radius: 5px;
-  box-shadow: 0px 0px 5px gray;
-}
-.user-filter {
-  display: inline-block;
-  justify-self: right;
-  align-self: end;
-  grid-row: 2;
-  grid-column: 1;
-  z-index: 50;
-}
-.user-filter form {
-  display: inline-block;
-  margin: 5px;
+  box-shadow: 0px 0px 3px gray;
+  user-select: none;
 }
 
-.user-filter input{
+.new-map-container {
+  justify-self: right;
+}
+.new-map-container * {
+  margin: 5px;
+}
+#new-map-heading:hover, .X{
+  cursor: pointer;
+}
+.side-bar {
+  justify-self: left;
+}
+/* 
+.user-filter {
+  padding: 0 2% 0 2%;
+  display: inline-block;
+  justify-self: center;
+  align-self: start;
+  grid-row-start: 1;
+  grid-row-end: 3;
+  grid-column: 2;
+  z-index: 2;
+  min-width: 100px;
+  width: 20vw;
+  overflow-y: scroll;
+  height: 80vh;
+} */
+.maps-list-header{
+  margin-left: 10px;
+  display: inline-block;
+  align-self: start;
+  grid-column: 2;
+  grid-row: 2;
+  width: 15vw;
+  min-width: 150px;
+}
+.maps-list {
+  margin-top: 100px;
+  margin-left: 10px;
+  padding: 5%;
+  width: 15vw;
+  min-width: 150px;
+  grid-column: 2;
+  grid-row: 2;
+  
+}
+.maps-list-card {
+
+  width: 100% !important;
+  display: inline-block !important;
+  
+  height: min-content;
+  max-height: 100%;
+  overflow-y: scroll;
+}
+
+.map-card {
+  width: 100%;
+  margin: 2%;
+  cursor: pointer;
+}
+.user-filter form {
+  display: grid;
+  margin: 0 10px 0 10px;
+  grid-template-rows: 1;
+  grid-template-columns: 1;
+  
+}
+.map-filter {
   text-align: center;
   border: none;
-  width: 35vw;
-  height: 30px;
-  min-width: 200px;
+  width: 90%;
+  height: 40px;
   border-radius: 3px;
-  box-shadow: 0px 0px 5px gray;
+  box-shadow: 0px 0px 3px gray;
 }
+#reset {
+  background-color: transparent;
+  justify-self: right;
+  width: 20px !important;
+  min-width: 20px !important;
+  box-shadow: none;
+}
+
+.user-filter:hover {
+  z-index: 50;
+}
+
+input {
+  border-radius: 3px;
+  box-shadow: 0px 0px 2px gray;
+  text-align: center;
+  border: none;
+}
+input::-webkit-calendar-picker-indicator {
+	display: none;
+}
+
+
 input[type="text"]{
   font-size: 1rem;
 }
-
-
 
 #newMarkerContainer {
   display: inline-block;
@@ -89,22 +197,23 @@ input[type="text"]{
 #newMarker {
   display: inline-block;
 }
-#newMarkerForm form {
-  width: 100%;
-  height: 25vh;
-}
+
 .marker {
   cursor: pointer;
-  width: 50px;
-  height: 50px;
+  width: 25px;
+  height: 25px;
   background-size: cover;
   background-color: lightgray;
   border-radius: 100%;
   z-index: 10;
 }
+.marker-image {
+  width: 80%;
+}
 .mapboxgl-popup {
   z-index: 20 !important;
-  max-width: 25vw !important;
+  max-width: min-content !important;
+  min-width: min-content !important;
 }
 
 .mapboxgl-popup-content{
@@ -119,9 +228,24 @@ input[type="text"]{
 }
 
 textarea {
+  border: none;
   background-color: transparent;
-  height: 10vh !important;
+  height: max-content;
+  min-height: 70px;
   width: 100vw !important;
   max-width: 300px;
+  min-width: min-content !important;
 }
 
+.img-holder {
+  white-space: nowrap;
+  overflow-x: scroll;
+  height: min-content;
+}
+
+.very-tiny {
+
+  display: inline-block !important;
+  margin: 0 !important;
+  height: 2em;
+}

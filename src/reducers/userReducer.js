@@ -1,7 +1,6 @@
 export default function userReducer(state={
   currentUser: {
-    markers: [],
-    likedMarkers: []
+    maps: []
   },
   allUsers: []
 }, action) {

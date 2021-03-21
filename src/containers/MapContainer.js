@@ -1,10 +1,12 @@
 import React from 'react'
-
+import {connect} from 'react-redux'
 import Map from '../components/Map.js';
-
+import NewMarkerContainer from './NewMarkerContainer.js'
+import NewMapContainer from './NewMapContainer.js'
+import MapFilter from '../components/MapFilter'
 class MapContainer extends React.Component{
   state = {
-    selectedMarker: {},
+    selectedMarker: {}
     // filteredMarkers: []
   }
   componentDidMount() {
@@ -31,17 +33,30 @@ class MapContainer extends React.Component{
     }
 
   }
- 
+
   render(){
     return(
       <div className="outer-map-container">
-        <h1 className="map-header">{this.props.heading}</h1>
-        <Map markers={this.props.markers} handleMarkerSelect={this.handleMarkerSelect}/>
-    
-        <br/>
+        {/* <h2 className="map-header">{this.props.heading}</h2> */}
+
+          <Map markers={this.props.map.markers} mapTitle={this.props.map.title} handleMarkerSelect={this.handleMarkerSelect}/>
+          <MapFilter/>
+        
       </div>
     )
   }
 }
 
-export default MapContainer
+
+const mapStateToProps = (state) => {
+  return {
+      currentUser: state.currentUser.currentUser,
+      selectedMap: state.maps.selectedMap
+  }
+}
+
+
+
+
+
+export default connect(mapStateToProps)(MapContainer)

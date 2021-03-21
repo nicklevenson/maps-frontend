@@ -1,4 +1,5 @@
 import { fetchUser } from "./UserActions"
+import { addMarkerToMap, fetchMaps, removeMarkerFromMap, filterMaps } from './MapActions'
 
 
 export const addMarker = (marker) => ({type: "ADD_MARKER", payload: marker})
@@ -19,7 +20,7 @@ export const fetchMarkers = () => {
   }
 }
 
-export const createMarker = (marker) => {
+export const createMarker = (marker, mapTitle) => {
   
   return (dispatch) => {
     let configObj = {
@@ -34,11 +35,11 @@ export const createMarker = (marker) => {
     fetch(`${process.env.REACT_APP_BACKEND_URL}/markers`, configObj)
     .then(res => res.json())
     .then(json => {
-        console.log(json)
-        dispatch(addMarker(json))
-        dispatch(fetchMarkers())
-        dispatch(fetchUser())
-        
+    
+        dispatch(addMarkerToMap(json))
+        // dispatch(filterMaps(mapTitle))
+        dispatch(fetchMaps())
+      
     })
     .catch(function(error) {
     
@@ -63,8 +64,8 @@ export const destroyMarker = (marker) => {
     .then(res => res.json())
     .then(json => {
       if (json.message) {
-        dispatch(removeMarker(marker))
-        dispatch(fetchMarkers())
+        dispatch(fetchMaps())
+        dispatch(removeMarkerFromMap(marker))
         dispatch(fetchUser())
         // alert("Marker Deleted. You may have to refresh to notice changes.")
       }else{
@@ -74,6 +75,63 @@ export const destroyMarker = (marker) => {
     
     .catch(function(error) {
       alert("Errors deleting marker.")
+    })
+  }
+}
+
+export const addMarkerToUserMap = (marker_id, map_id) => {
+  return (dispatch) => {
+    let configObj = {
+      method: 'POST',
+      headers: {
+          Authorization: `Bearer ${sessionStorage.jwt}`,
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({marker_id: marker_id, map_id: map_id})
+  }
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/addToMap`, configObj)
+    .then(res => res.json())
+    .then(json => {
+      if (json.message){
+        dispatch(fetchMaps())
+        dispatch(fetchUser())
+      }else{
+        alert(json.error)
+      }
+      
+    })
+    .catch(function(error) {
+        alert(error)
+    })
+  }
+}
+
+export const removeMarkerFromUserMap = (marker, map_id) => {
+  return (dispatch) => {
+    let configObj = {
+      method: 'POST',
+      headers: {
+          Authorization: `Bearer ${sessionStorage.jwt}`,
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({marker_id: marker.id, map_id: map_id})
+  }
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/removeFromMap`, configObj)
+    .then(res => res.json())
+    .then(json => {
+      if (json.message){
+        dispatch(removeMarkerFromMap(marker))
+        dispatch(fetchMaps())
+        dispatch(fetchUser())
+      }else{
+        alert(json.error)
+      }
+      
+    })
+    .catch(function(error) {
+        alert(error)
     })
   }
 }

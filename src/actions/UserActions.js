@@ -12,7 +12,9 @@ export const fetchUser = () => {
     })
     .then(res => res.json())
     .then(json => {
+      
         dispatch(setUser(json))
+       
     })
     .catch(function(error) {
         alert("Error getting User.")
