@@ -64,7 +64,7 @@ class MapFilter extends React.Component {
 
         <div className="maps-list">
         <Card className="maps-list-card">
-          {this.renderMapOptions().filter(m=>m.title.toLowerCase().includes(this.state.filterQuery) || m.markers.map(m=>m.user.username.toLowerCase()).some(u => u.includes(this.state.filterQuery))).map(map => {
+          {this.renderMapOptions().filter(m=>m.title.toLowerCase().includes(this.state.filterQuery) || m.users.map(u=>u.username.toLowerCase()).some(u => u.includes(this.state.filterQuery))).map(map => {
             return (
               <Card.Content onClick={e => this.handleChange(e, map.title)} className="map-card" 
                 style={this.props.selectedMap.title === map.title ? {backgroundColor: "rgba(235, 233, 243, 0.849)"} : null}>
