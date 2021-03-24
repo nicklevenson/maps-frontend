@@ -54,7 +54,7 @@ const mapDispatchToProps = (dispatch) => {
     fetchMaps: () => dispatch(fetchMaps()),
     fetchUser: () => dispatch(fetchUser()),
     fetchAllUsers: () => dispatch(fetchAllUsers()),
-    filterMaps: (title) => dispatch(filterMaps(title))
+    filterMaps: (title) => dispatch(filterMaps())
   }
 }
 
