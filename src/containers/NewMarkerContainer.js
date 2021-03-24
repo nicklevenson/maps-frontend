@@ -104,7 +104,6 @@ class NewMarkerContainer extends React.Component {
     
   }
 
-
   renderTempMarker = (marker) =>{
     var coords = [marker.lng, marker.lat];
     var temp = document.createElement('div');
@@ -115,16 +114,7 @@ class NewMarkerContainer extends React.Component {
     .setLngLat(coords)
     .addTo(this.props.map);
   }
- 
-
 }
-// const mapDispatchToProps = (dispatch) => {
-//   return {
-//     destroyMarker: (marker) => dispatch(destroyMarker(marker)),
-//     likeMarker: (marker, currentUserId) => dispatch(likeMarker(marker, currentUserId)),
-//     unlikeMarker: (marker, currentUserId) => dispatch(unlikeMarker(marker, currentUserId))
-//   }
-// } 
 
 const mapStateToProps = (state) => {
   return {
