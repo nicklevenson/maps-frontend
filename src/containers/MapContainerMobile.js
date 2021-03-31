@@ -2,20 +2,20 @@ import React from 'react';
 import mapboxgl from 'mapbox-gl'
 import {connect} from 'react-redux'
 import MarkerForm from '../components/MarkerForm.js'
-import MapContainerMobile from './MapContainerMobile.js'
+
 import RenderMarker from '../components/RenderMarker.js'
 import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
 import {destroyMarker, addMarkerToUserMap, removeMarkerFromUserMap} from '../actions/MarkerActions.js'
-import NewMarkerContainer from './NewMarkerContainer.js'
+import NewMarkerContainerMobile from './NewMarkerContainerMobile.js'
 import Login from '../components/Login.js'
 import MapFilter from '../components/MapFilter.js';
 import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
-import NewMapContainer from './NewMapContainer.js';
+import NewMapContainerMobile from './NewMapContainerMobile.js';
 import { addMarkerToMap } from '../actions/MapActions.js';
 import { Image} from 'semantic-ui-react'
 // eslint-disable-next-line import/no-webpack-loader-syntax
 mapboxgl.workerClass = require('worker-loader!mapbox-gl/dist/mapbox-gl-csp-worker').default;
-class MapContainer extends React.Component {
+class MapContainerMobile extends React.Component {
   state = {
     map: "",
     newMarkerInfo: null,
@@ -64,15 +64,10 @@ class MapContainer extends React.Component {
   }
   
   render(){
-    if (window.matchMedia('(max-width: 500px)').matches) {
-      return (
-        <MapContainerMobile/>
-      )
-    }else{
       return(
         <>
-        <div className="outer-map-container">
-          <div className="map-container">
+        <div className="outer-map-container-mobile">
+          <div className="map-container-mobile">
             <div id="map"></div>
           </div>
           {this.props.selectedMap.users ? 
@@ -94,14 +89,12 @@ class MapContainer extends React.Component {
             <h3>Search for Maps or Make One!</h3>
           </div>}
           
-          {this.isUserMap() ? <NewMarkerContainer map={this.state.map}/> : null}
-          <NewMapContainer editMapForm={this.state.editMapForm} removeEditForm={this.removeEditForm}/>
+          {this.isUserMap() ? <NewMarkerContainerMobile map={this.state.map}/> : null}
+          <NewMapContainerMobile editMapForm={this.state.editMapForm} removeEditForm={this.removeEditForm}/>
           <MapFilter/>
         </div> 
         </>
       )
-    }
-     
   }
 
   
@@ -126,6 +119,7 @@ class MapContainer extends React.Component {
     );
     this.setState({map: map})
     document.querySelectorAll(".mapboxgl-ctrl-geocoder--input")[0].placeholder = "Search for Places"
+    document.querySelectorAll(".mapboxgl-ctrl-geocoder--input")[0].style = "height: 30px;"
     // if (navigator.geolocation) {
     //   navigator.geolocation.getCurrentPosition(function(position) {
     //     document.getElementById("map-container").innerHTML += <h1>{position}</h1>
@@ -187,4 +181,4 @@ const mapStateToProps = (state) => {
 
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(MapContainer)
+export default connect(mapStateToProps, mapDispatchToProps)(MapContainerMobile)
