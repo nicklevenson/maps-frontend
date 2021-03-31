@@ -8,7 +8,7 @@ import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
 import {destroyMarker, addMarkerToUserMap, removeMarkerFromUserMap} from '../actions/MarkerActions.js'
 import NewMarkerContainerMobile from './NewMarkerContainerMobile.js'
 import Login from '../components/Login.js'
-import MapFilter from '../components/MapFilter.js';
+import MapFilterMobile from '../components/MapFilterMobile.js';
 import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
 import NewMapContainerMobile from './NewMapContainerMobile.js';
 import { addMarkerToMap } from '../actions/MapActions.js';
@@ -91,7 +91,7 @@ class MapContainerMobile extends React.Component {
           
           {this.isUserMap() ? <NewMarkerContainerMobile map={this.state.map}/> : null}
           <NewMapContainerMobile editMapForm={this.state.editMapForm} removeEditForm={this.removeEditForm}/>
-          <MapFilter/>
+          <MapFilterMobile/>
         </div> 
         </>
       )
@@ -119,7 +119,7 @@ class MapContainerMobile extends React.Component {
     );
     this.setState({map: map})
     document.querySelectorAll(".mapboxgl-ctrl-geocoder--input")[0].placeholder = "Search for Places"
-    document.querySelectorAll(".mapboxgl-ctrl-geocoder--input")[0].style = "height: 30px;"
+    document.querySelectorAll(".mapboxgl-ctrl-geocoder--input")[0].style = "height: 30px !important;"
     // if (navigator.geolocation) {
     //   navigator.geolocation.getCurrentPosition(function(position) {
     //     document.getElementById("map-container").innerHTML += <h1>{position}</h1>
