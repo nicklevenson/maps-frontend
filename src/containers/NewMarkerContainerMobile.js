@@ -60,29 +60,16 @@ class NewMarkerContainerMobile extends React.Component {
     if (document.getElementById("newMarkerContainer")) {
       const newMarkerButton = document.getElementById("newMarkerContainer")
     
-      newMarkerButton.addEventListener('mousedown', (e) => {
-        
+      newMarkerButton.addEventListener('click', (e) => {
+       
         if (this.props.currentUser.username) {
+         
           const triggerState = (newMarkerInfo) => this.setState({newMarkerInfo: newMarkerInfo})
           const renderTempMarker = (marker) => this.renderTempMarker(marker)
-          function handleMouseMove(e) {
-            if (document.getElementById("temp-marker")){
-              document.getElementById("temp-marker").remove()
-            }
-            const coords = [e.lngLat.lng, e.lngLat.lat]
          
-            const marker = {
-              title: "New Marker",
-              lat: coords[1],
-              lng: coords[0],
-              info: "Be sure to submit me"
-            }
-            renderTempMarker(marker)
-          }
-            map.on('mousemove', handleMouseMove)        
-            map.on('mouseup', function mapEvent(e){
-              map.off('mousemove', handleMouseMove)
-                document.getElementById("temp-marker").remove()
+          
+            map.on('click', function mapEvent(e){
+              console.log("he")
                 const coords = [e.lngLat.lng, e.lngLat.lat]
                 const marker = {
                   title: "New Marker",
@@ -90,10 +77,10 @@ class NewMarkerContainerMobile extends React.Component {
                   lng: coords[0],
                   info: "Be sure to submit me"
                 }
-             
+                
                 triggerState(marker)
                 renderTempMarker(marker)
-                map.off('mouseup',  mapEvent)
+                map.off('click',  mapEvent)
                    
           })
         }else{
